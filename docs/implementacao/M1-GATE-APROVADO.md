@@ -17,6 +17,7 @@ Configurar monorepo Turborepo + pnpm com build pipeline funcional, packages plac
 ### 1. Workspace Root
 
 ✅ **Criado:**
+
 - `package.json` (root) com scripts: `build`, `typecheck`, `test`, `format`, `format:check`
 - `pnpm-workspace.yaml` com `packages: ['packages/*', 'apps/*']`
 - `turbo.json` (Turbo 2.0 com `tasks` em vez de `pipeline`)
@@ -24,6 +25,7 @@ Configurar monorepo Turborepo + pnpm com build pipeline funcional, packages plac
 - `.eslintrc.js` (linting, resolução workspace pendente DI-012)
 
 ✅ **Verificação:**
+
 ```bash
 $ pnpm list turbo
 forja@0.0.1
@@ -35,10 +37,12 @@ forja@0.0.1
 ### 2. Config Packages
 
 ✅ **Criado:**
+
 - `packages/config-typescript/` — tsconfig compartilhado (base, react, node)
 - `packages/config-eslint/` — ESLint config compartilhado (funcionalidade pendente DI-012)
 
 ✅ **Verificação:**
+
 ```bash
 $ pnpm build --filter=@forja/config-*
 # Sem erros (packages não possuem build step)
@@ -49,11 +53,13 @@ $ pnpm build --filter=@forja/config-*
 ### 3. Motor Narrativo Placeholder
 
 ✅ **Criado:**
+
 - `packages/motor-narrativo/src/index.ts` — tipos `State`, `Inputs`, `Storylet`, `Resolution`, função `resolve()` placeholder
 - `packages/motor-narrativo/tests/resolve.test.ts` — 2 testes placeholder (1 passa, 1 skip)
 - Deps: TypeScript, Vitest, @forja/config-typescript
 
 ✅ **Verificação:**
+
 ```bash
 $ pnpm --filter @forja/motor-narrativo build
 # Compila sem erros (dist/ gerado)
@@ -69,6 +75,7 @@ $ pnpm --filter @forja/motor-narrativo test
 ### 4. Domínio Placeholder
 
 ✅ **Criado:**
+
 - `packages/dominio/src/index.ts` — tipos `Juramento`, `Ciclo`, funções `calcularProgressao()`, `isCicloCumprido()`, `calcularFolego()`
 - `packages/dominio/tests/progressao.test.ts` — 11 testes (todos passando)
 - Implementações validadas contra:
@@ -77,6 +84,7 @@ $ pnpm --filter @forja/motor-narrativo test
   - RN-005: Fôlego = 7 - dias treinados na semana
 
 ✅ **Verificação:**
+
 ```bash
 $ pnpm --filter @forja/dominio test
 # 11 testes passam (progressão, ciclo, fôlego)
@@ -87,10 +95,12 @@ $ pnpm --filter @forja/dominio test
 ### 5. Linting e Formatting
 
 ✅ **Criado:**
+
 - `.prettierrc` (tabs, single quote, trailing comma)
 - `.eslintrc.js` (extends `@forja/config-eslint`)
 
 ⚠️ **Status:**
+
 - `pnpm format` — ✅ Funciona (Prettier OK)
 - `pnpm lint` — ❌ ESLint workspace resolution pendente (DI-012)
 
@@ -101,12 +111,14 @@ $ pnpm --filter @forja/dominio test
 ### 6. CI GitHub Actions
 
 ✅ **Criado:**
+
 - `.github/workflows/ci.yml` — 3 jobs paralelos:
   - `typecheck` — TSC all packages
   - `test` — Vitest all packages
   - `format` — Prettier check mode
 
 ⚠️ **Status:**
+
 - Workflow criado, **não rodou ainda** (aguarda push `main` ou PR)
 - Job `lint` **não incluído** (DI-012)
 
@@ -115,6 +127,7 @@ $ pnpm --filter @forja/dominio test
 ### 7. Documentação
 
 ✅ **Criado:**
+
 - `docs/setup/README.md` — instruções instalação, scripts, troubleshooting
 - `docs/implementacao/DECISOES-IMPLEMENTACAO.md` — DI-012 (adiar ESLint workspace)
 
@@ -256,13 +269,13 @@ forja/
 
 ## Conformidade com ADRs
 
-| ADR       | Requisito                    | Status |
-| --------- | ---------------------------- | ------ |
-| ADR-0001  | Monorepo Turborepo + pnpm    | ✅     |
-| ADR-0010  | CI Python scripts (Fase 4+)  | N/A    |
-| D-033     | Motor narrativo zero deps    | ✅     |
-| D-036     | Storylets JSON (Fase 4+)     | N/A    |
-| DI-005    | Turborepo (não Nx)           | ✅     |
+| ADR      | Requisito                   | Status |
+| -------- | --------------------------- | ------ |
+| ADR-0001 | Monorepo Turborepo + pnpm   | ✅     |
+| ADR-0010 | CI Python scripts (Fase 4+) | N/A    |
+| D-033    | Motor narrativo zero deps   | ✅     |
+| D-036    | Storylets JSON (Fase 4+)    | N/A    |
+| DI-005   | Turborepo (não Nx)          | ✅     |
 
 ---
 
@@ -286,6 +299,7 @@ Executar conforme `docs/implementacao/03-FASE-2-MOTOR.md`:
 **Próximo gate:** M2 (Motor Narrativo Completo)
 
 **Pré-requisitos Fase 2:**
+
 - ✅ Fase 0 gate aprovado (DI-006 a DI-011)
 - ✅ Fase 1 gate M1 aprovado (este documento)
 - ⚠️ Resolver DI-012 (ESLint) antes M-01 (recomendado, não bloqueante)
