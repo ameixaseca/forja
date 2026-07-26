@@ -1,0 +1,36 @@
+# Build artifacts
+dist/
+coverage/
+*.tsbuildinfo
+.turbo/
+node_modules/
+
+# Docs fora escopo Fase 1
+.github/prompts/
+.github/skills/
+.github/copilot-instructions.md
+AGENTS.md
+docs/ci-cd/
+docs/database/
+docs/prd/
+docs/testes/
+docs/adr/
+docs/c4/
+docs/implementacao/00-CONTEXTO-E-PREMISSAS.md
+docs/implementacao/01-FASE-0-RECONCILIACAO.md
+docs/implementacao/02-FASE-1-SETUP.md
+docs/implementacao/03-FASE-2-MOTOR.md
+docs/implementacao/04-FASE-3-DOMINIO.md
+docs/implementacao/05-FASE-4-VERIFICACAO.md
+docs/implementacao/06-FASE-5-API.md
+docs/implementacao/07-FASE-6-MOBILE.md
+docs/implementacao/08-FASE-7-WEB.md
+docs/implementacao/09-FASE-8-BDD.md
+docs/implementacao/10-FASE-9-CICD.md
+docs/implementacao/11-FASE-10-TESTES-BLOQUEANTES.md
+docs/implementacao/AGENTS-WORKFLOW.md
+docs/implementacao/CRONOGRAMA.md
+docs/implementacao/ESCOPO-MVP.md
+docs/implementacao/README.md
+docs/implementacao/RISCOS-E-MITIGACOES.md
+docs/implementacao/STACK-TECNICO.md
