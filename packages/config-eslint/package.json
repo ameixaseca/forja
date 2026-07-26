@@ -1,0 +1,12 @@
+{
+  "name": "@forja/config-eslint",
+  "version": "0.0.1",
+  "private": true,
+  "main": "index.js",
+  "packageManager": "pnpm@10.14.0",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
+    "eslint": "^8.57.1"
+  }
+}

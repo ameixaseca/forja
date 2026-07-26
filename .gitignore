@@ -1,2 +1,6 @@
 .claude/
-.github/
+.turbo/
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
