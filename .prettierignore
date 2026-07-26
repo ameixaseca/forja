@@ -10,6 +10,7 @@ node_modules/
 .github/skills/
 .github/copilot-instructions.md
 AGENTS.md
+docs/README.md
 docs/ci-cd/
 docs/database/
 docs/prd/
