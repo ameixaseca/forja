@@ -1,27 +1,160 @@
-# Fase 1: Setup de Monorepo — FORJA
+# Fase 1: Setup Monorepo — FORJA
 
-**Duração:** 1 semana (Semana 3)  
-**Dependências:** Fase 0 completa (gate aprovado)  
-**Objetivo:** Configurar estrutura base do monorepo com Turborepo + pnpm
-
----
-
-## 1. Contexto
-
-### 1.1 Estado Inicial
-- Repo tem apenas `docs/` e `AGENTS.md`
-- Nenhum código de produção existe
-- ADR-0001 define monorepo como arquitetura
-
-### 1.2 Estado Final
-- Monorepo funcional com 5 packages + 3 apps
-- Build pipeline configurado (`turbo.json`)
-- Linting, formatting, typechecking funcionais
-- CI configurado (GitHub Actions)
+**Duração:** 1 semana  
+**Dependências:** Fase 0 gate aprovado  
+**Objetivo:** Configurar monorepo Turborepo + pnpm
 
 ---
 
-## 2. Estrutura Alvo
+## AI Agent Context
+
+**Artefatos entrada:**
+- ADR-0001 (monorepo structure)
+- ADR-0003 (NestJS API)
+- ADR-0008 (RN Web)
+- ADR-0010 (CI Python scripts)
+- D-033 (narrative subsystem isolation)
+- D-036 (JSON storylet catalog)
+
+**Artefatos saída esperados:**
+```
+forja/
+├── packages/
+│   ├── motor-narrativo/      # Pure TS (D-033)
+│   ├── dominio/               # Domain rules
+│   ├── ui-primitives/         # Shared RN components
+│   ├── config-eslint/
+│   └── config-typescript/
+├── apps/
+│   ├── mobile/                # Expo RN
+│   ├── web/                   # Next.js + RN Web
+│   └── api/                   # NestJS
+├── content/
+│   └── campanhas/espinha/
+├── turbo.json
+├── pnpm-workspace.yaml
+└── .github/workflows/ci.yml
+```
+
+**Comandos verificação:**
+```bash
+pnpm install
+pnpm build      # Turborepo build all
+pnpm lint       # ESLint all
+pnpm typecheck  # TSC all
+pnpm test       # Vitest all
+# Segunda vez build ~50% faster (cache hit)
+```
+
+**Dependências externas:**
+- Node.js 20+
+- pnpm 8+
+- GitHub repo com actions enabled
+
+---
+
+## 1. Estrutura Completa
+
+Veja estrutura detalhada original (linhas 24-85 versão anterior) — mantida para referência humana.
+
+---
+
+## 2. Tarefas AI Agent
+
+### Tarefa 1.1: Workspace Root
+**Agente:** `bash`
+**Comandos:**
+```bash
+pnpm init
+pnpm add -D -w turbo prettier eslint
+```
+**Artefatos:**
+- `package.json` (root) com scripts: build, lint, typecheck, test, format
+- `pnpm-workspace.yaml` com `packages: ['packages/*', 'apps/*']`
+- `turbo.json` (config §3.1.4 versão anterior)
+**Verificação:** `pnpm list turbo` retorna versão
+
+---
+
+### Tarefa 1.2: Config Packages
+**Agente:** `bash` + `write`
+**Criar:**
+- `packages/config-typescript/` com base.json, react.json, node.json (§3.2.1)
+- `packages/config-eslint/` com index.js (§3.2.2)
+**Verificação:** `pnpm build --filter=@forja/config-*` sem erros
+
+---
+
+### Tarefa 1.3: Motor Narrativo Placeholder
+**Agente:** `write`
+**Criar:** `packages/motor-narrativo/`
+- `package.json` (§3.3.2)
+- `tsconfig.json` extends `@forja/config-typescript/base.json`
+- `src/index.ts` com types: State, Inputs, Storylet, Resolution, função `resolve()` placeholder (§3.3.4)
+- `tests/resolve.test.ts` placeholder (§3.3.5)
+**Deps:** `typescript`, `vitest`, `@forja/config-typescript`, `@forja/config-eslint`
+**Verificação:**
+```bash
+cd packages/motor-narrativo
+pnpm build  # Compila TS
+pnpm test   # Vitest roda (falha esperada "Not implemented")
+```
+
+---
+
+### Tarefa 1.4: Domínio Placeholder
+**Agente:** `write`
+**Criar:** `packages/dominio/`
+- `src/index.ts` com Juramento, Ciclo, `calcularProgressao()` (§3.4.3)
+- `tests/progressao.test.ts` (§3.4.4)
+**Verificação:** `pnpm test --filter=@forja/dominio` passa (RN-001 cálculo 2/3 = 0.667)
+
+---
+
+### Tarefa 1.5: Linting e Formatting
+**Agente:** `write`
+**Criar:**
+- `.prettierrc` (§3.5.1)
+- `.eslintrc.js` extends `@forja/config-eslint` (§3.5.2)
+- Scripts root package.json (§3.5.3)
+**Verificação:** `pnpm lint && pnpm format:check` passa
+
+---
+
+### Tarefa 1.6: CI GitHub Actions
+**Agente:** `write`
+**Criar:** `.github/workflows/ci.yml` (§3.5.4)
+**Jobs:** lint, typecheck, test (paralelos)
+**Cache:** pnpm store, Turborepo cache
+**Verificação:** Push para `main` → Actions verde
+
+---
+
+## 3. Critérios Gate
+
+- [ ] `pnpm install` sem erros
+- [ ] `pnpm build` compila todos packages
+- [ ] `pnpm lint` passa
+- [ ] `pnpm typecheck` passa
+- [ ] `pnpm test` roda (placeholders passam/fail esperado)
+- [ ] CI GitHub Actions verde
+- [ ] Turborepo cache funciona (segundo build ~50% faster)
+- [ ] Estrutura match ADR-0001
+- [ ] Zero dependências runtime em `motor-narrativo` (D-033)
+- [ ] Commit tag `fase-1-completa`
+
+---
+
+## 4. Checklist Saída
+
+- [ ] 5 packages criados (motor-narrativo, dominio, ui-primitives, config-*)
+- [ ] 3 apps placeholders (mobile, web, api) — opcional Fase 1, pode adiar Fase 3
+- [ ] Build pipeline funcional
+- [ ] CI passando
+- [ ] `docs/setup/README.md` criado (§3.5.3 versão anterior)
+- [ ] Tag `fase-1-completa`
+
+**Próxima fase:** Fase 2 (Motor Narrativo) — 3 semanas
 
 ```
 forja/

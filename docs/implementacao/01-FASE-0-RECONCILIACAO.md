@@ -1,281 +1,198 @@
 # Fase 0: Reconciliação — FORJA
 
-**Duração:** 2 semanas (Semana 1-2)  
-**Gate:** Bloqueante absoluto — Fase 1 não começa até 100% resolvido  
-**Objetivo:** Resolver lacunas/defeitos pendentes em PRD + ESPEC; documentar decisões
+**Duração:** 2 semanas  
+**Gate:** Bloqueante — Fase 1 bloqueada até 100% resolvido  
+**Objetivo:** Resolver lacunas/defeitos, documentar decisões
+
+---
+
+## AI Agent Context
+
+**Artefatos de entrada:**
+- `docs/prd/PRD-Forja-v0_14.md` — requisitos funcionais RF-XXX, regras RN-XXX, decisões D-XXX
+- `docs/prd/ESPEC-Sistema-Narrativo-v2_6.md` — specs narrativas, métricas M-XX, testes T-XX
+- `docs/adr/0001-*.md` a `docs/adr/0014-*.md` — decisões arquiteturais
+- `docs/implementacao/DECISOES-IMPLEMENTACAO.md` — decisões DI-001 a DI-005 existentes
+
+**Artefatos de saída esperados:**
+- `docs/implementacao/DECISOES-IMPLEMENTACAO.md` — novas decisões DI-006 a DI-011
+- `docs/implementacao/FASE-0-GATE-APROVADO.md` — doc de aprovação
+- Issues GitHub para decisões postergadas (LAC-07, ESPEC-03, ESPEC-04)
+
+**Dependências externas:** Nenhuma — trabalho puramente documental.
 
 ---
 
 ## 1. Contexto
 
-### 1.1 Situação Atual
-- PRD v0.14 + ESPEC v2.6 completos
-- ESPEC declara "sem questões abertas" (linha 10)
-- Decisões DEC-005 a DEC-021, DEC-033, DEC-036, DEC-037 já travadas
-- Várias resolvem lacunas (ex: DEC-010 = reconhecimento por alcançabilidade)
+### 1.1 Situação
+PRD v0.14 + ESPEC v2.6 completos. Decisões DEC-005 a DEC-037 travadas. Lacunas conhecidas (PRD §15.2-15.3) parcialmente resolvidas.
 
-### 1.2 O Que Precisa Reconciliar
-1. **Verificar se decisões DEC-XXX cobrem todas lacunas PRD §15.2**
-2. **Identificar decisões implícitas não documentadas em DI-XXX**
-3. **Validar consistência entre PRD, ESPEC, ADRs**
-4. **Resolver questões de implementação não cobertas por specs**
+### 1.2 Escopo
+Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões implícitas. Validar consistência PRD/ESPEC/ADRs. Resolver questões bloqueantes.
 
-### 1.3 Risco Principal
+### 1.3 Risco
 **R-032 (crítico):** Lacunas não resolvidas bloqueiam Fase 1-2.
 
 ---
 
-## 2. Escopo da Fase
+## 2. Inventário Pré-processado
 
-### 2.1 Entradas
-- [x] PRD v0.14 (`docs/prd/PRD-Forja-v0_14.md`)
-- [x] ESPEC v2.6 (`docs/prd/ESPEC-Sistema-Narrativo-v2_6.md`)
-- [x] ADRs 0001-0014 (`docs/adr/`)
-- [x] Decisões travadas D-001 a D-045 (PRD §4)
-- [x] Decisões ESPEC DEC-005 a DEC-037
+### 2.1 Lacunas (PRD §15.2)
 
-### 2.2 Saídas
-- [ ] Lista de 16 lacunas/defeitos com status (resolvido/pendente/N/A)
-- [ ] Novas entradas em `DECISOES-IMPLEMENTACAO.md` (DI-006+)
-- [ ] Issues GitHub para decisões que exigem investigação
-- [ ] Atualização de ADRs se necessário (improvável)
-- [ ] Gate aprovado: documento `FASE-0-GATE-APROVADO.md`
+**✅ Resolvidas (8/11):**
+- LAC-01: Campanha única no MVP (DI-001)
+- LAC-02: Replay vs snapshot (DI-003)
+- LAC-03: Fôlego teto 4 (D-044)
+- LAC-05: Wearable adiar v2 (D-003)
+- LAC-08: PSE K=60% (RN-007, DI-002)
+- LAC-09: Cooldown por rótulo (RF-043)
+- LAC-10: Assinatura adiar (D-026)
+- LAC-11: Kill-switch campanha inteira (ADR-0004)
 
----
+**⚠️ Bloqueantes (3/11):**
+- **LAC-04:** Camadas compartilhamento — requer DI-009
+- **LAC-06:** Gênero gramatical — requer DI-010
+- **DEF-02:** Tie-breaker ordenação — requer DI-007 (determinismo M-05)
+- **DEF-03:** Cooldown Marco início — requer DI-008
+- **DEF-04:** 21 dias vs 14 dias — requer DI-006 (INCONS-01)
 
-## 3. Inventário de Lacunas e Defeitos
-
-### 3.1 Lacunas Mencionadas no PRD §15.2
-
-PRD §15.2 lista lacunas conhecidas. Verificar status:
-
-| ID | Descrição | Status | Resolução |
-|----|-----------|--------|-----------|
-| **LAC-01** | Múltiplas campanhas vs única no MVP | ✅ Resolvida | DI-001 (campanha única) |
-| **LAC-02** | Trégua retroativa: snapshot vs replay | ✅ Resolvida | DI-003 (replay) |
-| **LAC-03** | Limite de Fôlego acumulado | ✅ Resolvida | D-044 (teto 4) |
-| **LAC-04** | Compartilhamento: quais camadas opcionais | ⚠️ Investigar | RF-063, RF-064 |
-| **LAC-05** | Wearable: quais dados capturar | ✅ N/A | D-003 (adiar v2) |
-| **LAC-06** | I18n: como lidar com gênero gramatical | ⚠️ Investigar | RF-124 |
-| **LAC-07** | Modalidade: campos específicos (ex: distância) | ⚠️ Implementar | RF-056 (baixa prioridade) |
-| **LAC-08** | PSE: deve influenciar progressão? | ✅ Resolvida | RN-007 + DI-002 (K=60%) |
-| **LAC-09** | Marco: cooldown por atributo vs por rótulo | ✅ Resolvida | RF-043 (por rótulo) |
-| **LAC-10** | Assinatura: modelo de cobrança | ✅ N/A | D-026 (adiar) |
-| **LAC-11** | Kill-switch: granularidade (campanha vs storylet) | ✅ Resolvida | ADR-0004 (campanha inteira) |
-
-**Pendentes (3):**
-- LAC-04: Definir camadas de compartilhamento (ex: storylet recente, atributos, PSE histórico)
-- LAC-06: Estratégia de gênero gramatical (templates, variantes, ou aceitar neutro)
-- LAC-07: Campos específicos de modalidade (baixa prioridade, pode simplificar no MVP)
+**📍 Não-bloqueantes (3/11):**
+- LAC-07: Campos modalidade (baixa prioridade)
+- ESPEC-01: Pesos uniforme (esclarecimento menor)
+- ESPEC-02: `in.reencontro` >=10 vs >10 — requer DI-011
 
 ---
 
-### 3.2 Defeitos Mencionados no PRD §15.3
+## 3. Decisões Bloqueantes (DI-006 a DI-011)
 
-| ID | Descrição | Status | Resolução |
-|----|-----------|--------|-----------|
-| **DEF-01** | Valor de K (influência de PSE) não especificado | ✅ Resolvida | DI-002 (K=60%) |
-| **DEF-02** | Algoritmo de ordenação em caso de empate | ⚠️ Implementar | ESPEC §6.1 menciona, precisa detalhar |
-| **DEF-03** | Cooldown de Marco: início quando? (após declaração ou após ciclo encerrar) | ⚠️ Investigar | RF-043 menciona "2 ciclos", mas quando conta? |
-| **DEF-04** | Pausa longa: 21 dias ou 14 dias? | ⚠️ Resolver | RF-048 (21 dias) vs RF-007A (14 dias retroativo) |
-| **DEF-05** | Snapshot vs replay: quando recalcular? | ✅ Resolvida | ADR-0002 + DI-003 |
+### DI-006: Pausa Longa Unificada
 
-**Pendentes (3):**
-- DEF-02: Ordenação em empate (determinismo exige regra clara)
-- DEF-03: Cooldown de Marco (início imediato ou após encerramento de ciclo?)
-- DEF-04: Inconsistência entre 21 dias (RF-048) e 14 dias (RF-007A)
+**Problema:** RF-048 (21 dias) vs RF-007A (14 dias) inconsistente.
 
----
+**Decisão:** 14 dias para ambas regras (Trégua + Marcos).
 
-### 3.3 Lacunas ESPEC (Implícitas)
-
-ESPEC v2.6 declara "sem questões abertas", mas leitura cuidadosa revela:
-
-| Item | Descrição | Status | Ação |
-|------|-----------|--------|------|
-| **ESPEC-01** | ESPEC §6.1: "sorteio ponderado uniforme" — pesos iguais? | ⚠️ Esclarecer | Verificar se todos elegíveis têm peso 1 |
-| **ESPEC-02** | ESPEC §6.2: `in.reencontro` — "10 dias ou mais" inclui exato 10? | ⚠️ Esclarecer | Definir `>=10` ou `>10` |
-| **ESPEC-03** | ESPEC §3.5: Complicações — quantas por capítulo? | ⚠️ Investigar | Orçamento de comp. por capítulo? |
-| **ESPEC-04** | ESPEC §7.3: Fixtures de teste — onde ficam? | ⚠️ Implementar | Criar `testes/fixtures/negativos/` |
-
-**Pendentes (4):** Todas exigem esclarecimento ou decisão de implementação.
-
----
-
-### 3.4 Inconsistências Entre Documentos
-
-| Item | Conflito | Resolução |
-|------|----------|-----------|
-| **INCONS-01** | PRD RF-048 (21 dias) vs RF-007A (14 dias) | Resolver via DI-006 |
-| **INCONS-02** | ADR-0001 menciona Turborepo, mas sem `turbo.json` no repo | Fase 1 criará |
-| **INCONS-03** | ADR-0010 menciona CI com Python scripts, mas paths hardcoded `/home/claude` | Ajustar paths em F4 |
-
-**Pendentes (3):** Todas resolvíveis em fases posteriores, exceto INCONS-01 (bloqueante).
-
----
-
-## 4. Plano de Reconciliação
-
-### 4.1 Semana 1: Auditoria
-
-**Dia 1-2:**
-- [ ] Ler PRD §15 completo, mapear todas lacunas/defeitos
-- [ ] Ler ESPEC v2.6 completo, identificar ambiguidades
-- [ ] Ler todos ADRs (0001-0014), verificar consistência com PRD/ESPEC
-- [ ] Compilar lista de 20+ itens pendentes
-
-**Dia 3-4:**
-- [ ] Classificar cada item: resolvido | decisão-rápida | investigação | N/A
-- [ ] Criar issues GitHub para itens que exigem investigação (ex: DEF-02, ESPEC-03)
-- [ ] Documentar decisões rápidas em `DECISOES-IMPLEMENTACAO.md` (DI-006+)
-
-**Dia 5:**
-- [ ] Checkpoint: apresentar lista completa ao "cliente" (auto-revisão ou colega)
-- [ ] Ajustar prioridades (bloquante vs pode-adiar)
-
----
-
-### 4.2 Semana 2: Resolução
-
-**Dia 6-8:**
-- [ ] Resolver itens bloqueantes (DEF-02, DEF-03, DEF-04, INCONS-01)
-- [ ] Tomar decisões de design quando necessário (ex: gênero gramatical)
-- [ ] Atualizar `DECISOES-IMPLEMENTACAO.md` com DI-006 a DI-015 (estimativa)
-
-**Dia 9-10:**
-- [ ] Resolver itens não-bloqueantes mas importantes (LAC-04, LAC-06, ESPEC-02)
-- [ ] Adiar itens de baixa prioridade para fases posteriores (LAC-07, ESPEC-03)
-- [ ] Atualizar `ESCOPO-MVP.md` se decisões alterarem escopo
-
-**Dia 11-12:**
-- [ ] Validação cruzada: PRD vs ESPEC vs ADRs vs DI-XXX
-- [ ] Gerar `FASE-0-GATE-APROVADO.md` com lista de decisões + status
-- [ ] Criar issues GitHub para todas decisões pendentes (sprint backlog Fase 1+)
-
-**Gate:** Aprovar Fase 0 quando 100% de itens bloqueantes resolvidos.
-
----
-
-## 5. Decisões a Tomar (Antecipadas)
-
-### 5.1 DI-006: Pausa Longa — 14 ou 21 Dias?
-
-**Problema:** RF-048 (Marcos não contam após 21 dias) vs RF-007A (Trégua Recuperação retroativa 14 dias).
-
-**Alternativas:**
-1. **21 dias para ambos:** Unifica regra, mais generoso
-2. **14 dias para ambos:** Mais restritivo, consistente com "2 semanas"
-3. **Regras separadas:** 14 dias para Trégua, 21 para Marcos (complexo)
-
-**Recomendação:** Opção 2 (14 dias). Justificativa:
+**Justificativa:**
 - RF-007A já usa 14 dias (Trégua Recuperação)
-- Consistência facilita comunicação
-- 14 dias = 2 semanas (fácil lembrar)
+- Consistência com "2 semanas" (fácil comunicar)
+- Resolve INCONS-01
+
+**Impacto:** Ajustar RF-048 mentalmente durante implementação.
 
 ---
 
-### 5.2 DI-007: Ordenação em Empate
+### DI-007: Tie-breaker Determinístico
 
-**Problema:** ESPEC §6.1 não especifica tie-breaker se múltiplos storylets têm prioridade idêntica.
+**Problema:** ESPEC §6.1 não especifica desempate entre storylets mesma prioridade.
 
-**Alternativas:**
-1. **Aleatório com seed:** Usar RNG seeded
-2. **Ordem alfabética por ID:** Determinístico, mas favorece storylets com IDs menores
-3. **Ordem de declaração no catálogo:** Depende de ordem de arquivo (frágil)
+**Decisão:** Aleatório seeded (RNG com seed).
 
-**Recomendação:** Opção 1 (aleatório seeded). Justificativa:
-- RF-036: motor puro, seed garante reprodutibilidade
-- Evita viés (alfabético favorece IDs específicos)
-- Simulador pode testar distribuição justa
+**Justificativa:**
+- RF-036 (motor puro, seed garante reprodutibilidade)
+- Sem viés alfabético
+- Testável via M-05 (determinismo cross-platform)
 
----
-
-### 5.3 DI-008: Cooldown de Marco — Quando Começa?
-
-**Problema:** RF-043 (cooldown 2 ciclos por rótulo) — inicia após declaração ou após encerramento de ciclo?
-
-**Alternativas:**
-1. **Após declaração:** Marco declarado dia 1 de ciclo N → cooldown começa imediatamente
-2. **Após encerramento:** Marco declarado dia 1 de ciclo N → cooldown começa quando N encerra
-
-**Recomendação:** Opção 1 (após declaração). Justificativa:
-- Simplicidade: não precisa rastrear "ciclo de declaração"
-- Evita exploits (declarar Marco no último dia de ciclo)
-- Alinhado com intuição: "já declarei, agora espero"
+**Impacto:** Função `selectOne(pool, rng)` usa `rng.choice()`.
 
 ---
 
-### 5.4 DI-009: Camadas de Compartilhamento
+### DI-008: Cooldown Marco Inicia Após Declaração
 
-**Problema:** RF-063 (ligar/desligar camadas) — quais camadas existem?
+**Problema:** RF-043 (cooldown 2 ciclos) — quando começa?
 
-**Alternativas:**
-1. **Minimal (3 camadas):** Storylet recente | Atributos | Ficha completa
-2. **Completo (6 camadas):** Storylet | Atributos | PSE | Histórico | Juramento | Modalidade
-3. **Granular (10+ camadas):** Tudo separado
+**Decisão:** Cooldown inicia após declaração, não após encerramento ciclo.
 
-**Recomendação:** Opção 2 (completo, 6 camadas). Justificativa:
-- Equilibra controle do usuário vs complexidade de UI
-- Camadas sensíveis (PSE, histórico) opcionais por padrão (RF-064)
-- Suficiente para MVP, expansível em v2
+**Justificativa:**
+- Simplicidade (não rastrear "ciclo de declaração")
+- Previne exploit (declarar Marco último dia ciclo)
+- Alinhado intuição usuário
 
-**Camadas propostas:**
-1. **Storylet recente** (sempre on)
-2. **Atributos principais** (on por padrão)
-3. **PSE da sessão** (off por padrão — RC-001, dado de saúde)
-4. **Histórico de ciclos** (off por padrão)
-5. **Juramento atual** (on por padrão)
-6. **Modalidade** (on por padrão)
+**Impacto:** Lógica em `packages/dominio` (Fase 3).
 
 ---
 
-### 5.5 DI-010: Gênero Gramatical
+### DI-009: Camadas Compartilhamento (6 Camadas)
 
-**Problema:** RF-124 (declarar gênero por entidade) — como aplicar em texto?
+**Problema:** RF-063 (ligar/desligar camadas) — quais camadas?
 
-**Alternativas:**
-1. **Templates com placeholders:** `{entidade} estava {cansado|cansada}` (complexo)
-2. **Variantes completas:** Escrever parágrafos duplicados para M/F (trabalhoso)
-3. **Neutro por padrão:** Reescrever prosa para evitar gênero (ideal, mas difícil em pt-BR)
+**Decisão:** 6 camadas:
+1. Storylet recente (sempre on)
+2. Atributos principais (on padrão)
+3. PSE sessão (off padrão — RC-001 dado saúde)
+4. Histórico ciclos (off padrão)
+5. Juramento atual (on padrão)
+6. Modalidade (on padrão)
 
-**Recomendação:** Opção 3 + Opção 1 quando inevitável. Justificativa:
-- pt-BR permite neutro em muitos casos ("você", "a pessoa", verbos em 2ª pessoa)
-- Quando inevitável (ex: adjetivos), usar placeholders simples
-- Evita duplicar texto (manutenção 2x)
+**Justificativa:**
+- Equilibra controle vs complexidade UI
+- Camadas sensíveis opcionais (PSE, histórico)
+- Suficiente MVP, expansível v2
 
-**Implementação:**
+**Impacto:** UI em apps/mobile (Fase 5+).
+
+---
+
+### DI-010: Gênero Gramatical — Neutro + Placeholders
+
+**Problema:** RF-124 (gênero por entidade) — como aplicar texto?
+
+**Decisão:** Neutro por padrão + placeholders quando inevitável.
+
+**Estratégia:**
+- Prosa evita adjetivos (estilo indireto, "você", 2ª pessoa)
+- Quando inevitável: template `{adj:cansado}` resolve via `entidade.genero`
 - Entidade tem `genero: 'M' | 'F' | 'N'`
-- Template engine suporta `{adj:cansado}` → resolve baseado em gênero do sujeito
-- Maioria da prosa evita adjetivos (estilo indireto)
+
+**Justificativa:**
+- pt-BR permite neutro em muitos casos
+- Evita duplicar texto (manutenção 2x)
+- Template engine simples
+
+**Impacto:** Schema entidade em `content/schema/`, engine em `motor-narrativo` (Fase 2).
 
 ---
 
-### 5.6 DI-011: `in.reencontro` — Inclui Exato 10 Dias?
+### DI-011: `in.reencontro` Inclui Dia 10
 
-**Problema:** ESPEC §6.2 diz "10 dias ou mais" — ambíguo se dia 10 conta.
+**Problema:** ESPEC §6.2 "10 dias ou mais" ambíguo.
 
-**Alternativas:**
-1. **`>=10` (inclui):** Reencontro ativa em exato 10 dias
-2. **`>10` (exclui):** Só ativa em 11+ dias
+**Decisão:** `>=10` (inclui dia 10 exato).
 
-**Recomendação:** Opção 1 (`>=10`). Justificativa:
+**Justificativa:**
 - "10 dias **ou mais**" linguisticamente inclui 10
-- Consistente com outras regras (ex: RF-048 "21 dias ou mais")
+- Consistente RF-048 "21 dias ou mais"
 - Mais generoso (beneficia jogador)
 
+**Impacto:** Função `isEligible()` em `selector/eligibility.ts` (Fase 2).
+
 ---
 
-## 6. Critérios de Gate
+## 4. Tarefas AI Agent
 
-Fase 0 aprovada quando:
+### Tarefa 1: Criar DI-006 a DI-011
+**Agente:** `task` (general)
+**Input:** Decisões acima + `docs/implementacao/DECISOES-IMPLEMENTACAO.md` existente
+**Ação:** Adicionar DI-006 a DI-011 em formato existente do arquivo
+**Output:** Arquivo atualizado
+**Verificação:** Grep por `DI-006` a `DI-011` retorna 6 entradas
 
-- [ ] 100% de itens bloqueantes resolvidos (DEF-02, DEF-03, DEF-04, INCONS-01)
-- [ ] Decisões DI-006 a DI-011 documentadas em `DECISOES-IMPLEMENTACAO.md`
-- [ ] Issues GitHub criadas para decisões adiadas (LAC-07, ESPEC-03)
-- [ ] Nenhuma inconsistência crítica entre PRD/ESPEC/ADRs
-- [ ] Documento `FASE-0-GATE-APROVADO.md` gerado com assinatura
+### Tarefa 2: Criar Gate Aprovado
+**Agente:** `write`
+**Input:** Template §6 (abaixo)
+**Ação:** Criar `docs/implementacao/FASE-0-GATE-APROVADO.md`
+**Output:** Arquivo com data, decisões tomadas, itens adiados, bloqueantes resolvidos
+**Verificação:** Arquivo existe, menciona DI-006 a DI-011
 
-**Template de gate:**
+### Tarefa 3: Criar Issues GitHub
+**Agente:** `bash` (gh CLI)
+**Input:** Itens não-bloqueantes (LAC-07, ESPEC-01, ESPEC-03, ESPEC-04)
+**Ação:** `gh issue create` para cada, label `fase-posterior`
+**Output:** 4 issues criadas
+**Verificação:** `gh issue list --label fase-posterior` retorna 4 issues
+
+---
+
+## 5. Gate Template
 
 ```markdown
 # Fase 0: Gate Aprovado
@@ -284,58 +201,40 @@ Fase 0 aprovada quando:
 **Aprovado por:** [nome]
 
 ## Decisões Tomadas
-- DI-006: 14 dias para pausa longa
-- DI-007: Ordenação por seed em empate
+- DI-006: 14 dias pausa longa
+- DI-007: Ordenação seed em empate
 - DI-008: Cooldown inicia após declaração
-- DI-009: 6 camadas de compartilhamento
-- DI-010: Neutro + placeholders para gênero
-- DI-011: `in.reencontro` ativa em `>=10` dias
+- DI-009: 6 camadas compartilhamento
+- DI-010: Neutro + placeholders gênero
+- DI-011: `in.reencontro` ativa `>=10` dias
 
 ## Itens Adiados
-- LAC-07 (campos específicos de modalidade) → Fase 3
-- ESPEC-03 (orçamento de complicações) → Fase 4
-- ESPEC-04 (fixtures de teste) → Fase 4
+- LAC-07 (campos modalidade) → Fase 3, issue #TBD
+- ESPEC-01 (pesos uniforme) → Fase 2 esclarece código
+- ESPEC-03 (orçamento complicações) → Fase 4, issue #TBD
+- ESPEC-04 (fixtures teste) → Fase 4, issue #TBD
 
 ## Bloqueantes Resolvidos
-- ✅ DEF-02: Tie-breaker definido (seed)
-- ✅ DEF-03: Cooldown definido (após declaração)
-- ✅ DEF-04: Unificado em 14 dias
-- ✅ INCONS-01: RF-048 ajustado para 14 dias
+- ✅ DEF-02: Tie-breaker seeded (DI-007)
+- ✅ DEF-03: Cooldown após declaração (DI-008)
+- ✅ DEF-04: Unificado 14 dias (DI-006)
+- ✅ INCONS-01: RF-048 ajustado 14 dias (DI-006)
+- ✅ LAC-04: 6 camadas definidas (DI-009)
+- ✅ LAC-06: Estratégia gênero (DI-010)
+- ✅ ESPEC-02: `>=10` dias (DI-011)
 
 ## Próximo Passo
-Iniciar Fase 1 (Setup de Monorepo).
+Iniciar Fase 1 (Setup Monorepo).
 ```
 
 ---
 
-## 7. Riscos Específicos da Fase
+## 6. Checklist Saída
 
-| Risco | Probabilidade | Mitigação |
-|-------|---------------|-----------|
-| **Descobrir lacunas não mapeadas** | Alta (50%) | Timebox: 2 semanas hard limit; priorizar bloqueantes |
-| **Decisões exigem consenso externo** | Média (30%) | Solo dev: tomar decisão documentada, revisar em v1.1 |
-| **Estouro de prazo (>2 semanas)** | Alta (50%) | Gate: adiar decisões não-bloqueantes para fases posteriores |
+- [ ] DI-006 a DI-011 em `docs/implementacao/DECISOES-IMPLEMENTACAO.md`
+- [ ] `docs/implementacao/FASE-0-GATE-APROVADO.md` criado
+- [ ] Issues GitHub para LAC-07, ESPEC-03, ESPEC-04
+- [ ] Nenhuma inconsistência bloqueante PRD/ESPEC/ADRs
+- [ ] Commit tag `fase-0-completa`
 
-**Plano B:** Se Fase 0 exceder 2 semanas, aceitar decisões "good enough" e revisar em retrospectiva pós-F4.
-
----
-
-## 8. Checklist de Saída
-
-Antes de marcar Fase 0 como completa:
-
-- [ ] Auditoria de PRD §15 completa
-- [ ] Auditoria de ESPEC v2.6 completa
-- [ ] Auditoria de ADRs 0001-0014 completa
-- [ ] Lista de 20+ itens compilada
-- [ ] 6+ decisões documentadas (DI-006 a DI-011)
-- [ ] Issues GitHub criadas para sprint backlog
-- [ ] `FASE-0-GATE-APROVADO.md` gerado
-- [ ] `DECISOES-IMPLEMENTACAO.md` atualizado
-- [ ] `ESCOPO-MVP.md` atualizado (se necessário)
-- [ ] Commit com tag `fase-0-completa`
-
----
-
-**Próxima fase:** Fase 1 (Setup de Monorepo)  
-**Duração estimada Fase 1:** 1 semana
+**Próxima fase:** Fase 1 (Setup Monorepo) — 1 semana
