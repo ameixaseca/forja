@@ -43,16 +43,19 @@
 
 **Ferramenta:** pnpm v8+  
 **Justificativa:**
+
 - Workspace nativo (melhor que npm workspaces)
 - Mais rápido que yarn
 - Disk-efficient (symlinks)
 - Lockfile determinístico
 
 **Alternativas consideradas:**
+
 - ❌ npm: workspaces funcional, mas mais lento
 - ❌ yarn: Berry complexo demais para projeto solo
 
 **Configuração:**
+
 ```yaml
 # pnpm-workspace.yaml
 packages:
@@ -67,16 +70,19 @@ packages:
 
 **Ferramenta:** Turborepo  
 **Justificativa (ADR-0001):**
+
 - Cache inteligente (local + remoto)
 - Builds incrementais
 - Detecta pacotes afetados
 - Pipeline configurável
 
 **Alternativas consideradas:**
+
 - ❌ Nx: mais features, mas overkill para escopo
 - ❌ Rush: Microsoft-centric, menos adoção
 
 **Configuração:**
+
 ```json
 // turbo.json
 {
@@ -103,14 +109,15 @@ packages:
 **Configuração:** `strict: true` em todos os pacotes
 
 **Por pacote:**
-| Pacote | Target | Module | Justificativa |
-|--------|--------|--------|---------------|
-| `motor-narrativo` | ES2020 | ESNext | Pure TS, sem deps Node |
-| `dominio` | ES2020 | ESNext | Pure TS, sem deps Node |
-| `schema` | ES2020 | CommonJS | Compatibilidade NestJS |
-| `api` | ES2022 | CommonJS | Node 20 |
-| `mobile` | ES2020 | ESNext | Hermes engine |
-| `web` | ES2022 | ESNext | Next.js |
+
+| Pacote            | Target | Module   | Justificativa          |
+| ----------------- | ------ | -------- | ---------------------- |
+| `motor-narrativo` | ES2020 | ESNext   | Pure TS, sem deps Node |
+| `dominio`         | ES2020 | ESNext   | Pure TS, sem deps Node |
+| `schema`          | ES2020 | CommonJS | Compatibilidade NestJS |
+| `api`             | ES2022 | CommonJS | Node 20                |
+| `mobile`          | ES2020 | ESNext   | Hermes engine          |
+| `web`             | ES2022 | ESNext   | Next.js                |
 
 ---
 
@@ -119,12 +126,14 @@ packages:
 ### 3.1 `motor-narrativo`
 
 **Restrições arquiteturais (D-033, RF-035):**
+
 - ✅ Pure TypeScript
 - ❌ NUNCA importar React, Node, platform APIs
 - ❌ NUNCA importar de `dominio`, `api`, apps
 - ✅ Função pura: estado + inputs + seed → resolução
 
 **Dependências permitidas:**
+
 ```json
 {
   "dependencies": {
@@ -138,6 +147,7 @@ packages:
 ```
 
 **Teste de conformidade:**
+
 ```bash
 # Deve falhar se importar deps proibidas
 pnpm depcheck packages/motor-narrativo
@@ -148,12 +158,14 @@ pnpm depcheck packages/motor-narrativo
 ### 3.2 `dominio`
 
 **Responsabilidades:**
+
 - Event sourcing (projeção de eventos → estado)
 - Cálculo de Vontade, Fôlego, Marcos
 - Regras de ciclo (Juramento, Trégua)
 - Validação de business rules (RN-XXX)
 
 **Dependências:**
+
 ```json
 {
   "dependencies": {
@@ -170,17 +182,20 @@ pnpm depcheck packages/motor-narrativo
 
 **Ferramenta:** Zod v3  
 **Justificativa (ADR-0009):**
+
 - Schema compartilhado cliente ↔ API
 - Runtime validation
 - TypeScript types inferidos
 - Composable
 
 **Alternativas consideradas:**
+
 - ❌ Yup: menos type-safe
 - ❌ Joi: Node-only
 - ❌ io-ts: verbose
 
 **Schemas principais:**
+
 ```typescript
 // DiaryEvent
 export const DiaryEventSchema = z.object({
@@ -226,6 +241,7 @@ export const EntitlementSchema = z.object({
 
 **Gerado por:** Supabase CLI  
 **Comando:**
+
 ```bash
 supabase gen types typescript --local > packages/db-types/src/index.ts
 ```
@@ -240,11 +256,13 @@ supabase gen types typescript --local > packages/db-types/src/index.ts
 
 **Ferramenta:** Node.js 20 LTS  
 **Justificativa:**
+
 - LTS até abril 2026 (alinhado com timeline)
 - Native fetch, test runner
 - Performance adequada
 
 **Alternativas consideradas:**
+
 - ❌ Bun: muito novo, ecosistema imaturo
 - ❌ Deno: boa opção, mas tooling menos maduro que Node
 
@@ -255,16 +273,19 @@ supabase gen types typescript --local > packages/db-types/src/index.ts
 **Ferramenta:** NestJS v10  
 **Adapter:** Fastify (não Express)  
 **Justificativa (ADR-0003):**
+
 - Estrutura modular (auth, sync, entitlements, lgpd)
 - DI nativo
 - Guards/pipes para validação consistente
 - Familiaridade com arquitetura em camadas
 
 **Alternativas consideradas:**
+
 - ❌ Fastify puro: mais leve, mas sem convenções (exige impor estrutura manualmente)
 - ❌ Express: lento comparado a Fastify
 
 **Módulos:**
+
 ```
 apps/api/src/
 ├── auth/           # Magic link via Supabase Auth
@@ -300,25 +321,25 @@ async sync(@Body() dto: SyncRequestDto) {
 
 **Ferramenta:** @supabase/supabase-js v2  
 **Uso:**
+
 - Auth: Supabase Auth SDK
 - Queries: PostgREST via SDK (respeita RLS)
 - Admin: `service_role` key (bypass RLS)
 
 **Alternativas consideradas:**
+
 - ❌ Prisma: ORM complexo, RLS complicado
 - ❌ TypeORM: menos maduro que Prisma
 - ✅ Supabase SDK: RLS nativo, auth integrado
 
 **Configuração:**
+
 ```typescript
 // apps/api/src/supabase/supabase.service.ts
 import { createClient } from '@supabase/supabase-js';
 
 export class SupabaseService {
-  private client = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_ANON_KEY
-  );
+  private client = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 
   private adminClient = createClient(
     process.env.SUPABASE_URL,
@@ -336,6 +357,7 @@ export class SupabaseService {
 
 **Ferramenta:** Supabase (PostgreSQL 16 gerenciado)  
 **Justificativa (ADR-0006):**
+
 - RLS nativo
 - Auth gerenciado
 - PostgREST automático
@@ -343,11 +365,13 @@ export class SupabaseService {
 - Backup automático
 
 **Alternativas consideradas:**
+
 - ❌ PostgreSQL self-hosted: operacional complexo para solo
 - ❌ MongoDB: não relacional, RLS inexistente
 - ❌ Firebase: vendor lock-in, SQL superior para queries
 
 **Local development:**
+
 ```bash
 supabase start          # Inicia Postgres + Studio local
 supabase db reset       # Aplica migrations
@@ -365,12 +389,14 @@ supabase db push        # Push para remoto
 **Ferramenta:** Expo SDK 51+  
 **Workflow:** Managed (não bare)  
 **Justificativa:**
+
 - Setup zero para iOS + Android
 - OTA updates (EAS Update) para hotfix
 - Expo Router (navegação file-based)
 - Build cloud (EAS Build)
 
 **Alternativas consideradas:**
+
 - ❌ React Native bare: mais controle, mas setup complexo
 - ❌ Flutter: Dart não compartilha lógica TS
 - ❌ Kotlin Multiplatform: ecosistema menor
@@ -402,11 +428,13 @@ apps/mobile/app/
 
 **Ferramenta:** expo-sqlite  
 **Justificativa (D-008, ADR-0002):**
+
 - Offline-first
 - Event store local
 - Sync eventual com Postgres
 
 **Schema local:**
+
 ```sql
 CREATE TABLE diary_events (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -422,6 +450,7 @@ CREATE TABLE diary_events (
 ```
 
 **Alternativas consideradas:**
+
 - ❌ AsyncStorage: não relacional, sem queries
 - ❌ WatermelonDB: ORM complexo, overkill
 - ❌ Realm: vendor lock-in
@@ -432,12 +461,14 @@ CREATE TABLE diary_events (
 
 **Ferramenta:** Zustand v4  
 **Justificativa:**
+
 - Leve (< 1KB)
 - Sem boilerplate (vs Redux)
 - TypeScript-first
 - Hooks nativos
 
 **Stores principais:**
+
 ```typescript
 // apps/mobile/src/stores/campaign.ts
 export const useCampaignStore = create<CampaignState>((set) => ({
@@ -451,11 +482,14 @@ export const useCampaignStore = create<CampaignState>((set) => ({
 export const useSyncStore = create<SyncState>((set) => ({
   lastSyncAt: null,
   pendingEvents: 0,
-  sync: async () => { /* ... */ },
+  sync: async () => {
+    /* ... */
+  },
 }));
 ```
 
 **Alternativas consideradas:**
+
 - ❌ Redux Toolkit: verboso demais
 - ❌ MobX: magic demais
 - ❌ Jotai/Recoil: atômico, mas overkill
@@ -466,12 +500,14 @@ export const useSyncStore = create<SyncState>((set) => ({
 
 **Ferramenta:** TanStack Query (React Query) v5  
 **Justificativa:**
+
 - Cache inteligente
 - Retry automático
 - Offline support
 - Invalidação declarativa
 
 **Exemplo:**
+
 ```typescript
 const { data: ficha } = useQuery({
   queryKey: ['ficha', campaignId],
@@ -486,17 +522,20 @@ const { data: ficha } = useQuery({
 
 **Ferramenta:** React Native Paper v5 (Material Design 3)  
 **Justificativa:**
+
 - Componentes prontos (Button, TextInput, Card)
 - Tema personalizável
 - Acessibilidade built-in
 - Boa documentação
 
 **Alternativas consideradas:**
+
 - ❌ NativeBase: bundle maior
 - ❌ UI Kitten: menos adoção
 - ❌ Componentes custom: esforço alto
 
 **Tema:**
+
 ```typescript
 const theme = {
   ...MD3DarkTheme,
@@ -516,12 +555,14 @@ const theme = {
 
 **Ferramenta:** Next.js 14 (App Router)  
 **Justificativa (ADR-0008):**
+
 - React Native Web suportado
 - SSR/SSG para SEO
 - API routes para BFF (se necessário)
 - Deploy Vercel trivial
 
 **Alternativas consideradas:**
+
 - ❌ Vite + React: sem SSR out-of-the-box
 - ❌ Remix: menos maduro que Next
 
@@ -531,10 +572,12 @@ const theme = {
 
 **Versão:** 0.19+  
 **Justificativa (ADR-0008):**
+
 - Compartilha ~90% componentes com mobile
 - `react-native` → `react-native-web` alias
 
 **Configuração Next.js:**
+
 ```javascript
 // next.config.js
 module.exports = {
@@ -548,6 +591,7 @@ module.exports = {
 ```
 
 **Divergências permitidas:**
+
 - Navegação (Next router vs Expo router)
 - Auth (cookie vs SecureStore)
 - Layout responsivo (2 colunas desktop)
@@ -560,17 +604,20 @@ module.exports = {
 
 **Linguagem:** Python 3.11+  
 **Justificativa:**
+
 - Script já existe (`docs/prd/verificar.py`)
 - Pandas/NumPy para análise
 - Portável (roda em CI)
 
 **Dependências:**
+
 ```txt
 # requirements.txt
 pytest>=7.0
 ```
 
 **Testes executados:**
+
 - T-01 a T-08 (estáticos): IDs únicos, schemas válidos
 - T-14, T-17 a T-21: predicados, closures
 - T-23 a T-26: referências de texto
@@ -582,10 +629,12 @@ pytest>=7.0
 
 **Linguagem:** TypeScript (roda via ts-node)  
 **Justificativa:**
+
 - Reutiliza `motor-narrativo` (mesmo código de produção)
 - Types compartilhados
 
 **Estrutura:**
+
 ```
 tooling/simulador/
 ├── src/
@@ -596,6 +645,7 @@ tooling/simulador/
 ```
 
 **Output:**
+
 ```
 $ pnpm simulate --policy constante --n 50 --seed 42
 Simulação concluída: 50 resoluções
@@ -617,6 +667,7 @@ Simulação concluída: 50 resoluções
 **Config:** `eslint-config-next` (para web), custom para packages
 
 **Rules importantes:**
+
 ```json
 {
   "rules": {
@@ -633,6 +684,7 @@ Simulação concluída: 50 resoluções
 
 **Ferramenta:** Prettier v3  
 **Config:**
+
 ```json
 {
   "semi": true,
@@ -648,8 +700,10 @@ Simulação concluída: 50 resoluções
 ### 7.5 Testes
 
 #### Unit/Integration Tests
+
 **Ferramenta:** Vitest v1  
 **Justificativa:**
+
 - Compatível com Vite
 - Mais rápido que Jest
 - ESM nativo
@@ -657,16 +711,19 @@ Simulação concluída: 50 resoluções
 **Usado em:** `motor-narrativo`, `dominio`, `schema`, `api`
 
 #### BDD Tests
+
 **Ferramenta:** Cucumber.js v10 ou Vitest + custom matcher  
 **Features:** Gherkin em pt-BR
 
 **Decisão:** Avaliar na Fase 8. Se Cucumber muito verboso, usar Vitest com helpers que parsam Gherkin.
 
 #### E2E Tests (Mobile)
+
 **Ferramenta:** Detox (não no MVP)  
 **Justificativa:** Custo alto, adiar para v1.1
 
 #### E2E Tests (Web)
+
 **Ferramenta:** Playwright (não no MVP)  
 **Justificativa:** Custo alto, adiar para v1.1
 
@@ -680,6 +737,7 @@ Simulação concluída: 50 resoluções
 **Workflows:** (já especificados em `docs/ci-cd/`)
 
 **Runners:**
+
 - Linux (ubuntu-latest) para API, packages, verificação
 - macOS (macos-14) para build iOS (EAS Build, não local)
 - Sem Windows (não necessário)
@@ -689,29 +747,36 @@ Simulação concluída: 50 resoluções
 ### 8.2 Deploy
 
 #### API
+
 **Plataforma:** Fly.io  
 **Justificativa:**
+
 - Deploy Node.js trivial
 - Postgres próximo (Supabase)
 - Free tier generoso
 - Blue-green deploy
 
 **Alternativas consideradas:**
+
 - ❌ Heroku: caro
 - ❌ Railway: menos maduro
 - ❌ AWS ECS: complexo demais
 
 #### Web
+
 **Plataforma:** Vercel  
 **Justificativa:**
+
 - Next.js nativo
 - Preview deployments automáticos
 - CDN global
 - Free tier para hobby
 
 #### Mobile
+
 **Plataforma:** EAS Build + EAS Submit  
 **Justificativa:**
+
 - Build cloud (sem necessidade de Mac/Xcode local)
 - Submit automático para lojas
 - OTA updates (EAS Update)
@@ -722,12 +787,14 @@ Simulação concluída: 50 resoluções
 
 **Ferramenta:** GitHub Secrets (repository + environment)  
 **Ambientes:**
+
 - `staging`: auto-deploy, sem gate
 - `producao`: gate manual
 - `mobile-lojas`: gate manual
 - `kill-switch`: gate manual
 
 **Secrets:**
+
 ```
 # Repository secrets
 SUPABASE_ACCESS_TOKEN
@@ -753,6 +820,7 @@ CLOUDFLARE_API_TOKEN  # para kill-switch
 **Agregação:** Fly.io logs (staging), Datadog free tier (produção)
 
 **Estrutura:**
+
 ```json
 {
   "level": "info",
@@ -770,10 +838,12 @@ CLOUDFLARE_API_TOKEN  # para kill-switch
 
 **Ferramenta:** Sentry  
 **Planos:**
+
 - Dev: free tier
 - Produção: avaliar custo após lançamento
 
 **Integração:**
+
 - Mobile: `@sentry/react-native`
 - Web: `@sentry/nextjs`
 - API: `@sentry/node`
@@ -786,6 +856,7 @@ CLOUDFLARE_API_TOKEN  # para kill-switch
 
 **MVP:** Nenhum analytics de uso  
 **Justificativa (RC-003):**
+
 - Sem SDK de terceiros (exfiltração)
 - Plausible Analytics (privacy-first) para web em v1.1
 - Mobile: telemetria própria agregada (sem user_id)
@@ -797,12 +868,14 @@ CLOUDFLARE_API_TOKEN  # para kill-switch
 ### 10.1 Requisitos
 
 **Obrigatório:**
+
 - Node.js 20
 - pnpm 8
 - Git
 - VSCode (ou editor com TypeScript LSP)
 
 **Opcional (para mobile):**
+
 - Xcode 15+ (macOS, para iOS)
 - Android Studio (para Android)
 - Expo Go app (para testes rápidos)
@@ -831,6 +904,7 @@ pnpm dev
 ```
 
 **`pnpm dev` inicia:**
+
 - Supabase Studio: http://localhost:54323
 - API: http://localhost:3001
 - Web: http://localhost:3000
@@ -868,16 +942,19 @@ pnpm db:pull
 ## 11. Decisões Pendentes
 
 ### 11.1 BDD Runner
+
 **Opções:** Cucumber.js vs Vitest + custom  
 **Decidir em:** Fase 8  
 **Critério:** Verbosity vs readability
 
 ### 11.2 Mobile E2E
+
 **Opções:** Detox vs Maestro vs manual  
 **Decidir em:** Pós-MVP  
 **Critério:** Custo vs cobertura
 
 ### 11.3 Web Analytics
+
 **Opções:** Plausible vs PostHog vs custom  
 **Decidir em:** Pós-MVP  
 **Critério:** Privacy vs features
@@ -887,10 +964,12 @@ pnpm db:pull
 ## 12. Versionamento
 
 ### 12.1 Packages Internos
+
 **Estratégia:** `workspace:*` (sempre última versão local)  
 **Versioning:** Não publicados no npm, sem semver rígido
 
 ### 12.2 Apps
+
 **Mobile:** semver (1.0.0, 1.0.1, ...)  
 **Web:** commit SHA (deploy contínuo)  
 **API:** commit SHA (deploy contínuo)
@@ -899,18 +978,18 @@ pnpm db:pull
 
 ## 13. Conformidade com ADRs
 
-| ADR | Decisão | Implementação |
-|-----|---------|---------------|
-| ADR-0001 | Monorepo | pnpm + Turborepo |
-| ADR-0002 | Event sourcing | SQLite local + Postgres remoto |
-| ADR-0003 | NestJS | API framework |
+| ADR      | Decisão                 | Implementação                   |
+| -------- | ----------------------- | ------------------------------- |
+| ADR-0001 | Monorepo                | pnpm + Turborepo                |
+| ADR-0002 | Event sourcing          | SQLite local + Postgres remoto  |
+| ADR-0003 | NestJS                  | API framework                   |
 | ADR-0004 | Kill-switch fora da API | Cloudflare Workers (não no MVP) |
-| ADR-0005 | Entitlements | Tabela `entitlements` |
-| ADR-0006 | Postgres + RLS | Supabase |
-| ADR-0007 | Hosting baixo custo | Fly.io + Vercel |
-| ADR-0008 | RN Web | Next.js + RN Web |
-| ADR-0009 | Zod | Package `@forja/schema` |
-| ADR-0010 | Verificador Python | `tooling/verificador/` |
+| ADR-0005 | Entitlements            | Tabela `entitlements`           |
+| ADR-0006 | Postgres + RLS          | Supabase                        |
+| ADR-0007 | Hosting baixo custo     | Fly.io + Vercel                 |
+| ADR-0008 | RN Web                  | Next.js + RN Web                |
+| ADR-0009 | Zod                     | Package `@forja/schema`         |
+| ADR-0010 | Verificador Python      | `tooling/verificador/`          |
 
 ---
 

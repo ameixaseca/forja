@@ -11,6 +11,7 @@ Terse like caveman. Technical substance exact. Only fluff die. Drop: articles, f
 Trust order: PRD (`docs/prd/PRD-Forja-v0_14.md`) → ADRs (`docs/adr/`) → C4 diagrams (`docs/c4/`) → DB schema (`docs/database/`).
 
 **Monorepo structure (planned):**
+
 - `packages/motor-narrativo` — pure TypeScript narrative engine, no React/Node/platform deps (ADR-0001, D-033)
 - `packages/dominio` — domain rules, same constraints
 - `apps/mobile` — React Native
@@ -19,6 +20,7 @@ Trust order: PRD (`docs/prd/PRD-Forja-v0_14.md`) → ADRs (`docs/adr/`) → C4 d
 - `content/` — storylet JSON catalog, embedded in binaries (D-036)
 
 **Key constraints from PRD:**
+
 - D-001: Single-player, no multiplayer
 - D-002: No LLM in runtime
 - D-008: Offline-first
@@ -29,6 +31,7 @@ Trust order: PRD (`docs/prd/PRD-Forja-v0_14.md`) → ADRs (`docs/adr/`) → C4 d
 ## Content verification
 
 **Python scripts are part of the build, not runtime:**
+
 - `docs/prd/verificar.py` — validates prototype against ESPEC rules and cross-references
 - `docs/testes/cobertura.py` — checks BDD feature coverage against requirements
 - Both run in CI when `content/` or `packages/motor-narrativo/` change (ADR-0010)
@@ -41,10 +44,12 @@ Trust order: PRD (`docs/prd/PRD-Forja-v0_14.md`) → ADRs (`docs/adr/`) → C4 d
 PostgreSQL via Supabase. Schema in `docs/database/migrations/`, numbered by timestamp, order-dependent.
 
 **What Postgres DOES NOT store:**
+
 - Storylet content, qualities, entities (lives in app binary per D-036)
 - Character sheet (recalculated client-side from `diary_events` log per ADR-0002)
 
 **What it stores:**
+
 - `diary_events` — append-only event log, source of truth for progression
 - `campaign_instances` — user's campaign state (snapshot is cache only)
 - `entitlements` — purchase validation, written by `service_role` only
@@ -52,12 +57,14 @@ PostgreSQL via Supabase. Schema in `docs/database/migrations/`, numbered by time
 - `storylet_kill_switch` — admin source only, never read in runtime (ADR-0004)
 
 **Two access paths, same RLS barrier:**
+
 - Direct via Supabase SDK (diary sync, consent, instances) — uses `auth.uid()`
 - Via NestJS API (receipt validation only) — uses `service_role`, bypasses RLS
 
 ## CI/CD (planned workflows in `docs/ci-cd/.github/workflows/`)
 
 Commands when code exists:
+
 ```bash
 # Lint, typecheck, test (Turborepo detects affected packages)
 pnpm lint
@@ -77,6 +84,16 @@ supabase db push --dry-run
 
 **Kill-switch:** Manual workflow only, publishes to CDN outside API perimeter (ADR-0004).
 
+## Testing requirement
+
+Every added functionality must include:
+
+- Unit tests
+- Integration tests
+- Mutation tests
+
+No feature considered complete without these three test layers.
+
 ## OpenSpec workflow
 
 Skills available: `openspec-propose`, `openspec-apply-change`, `openspec-explore`, `openspec-archive-change`, `openspec-sync-specs`.
@@ -84,6 +101,7 @@ Skills available: `openspec-propose`, `openspec-apply-change`, `openspec-explore
 Changes live in `openspec/changes/`, specs in `openspec/specs/` (currently empty).
 
 When implementing from OpenSpec tasks, verify against:
+
 - D-033 (narrative subsystem isolation)
 - D-036 (JSON catalog format)
 - RF-036 (narrative engine must be pure function: state + inputs + seed → result)
@@ -94,6 +112,7 @@ PRD uses: RF (functional), RN (business rules), RE (non-functional), RC (complia
 ESPEC uses: T (test cases), M (metrics).
 
 **Deliberate gaps** (not testable via automation):
+
 - RF-030, RF-035, RF-036 — architecture, covered by code structure
 - RC-033, RC-034 — authorship process
 - RC-041, RC-042, RC-043 — dormant until i18n expansion

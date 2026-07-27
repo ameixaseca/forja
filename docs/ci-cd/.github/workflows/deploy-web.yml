@@ -1,0 +1,68 @@
+# Deploy do app web (Next.js + React Native Web, ADR-0008) na Vercel.
+# Preview automático por PR; staging automático em merge; produção atrás
+# de aprovação humana, alinhada aos gates de API e banco (ADR-0015).
+name: Deploy — Web
+
+on:
+  pull_request:
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/**"
+      - "packages/**"
+
+concurrency:
+  group: deploy-web-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Preview (PR)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
+          working-directory: apps/web
+
+  staging:
+    name: Deploy staging (automático)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://staging.forja.app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
+          working-directory: apps/web
+          alias-domains: staging.forja.app
+
+  producao:
+    name: Deploy produção (aprovação manual)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: staging
+    runs-on: ubuntu-latest
+    environment:
+      name: producao
+      url: https://forja.app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID_WEB }}
+          working-directory: apps/web
+          vercel-args: "--prod"

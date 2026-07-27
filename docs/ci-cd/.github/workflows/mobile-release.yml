@@ -1,0 +1,68 @@
+# Release mobile — nunca automático a partir de merge em main (ADR-0014).
+# Dispara só por tag mobile-v* ou manualmente. Submissão às lojas fica
+# atrás de um segundo gate humano mesmo depois do build pronto.
+name: Release — Mobile
+
+on:
+  push:
+    tags:
+      - "mobile-v*"
+  workflow_dispatch:
+    inputs:
+      perfil:
+        description: "Perfil de build (eas.json)"
+        required: true
+        default: "production"
+        type: choice
+        options: [production, preview]
+      submeter_as_lojas:
+        description: "Também submeter às lojas após o build?"
+        required: true
+        default: false
+        type: boolean
+
+concurrency:
+  group: mobile-release
+  cancel-in-progress: false # nunca cancelar um build de loja em andamento
+
+jobs:
+  build:
+    name: Build EAS (iOS + Android)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+
+      - name: Suíte completa do motor antes de liberar release (RF-036)
+        run: pnpm turbo run test --filter=@forja/motor-narrativo --filter=@forja/dominio
+
+      - name: Configurar EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: EAS Build
+        working-directory: apps/mobile
+        run: eas build --platform all --profile ${{ inputs.perfil || 'production' }} --non-interactive
+
+  submeter:
+    name: Submissão às lojas (aprovação manual)
+    needs: build
+    if: inputs.submeter_as_lojas == true || startsWith(github.ref, 'refs/tags/mobile-v')
+    runs-on: ubuntu-latest
+    environment: mobile-lojas
+    steps:
+      - uses: actions/checkout@v4
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: EAS Submit
+        working-directory: apps/mobile
+        run: eas submit --platform all --latest --non-interactive

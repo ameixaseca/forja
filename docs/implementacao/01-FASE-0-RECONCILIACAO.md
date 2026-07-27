@@ -9,12 +9,14 @@
 ## AI Agent Context
 
 **Artefatos de entrada:**
+
 - `docs/prd/PRD-Forja-v0_14.md` — requisitos funcionais RF-XXX, regras RN-XXX, decisões D-XXX
 - `docs/prd/ESPEC-Sistema-Narrativo-v2_6.md` — specs narrativas, métricas M-XX, testes T-XX
 - `docs/adr/0001-*.md` a `docs/adr/0014-*.md` — decisões arquiteturais
 - `docs/implementacao/DECISOES-IMPLEMENTACAO.md` — decisões DI-001 a DI-005 existentes
 
 **Artefatos de saída esperados:**
+
 - `docs/implementacao/DECISOES-IMPLEMENTACAO.md` — novas decisões DI-006 a DI-011
 - `docs/implementacao/FASE-0-GATE-APROVADO.md` — doc de aprovação
 - Issues GitHub para decisões postergadas (LAC-07, ESPEC-03, ESPEC-04)
@@ -26,12 +28,15 @@
 ## 1. Contexto
 
 ### 1.1 Situação
+
 PRD v0.14 + ESPEC v2.6 completos. Decisões DEC-005 a DEC-037 travadas. Lacunas conhecidas (PRD §15.2-15.3) parcialmente resolvidas.
 
 ### 1.2 Escopo
+
 Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões implícitas. Validar consistência PRD/ESPEC/ADRs. Resolver questões bloqueantes.
 
 ### 1.3 Risco
+
 **R-032 (crítico):** Lacunas não resolvidas bloqueiam Fase 1-2.
 
 ---
@@ -41,6 +46,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 ### 2.1 Lacunas (PRD §15.2)
 
 **✅ Resolvidas (8/11):**
+
 - LAC-01: Campanha única no MVP (DI-001)
 - LAC-02: Replay vs snapshot (DI-003)
 - LAC-03: Fôlego teto 4 (D-044)
@@ -51,6 +57,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 - LAC-11: Kill-switch campanha inteira (ADR-0004)
 
 **⚠️ Bloqueantes (3/11):**
+
 - **LAC-04:** Camadas compartilhamento — requer DI-009
 - **LAC-06:** Gênero gramatical — requer DI-010
 - **DEF-02:** Tie-breaker ordenação — requer DI-007 (determinismo M-05)
@@ -58,6 +65,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 - **DEF-04:** 21 dias vs 14 dias — requer DI-006 (INCONS-01)
 
 **📍 Não-bloqueantes (3/11):**
+
 - LAC-07: Campos modalidade (baixa prioridade)
 - ESPEC-01: Pesos uniforme (esclarecimento menor)
 - ESPEC-02: `in.reencontro` >=10 vs >10 — requer DI-011
@@ -73,6 +81,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Decisão:** 14 dias para ambas regras (Trégua + Marcos).
 
 **Justificativa:**
+
 - RF-007A já usa 14 dias (Trégua Recuperação)
 - Consistência com "2 semanas" (fácil comunicar)
 - Resolve INCONS-01
@@ -88,6 +97,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Decisão:** Aleatório seeded (RNG com seed).
 
 **Justificativa:**
+
 - RF-036 (motor puro, seed garante reprodutibilidade)
 - Sem viés alfabético
 - Testável via M-05 (determinismo cross-platform)
@@ -103,6 +113,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Decisão:** Cooldown inicia após declaração, não após encerramento ciclo.
 
 **Justificativa:**
+
 - Simplicidade (não rastrear "ciclo de declaração")
 - Previne exploit (declarar Marco último dia ciclo)
 - Alinhado intuição usuário
@@ -116,6 +127,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Problema:** RF-063 (ligar/desligar camadas) — quais camadas?
 
 **Decisão:** 6 camadas:
+
 1. Storylet recente (sempre on)
 2. Atributos principais (on padrão)
 3. PSE sessão (off padrão — RC-001 dado saúde)
@@ -124,6 +136,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 6. Modalidade (on padrão)
 
 **Justificativa:**
+
 - Equilibra controle vs complexidade UI
 - Camadas sensíveis opcionais (PSE, histórico)
 - Suficiente MVP, expansível v2
@@ -139,11 +152,13 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Decisão:** Neutro por padrão + placeholders quando inevitável.
 
 **Estratégia:**
+
 - Prosa evita adjetivos (estilo indireto, "você", 2ª pessoa)
 - Quando inevitável: template `{adj:cansado}` resolve via `entidade.genero`
 - Entidade tem `genero: 'M' | 'F' | 'N'`
 
 **Justificativa:**
+
 - pt-BR permite neutro em muitos casos
 - Evita duplicar texto (manutenção 2x)
 - Template engine simples
@@ -159,6 +174,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Decisão:** `>=10` (inclui dia 10 exato).
 
 **Justificativa:**
+
 - "10 dias **ou mais**" linguisticamente inclui 10
 - Consistente RF-048 "21 dias ou mais"
 - Mais generoso (beneficia jogador)
@@ -170,6 +186,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 ## 4. Tarefas AI Agent
 
 ### Tarefa 1: Criar DI-006 a DI-011
+
 **Agente:** `task` (general)
 **Input:** Decisões acima + `docs/implementacao/DECISOES-IMPLEMENTACAO.md` existente
 **Ação:** Adicionar DI-006 a DI-011 em formato existente do arquivo
@@ -177,6 +194,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Verificação:** Grep por `DI-006` a `DI-011` retorna 6 entradas
 
 ### Tarefa 2: Criar Gate Aprovado
+
 **Agente:** `write`
 **Input:** Template §6 (abaixo)
 **Ação:** Criar `docs/implementacao/FASE-0-GATE-APROVADO.md`
@@ -184,6 +202,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Verificação:** Arquivo existe, menciona DI-006 a DI-011
 
 ### Tarefa 3: Criar Issues GitHub
+
 **Agente:** `bash` (gh CLI)
 **Input:** Itens não-bloqueantes (LAC-07, ESPEC-01, ESPEC-03, ESPEC-04)
 **Ação:** `gh issue create` para cada, label `fase-posterior`
@@ -201,6 +220,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 **Aprovado por:** [nome]
 
 ## Decisões Tomadas
+
 - DI-006: 14 dias pausa longa
 - DI-007: Ordenação seed em empate
 - DI-008: Cooldown inicia após declaração
@@ -209,12 +229,14 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 - DI-011: `in.reencontro` ativa `>=10` dias
 
 ## Itens Adiados
+
 - LAC-07 (campos modalidade) → Fase 3, issue #TBD
 - ESPEC-01 (pesos uniforme) → Fase 2 esclarece código
 - ESPEC-03 (orçamento complicações) → Fase 4, issue #TBD
 - ESPEC-04 (fixtures teste) → Fase 4, issue #TBD
 
 ## Bloqueantes Resolvidos
+
 - ✅ DEF-02: Tie-breaker seeded (DI-007)
 - ✅ DEF-03: Cooldown após declaração (DI-008)
 - ✅ DEF-04: Unificado 14 dias (DI-006)
@@ -224,6 +246,7 @@ Verificar decisões DEC-XXX cobrem lacunas PRD §15.2. Identificar decisões imp
 - ✅ ESPEC-02: `>=10` dias (DI-011)
 
 ## Próximo Passo
+
 Iniciar Fase 1 (Setup Monorepo).
 ```
 

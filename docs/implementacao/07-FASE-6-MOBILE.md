@@ -9,11 +9,13 @@
 ## AI Agent Context
 
 **Artefatos entrada:**
+
 - `@forja/motor-narrativo` (resolve)
 - `@forja/dominio` (calcularFicha)
 - API `/sync`
 
 **Artefatos saída:**
+
 ```
 apps/mobile/
 ├── src/
@@ -38,6 +40,7 @@ apps/mobile/
 ```
 
 **Comandos verificação:**
+
 ```bash
 cd apps/mobile
 pnpm ios         # Simulador iOS
@@ -50,27 +53,32 @@ pnpm test:e2e    # Detox E2E
 ## Tarefas
 
 ### Tarefa 6.1: Setup Expo
+
 **Agente:** `bash`
+
 ```bash
 npx create-expo-app apps/mobile --template blank-typescript
 cd apps/mobile
 pnpm add expo-router expo-sqlite @forja/motor-narrativo @forja/dominio
 pnpm add react-native-reanimated react-native-gesture-handler
 ```
+
 **Verificação:** `pnpm ios` abre simulador.
 
 ---
 
 ### Tarefa 6.2: SQLite Local
+
 **Agente:** `write`
 **Arquivo:** `src/storage/sqlite.ts`
+
 ```typescript
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('forja.db');
 
 export function initDB() {
-  db.transaction(tx => {
+  db.transaction((tx) => {
     tx.executeSql(`
       CREATE TABLE IF NOT EXISTS diary_events (
         id TEXT PRIMARY KEY,
@@ -84,7 +92,7 @@ export function initDB() {
 }
 
 export function insertEvent(event: DiaryEvent) {
-  db.transaction(tx => {
+  db.transaction((tx) => {
     tx.executeSql(
       'INSERT INTO diary_events (id, tipo, timestamp, payload, synced) VALUES (?, ?, ?, ?, ?)',
       [event.id, event.tipo, event.timestamp, JSON.stringify(event.payload), 0]
@@ -94,58 +102,66 @@ export function insertEvent(event: DiaryEvent) {
 
 export function getUnsyncedEvents(): Promise<DiaryEvent[]> {
   return new Promise((resolve) => {
-    db.transaction(tx => {
+    db.transaction((tx) => {
       tx.executeSql('SELECT * FROM diary_events WHERE synced = 0', [], (_, { rows }) => {
-        resolve(rows._array.map(row => ({
-          id: row.id,
-          tipo: row.tipo,
-          timestamp: row.timestamp,
-          payload: JSON.parse(row.payload),
-        })));
+        resolve(
+          rows._array.map((row) => ({
+            id: row.id,
+            tipo: row.tipo,
+            timestamp: row.timestamp,
+            payload: JSON.parse(row.payload),
+          }))
+        );
       });
     });
   });
 }
 ```
+
 **Verificação:** Insere 1 evento, query retorna.
 
 ---
 
 ### Tarefa 6.3: SyncService
+
 **Agente:** `write`
 **Arquivo:** `src/sync/SyncService.ts`
+
 ```typescript
 export class SyncService {
   async sync() {
     const unsynced = await getUnsyncedEvents();
     const lastSync = await AsyncStorage.getItem('last_sync');
-    
+
     const response = await fetch('https://api.forja.app/sync', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ last_sync: lastSync, events_to_push: unsynced }),
     });
-    
+
     const { events_to_pull, new_sync_token } = await response.json();
-    
+
     // Inserir eventos do server
     for (const event of events_to_pull) {
       await insertEvent({ ...event, synced: 1 });
     }
-    
+
     // Marcar locais como synced
-    await markEventsSynced(unsynced.map(e => e.id));
+    await markEventsSynced(unsynced.map((e) => e.id));
     await AsyncStorage.setItem('last_sync', new_sync_token);
   }
 }
 ```
+
 **Verificação:** Mock fetch, sync insere eventos.
 
 ---
 
 ### Tarefa 6.4: Telas MVP
+
 **Agente:** `write`
 **7 telas principais:**
+
 1. **HomeScreen:** Dashboard com ficha (atributos, vontade, fôlego)
 2. **JuramentoScreen:** Form criar juramento (dias/semana, data início/fim)
 3. **SessaoScreen:** Botão "Registrar Sessão" → chama `resolve()` → mostra resolução
@@ -160,8 +176,10 @@ export class SyncService {
 ---
 
 ### Tarefa 6.5: Integração Motor
+
 **Agente:** `write`
 **Hook:** `useResolution.ts`
+
 ```typescript
 import { resolve } from '@forja/motor-narrativo';
 import { calcularFicha } from '@forja/dominio';
@@ -170,7 +188,7 @@ export function useResolution() {
   const registrarSessao = async () => {
     const eventos = await getAllEvents();
     const ficha = calcularFicha(eventos);
-    
+
     const inputs = {
       rolagem: roll2d6() + ficha.vontade,
       atributo: ficha.atributos,
@@ -180,12 +198,12 @@ export function useResolution() {
       reencontro: false,
       sessao_secundaria: false,
     };
-    
+
     const catalog = require('../../content/campanhas/espinha/catalog.json');
     const seed = Date.now(); // Simplificado; usar server timestamp real
-    
+
     const result = resolve(catalog, { qualities: {...} }, inputs, seed);
-    
+
     // Inserir evento
     await insertEvent({
       id: uuid(),
@@ -193,13 +211,14 @@ export function useResolution() {
       timestamp: new Date().toISOString(),
       payload: { storylet_id: result.storylet.id, efeitos: result.efeitos },
     });
-    
+
     return result;
   };
-  
+
   return { registrarSessao };
 }
 ```
+
 **Verificação:** Sessão registrada → evento inserido → ficha atualizada.
 
 ---

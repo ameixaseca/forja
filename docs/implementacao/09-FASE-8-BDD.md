@@ -9,10 +9,12 @@
 ## AI Agent Context
 
 **Artefatos entrada:**
+
 - `docs/testes/rastreabilidade/features/*.feature` (14 features)
 - `@forja/motor-narrativo`, `@forja/dominio`
 
 **Artefatos saída:**
+
 ```
 packages/bdd/
 ├── features/                 # Copiado de docs/testes/
@@ -30,6 +32,7 @@ packages/bdd/
 ```
 
 **Comandos verificação:**
+
 ```bash
 cd packages/bdd
 pnpm test              # Roda 315 cenários
@@ -41,14 +44,18 @@ pnpm test:coverage     # Coverage requisitos
 ## Tarefas
 
 ### Tarefa 8.1: Setup Vitest + Gherkin
+
 **Agente:** `bash`
+
 ```bash
 mkdir -p packages/bdd
 cd packages/bdd
 pnpm init
 pnpm add -D vitest @cucumber/cucumber
 ```
+
 **Config:** `vitest.config.ts`
+
 ```typescript
 export default {
   test: {
@@ -56,22 +63,28 @@ export default {
   },
 };
 ```
+
 **Verificação:** `pnpm test` roda (vazio ainda).
 
 ---
 
 ### Tarefa 8.2: Copiar Features
+
 **Agente:** `bash`
+
 ```bash
 cp -r ../../docs/testes/rastreabilidade/features ./
 ```
+
 **Verificação:** 14 arquivos `.feature` copiados.
 
 ---
 
 ### Tarefa 8.3: Step Definitions
+
 **Agente:** `write`
 **Exemplo:** `step-definitions/juramento.steps.ts`
+
 ```typescript
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from 'vitest';
@@ -92,40 +105,47 @@ Then('juramento criado com sucesso', function () {
   expect(this.world.ficha.juramento).toBeDefined();
 });
 ```
+
 **Repetir:** 14 features × ~20 steps cada = 280 steps
 **Verificação:** Cenários passam.
 
 ---
 
 ### Tarefa 8.4: World Context
+
 **Agente:** `write`
 **Arquivo:** `support/world.ts`
+
 ```typescript
 export class World {
   ficha: Ficha;
   eventos: DiaryEvent[] = [];
   catalog: Catalog;
-  
+
   constructor() {
     this.ficha = fichaInicial();
     this.catalog = catalogoSintetico();
   }
-  
+
   registrarEvento(evento: DiaryEvent) {
     this.eventos.push(evento);
     this.ficha = calcularFicha(this.eventos);
   }
 }
 ```
+
 **Verificação:** Steps compartilham estado.
 
 ---
 
 ### Tarefa 8.5: Executar Suíte
+
 **Agente:** `bash`
+
 ```bash
 pnpm test
 ```
+
 **Meta:** 315/315 cenários passando
 **Verificação:** Output mostra 100% verde.
 

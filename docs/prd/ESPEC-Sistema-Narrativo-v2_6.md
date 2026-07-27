@@ -2,32 +2,32 @@
 
 **Especificação do subsistema de storylets — campanha codificada**
 
-| Campo | Valor |
-|---|---|
-| Versão | **v2.6** (substitui v2.5) |
-| Documento pai | PRD FORJA v0.14 |
-| Registro de decisões | `decisoes.md` — DEC-005 a DEC-020, DEC-036, DEC-037 |
-| Status | **Fechada para início da especificação técnica.** Sem questões abertas |
-| Data | Julho/2026 |
+| Campo                | Valor                                                                  |
+| -------------------- | ---------------------------------------------------------------------- |
+| Versão               | **v2.6** (substitui v2.5)                                              |
+| Documento pai        | PRD FORJA v0.14                                                        |
+| Registro de decisões | `decisoes.md` — DEC-005 a DEC-020, DEC-036, DEC-037                    |
+| Status               | **Fechada para início da especificação técnica.** Sem questões abertas |
+| Data                 | Julho/2026                                                             |
 
 **Mudanças desde v2.5 — todas com origem em `decisoes.md`:**
 
-| Mudança | Origem |
-|---|---|
-| A regra de reconhecimento passa de forma para **alcançabilidade** (§5). Novo T-27, cobertura por variante | DEC-010 |
+| Mudança                                                                                                            | Origem  |
+| ------------------------------------------------------------------------------------------------------------------ | ------- |
+| A regra de reconhecimento passa de forma para **alcançabilidade** (§5). Novo T-27, cobertura por variante          | DEC-010 |
 | Trégua e reencontro passam a ser **invariantes de motor** (M-01, M-02), não predicados de autoria. T-13 aposentado | DEC-011 |
-| Campo `Desativavel` **removido**; elegibilidade à desativação é derivada da banda (M-03). T-20 aposentado | DEC-012 |
-| Prefixo `mem.` oficializado; novo T-28 | DEC-013 |
-| **Espinha de desfecho não lê complicação** (T-29); rede de segurança devolve `st_cor_fallback` (M-04) | DEC-014 |
-| `cap.resolucoes` e `cap.estagio` definidos; `sys.resolucoes` proibido em `requer` (T-33) | DEC-015 |
-| Ponto de escolha intermediário especificado (M-07) | DEC-016 |
-| **Regra de pressão** (M-06): solubilidade do capítulo passa de amostrada a estrutural | DEC-017 |
-| Camada neutra de `Cor` ≥ 60% (T-18) | DEC-018 |
-| Nomes próprios invariantes entre idiomas | DEC-020 |
-| Orçamento recalculado para **4 capítulos**, ~260 storylets | DEC-021 |
-| Banda `Arco` exige condicionamento estreito; novo T-30 | DEC-036 |
-| Fixtures de teste negativo substituem defeitos deliberados no catálogo | DEC-037 |
-| §3 renumerada de forma contígua | DEC-005 |
+| Campo `Desativavel` **removido**; elegibilidade à desativação é derivada da banda (M-03). T-20 aposentado          | DEC-012 |
+| Prefixo `mem.` oficializado; novo T-28                                                                             | DEC-013 |
+| **Espinha de desfecho não lê complicação** (T-29); rede de segurança devolve `st_cor_fallback` (M-04)              | DEC-014 |
+| `cap.resolucoes` e `cap.estagio` definidos; `sys.resolucoes` proibido em `requer` (T-33)                           | DEC-015 |
+| Ponto de escolha intermediário especificado (M-07)                                                                 | DEC-016 |
+| **Regra de pressão** (M-06): solubilidade do capítulo passa de amostrada a estrutural                              | DEC-017 |
+| Camada neutra de `Cor` ≥ 60% (T-18)                                                                                | DEC-018 |
+| Nomes próprios invariantes entre idiomas                                                                           | DEC-020 |
+| Orçamento recalculado para **4 capítulos**, ~260 storylets                                                         | DEC-021 |
+| Banda `Arco` exige condicionamento estreito; novo T-30                                                             | DEC-036 |
+| Fixtures de teste negativo substituem defeitos deliberados no catálogo                                             | DEC-037 |
+| §3 renumerada de forma contígua                                                                                    | DEC-005 |
 
 ---
 
@@ -35,16 +35,16 @@
 
 Este documento especifica **como a narrativa funciona**, não como ela é distribuída. Com o rollback de D-027, o sistema narrativo é um subsistema interno do aplicativo, não uma biblioteca com fronteira contratual.
 
-**O que sobreviveu do v1.0 e por quê:** o modelo de storylet, as bandas de seleção, o algoritmo de sorteio, o determinismo e a regra de reconhecimento são decisões de *desenho de sistema narrativo*. Elas valem igualmente se o conteúdo é dado remoto ou classe compilada. Descartá-las junto com o motor seria jogar fora a parte que resolve R-001.
+**O que sobreviveu do v1.0 e por quê:** o modelo de storylet, as bandas de seleção, o algoritmo de sorteio, o determinismo e a regra de reconhecimento são decisões de _desenho de sistema narrativo_. Elas valem igualmente se o conteúdo é dado remoto ou classe compilada. Descartá-las junto com o motor seria jogar fora a parte que resolve R-001.
 
 **O que morreu:** formato de pacote, manifesto, migração de estado entre versões, assinatura criptográfica, validação estática como portão de publicação e a API pura de biblioteca.
 
 **Duas suítes, não uma.** A partir desta versão a verificação está separada em:
 
-| Suíte | Objeto | Notação |
-|---|---|---|
-| **Catálogo** | propriedades do conteúdo escrito | `T-nn` |
-| **Motor** | invariantes do seletor, independentes de catálogo | `M-nn` |
+| Suíte        | Objeto                                            | Notação |
+| ------------ | ------------------------------------------------- | ------- |
+| **Catálogo** | propriedades do conteúdo escrito                  | `T-nn`  |
+| **Motor**    | invariantes do seletor, independentes de catálogo | `M-nn`  |
 
 A separação não é organizacional. Vários defeitos da v2.5 existiam porque garantias que só o motor pode dar estavam escritas como obrigações de autoria, a serem repetidas corretamente em algumas centenas de arquivos.
 
@@ -56,25 +56,25 @@ O estado do mundo é um **dicionário de qualidades**: nome → valor.
 
 ### 2.1 Tipos
 
-| Tipo | Domínio | Uso |
-|---|---|---|
-| `int` | faixa declarada | contadores, intensidade, progresso |
-| `bool` | 0 ou 1 | sinalizadores |
-| `enum` | conjunto declarado | estado de entidade, tom de arco |
+| Tipo   | Domínio            | Uso                                |
+| ------ | ------------------ | ---------------------------------- |
+| `int`  | faixa declarada    | contadores, intensidade, progresso |
+| `bool` | 0 ou 1             | sinalizadores                      |
+| `enum` | conjunto declarado | estado de entidade, tom de arco    |
 
 Sem strings livres, listas ou objetos aninhados. A restrição continua valendo mesmo sem validador: ela é o que mantém o estado serializável, comparável e testável.
 
 ### 2.2 Espaço de nomes
 
-| Prefixo | Escrito por | Semântica | Exemplo |
-|---|---|---|---|
-| `in.` | aplicação | entradas da resolução corrente | `in.rolagem`, `in.atributo.forca`, `in.tregua`, `in.reencontro` |
-| `cap.` | sistema | estado do capítulo corrente | `cap.atual`, `cap.resolucoes`, `cap.estagio` |
-| `ent.` | campanha | estado de entidade | `ent.sebastiao.estado`, `ent.sebastiao.conhecido` |
-| `comp.` | campanha | complicação **do capítulo** | `comp.carga_demais` |
-| `mem.` | campanha | memória **de campanha**: escrita num capítulo, lida em outro posterior | `mem.andou_sozinho` |
-| `arco.` | campanha | tom e intensidade | `arco.tom`, `arco.sede` |
-| `sys.` | sistema | contadores globais | `sys.visto.<storylet_id>`, `sys.resolucoes` |
+| Prefixo | Escrito por | Semântica                                                              | Exemplo                                                         |
+| ------- | ----------- | ---------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `in.`   | aplicação   | entradas da resolução corrente                                         | `in.rolagem`, `in.atributo.forca`, `in.tregua`, `in.reencontro` |
+| `cap.`  | sistema     | estado do capítulo corrente                                            | `cap.atual`, `cap.resolucoes`, `cap.estagio`                    |
+| `ent.`  | campanha    | estado de entidade                                                     | `ent.sebastiao.estado`, `ent.sebastiao.conhecido`               |
+| `comp.` | campanha    | complicação **do capítulo**                                            | `comp.carga_demais`                                             |
+| `mem.`  | campanha    | memória **de campanha**: escrita num capítulo, lida em outro posterior | `mem.andou_sozinho`                                             |
+| `arco.` | campanha    | tom e intensidade                                                      | `arco.tom`, `arco.sede`                                         |
+| `sys.`  | sistema     | contadores globais                                                     | `sys.visto.<storylet_id>`, `sys.resolucoes`                     |
 
 `sys.visto.<id>` e `ent.X.conhecido` são mantidos automaticamente. O autor não escreve efeito para eles.
 
@@ -82,23 +82,23 @@ Sem strings livres, listas ou objetos aninhados. A restrição continua valendo 
 
 **Entradas mantidas pela aplicação:**
 
-| Qualidade | Tipo | Definição |
-|---|---|---|
-| `in.rolagem` | int 2..15 | resultado de `2d6 + Vontade` |
-| `in.atributo.{forca,vigor,destreza}` | int 0..5 | ficha corrente |
-| `in.vontade` | int 0..3 | ficha corrente |
-| `in.ciclo_cumprido` | bool | o ciclo anterior foi cumprido |
-| `in.tregua` | bool | o ciclo corrente é de Trégua ou de Trégua de Recuperação |
-| `in.reencontro` | bool | 1 na **primeira** resolução após uma Trégua encerrada ou após 10 dias ou mais sem sessão (DEC-011) |
-| `in.sessao_secundaria` | bool | é a segunda sessão registrada no mesmo dia (DEC-033) |
+| Qualidade                            | Tipo      | Definição                                                                                          |
+| ------------------------------------ | --------- | -------------------------------------------------------------------------------------------------- |
+| `in.rolagem`                         | int 2..15 | resultado de `2d6 + Vontade`                                                                       |
+| `in.atributo.{forca,vigor,destreza}` | int 0..5  | ficha corrente                                                                                     |
+| `in.vontade`                         | int 0..3  | ficha corrente                                                                                     |
+| `in.ciclo_cumprido`                  | bool      | o ciclo anterior foi cumprido                                                                      |
+| `in.tregua`                          | bool      | o ciclo corrente é de Trégua ou de Trégua de Recuperação                                           |
+| `in.reencontro`                      | bool      | 1 na **primeira** resolução após uma Trégua encerrada ou após 10 dias ou mais sem sessão (DEC-011) |
+| `in.sessao_secundaria`               | bool      | é a segunda sessão registrada no mesmo dia (DEC-033)                                               |
 
 **Estado de capítulo mantido pelo sistema:**
 
-| Qualidade | Tipo | Definição |
-|---|---|---|
-| `cap.atual` | int | capítulo corrente |
-| `cap.resolucoes` | int | resoluções desde a virada de capítulo. **Zerado na virada** |
-| `cap.estagio` | enum | `abertura` \| `meio` \| `pressao` \| `desfecho` |
+| Qualidade        | Tipo | Definição                                                   |
+| ---------------- | ---- | ----------------------------------------------------------- |
+| `cap.atual`      | int  | capítulo corrente                                           |
+| `cap.resolucoes` | int  | resoluções desde a virada de capítulo. **Zerado na virada** |
+| `cap.estagio`    | enum | `abertura` \| `meio` \| `pressao` \| `desfecho`             |
 
 `cap.estagio` é derivado, nunca escrito por efeito:
 
@@ -144,11 +144,11 @@ O campo `Desativavel` da v2.5 **não existe mais** (DEC-012). A elegibilidade à
 
 ### 3.1 Bandas
 
-| Banda | Papel | Reposição |
-|---|---|---|
-| `Espinha` | abertura e desfecho escritos do capítulo | nunca reposta |
-| `Arco` | vinhetas que movem a complicação estruturante | bolsa por capítulo |
-| `Cor` | ambientação sem efeito estrutural | bolsa global, reposta ao esgotar |
+| Banda     | Papel                                         | Reposição                        |
+| --------- | --------------------------------------------- | -------------------------------- |
+| `Espinha` | abertura e desfecho escritos do capítulo      | nunca reposta                    |
+| `Arco`    | vinhetas que movem a complicação estruturante | bolsa por capítulo               |
+| `Cor`     | ambientação sem efeito estrutural             | bolsa global, reposta ao esgotar |
 
 A estratificação garante que o enredo escrito sempre vença o procedural. É a implementação de D-017.
 
@@ -158,14 +158,14 @@ A estratificação garante que o enredo escrito sempre vença o procedural. É a
 
 Com ~12 resoluções por capítulo, 4 capítulos (D-041) e razão vistos/escritos-alvo de 0,2:
 
-| Banda | Escopo | Escritos | Resoluções esperadas | Razão |
-|---|---|---|---|---|
-| `Espinha` | por capítulo | 2 × 4 = **8** | 2 por capítulo = 8 | 1,0 |
-| `Arco` | por capítulo | ~24 × 4 = **96** | ~4 por capítulo = 16 | 0,17 |
-| `Cor` neutra | global | **~90** | — | — |
-| `Cor` tonal | global | **~60** | — | — |
-| `Cor` total | global | **~150** | ~6 por capítulo = 24 | 0,16 |
-| **Total** | | **~254** | **~48** | **0,19** |
+| Banda        | Escopo       | Escritos         | Resoluções esperadas | Razão    |
+| ------------ | ------------ | ---------------- | -------------------- | -------- |
+| `Espinha`    | por capítulo | 2 × 4 = **8**    | 2 por capítulo = 8   | 1,0      |
+| `Arco`       | por capítulo | ~24 × 4 = **96** | ~4 por capítulo = 16 | 0,17     |
+| `Cor` neutra | global       | **~90**          | —                    | —        |
+| `Cor` tonal  | global       | **~60**          | —                    | —        |
+| `Cor` total  | global       | **~150**         | ~6 por capítulo = 24 | 0,16     |
+| **Total**    |              | **~254**         | **~48**              | **0,19** |
 
 Ordem de grandeza: **~260 storylets, 40–65 mil palavras.** Ver R-026 do PRD.
 
@@ -183,10 +183,10 @@ A estratificação faz `Arco` descartar `Cor` sempre que houver **qualquer** `Ar
 
 Condicionar toda a banda `Cor` por `arco.tom` multiplicaria o orçamento pelo número de tons. A banda é dividida em duas camadas:
 
-| Camada | Predicado de tom | Proporção | Papel |
-|---|---|---|---|
-| `Cor` neutra | nenhum — elegível sempre | **≥ 60%** (~90) | ambientação que funciona em qualquer momento da campanha |
-| `Cor` tonal | declara 1 ou 2 tons compatíveis | ≤ 40% (~60) | cor específica do momento; é o que faz o capítulo 4 soar diferente do 1 |
+| Camada       | Predicado de tom                | Proporção       | Papel                                                                   |
+| ------------ | ------------------------------- | --------------- | ----------------------------------------------------------------------- |
+| `Cor` neutra | nenhum — elegível sempre        | **≥ 60%** (~90) | ambientação que funciona em qualquer momento da campanha                |
+| `Cor` tonal  | declara 1 ou 2 tons compatíveis | ≤ 40% (~60)     | cor específica do momento; é o que faz o capítulo 4 soar diferente do 1 |
 
 **A proporção é restrição, não alvo.** Com neutra ≥ 60%, a camada neutra sozinha satisfaz T-17 em qualquer tom, o que torna a banda robusta a mudanças no domínio de `arco.tom` sem recálculo.
 
@@ -194,10 +194,10 @@ Condicionar toda a banda `Cor` por `arco.tom` multiplicaria o orçamento pelo n�
 
 **Duas subclasses obrigatórias de `Cor`:**
 
-| Subclasse | Mínimo | Papel |
-|---|---|---|
-| `ausencia` | ≥ 6 itens, todos na camada neutra | vinhetas de Trégua e de reencontro (§3.4) |
-| `fallback` | exatamente 1 (`st_cor_fallback`) | rede de segurança de §6.1; sem predicado, sem efeito |
+| Subclasse  | Mínimo                            | Papel                                                |
+| ---------- | --------------------------------- | ---------------------------------------------------- |
+| `ausencia` | ≥ 6 itens, todos na camada neutra | vinhetas de Trégua e de reencontro (§3.4)            |
+| `fallback` | exatamente 1 (`st_cor_fallback`)  | rede de segurança de §6.1; sem predicado, sem efeito |
 
 #### Fila de exclusão na reposição
 
@@ -220,9 +220,11 @@ Lista ordenada. Avaliação: primeira variante cujo `Quando` é satisfeito. A ú
 **A variante não contém prosa.** Ela contém uma **referência de texto** e a lista de parâmetros que o texto consome:
 
 ```json
-{ "quando": { "todos": [ { "q": "ent.sebastiao.conhecido", "eq": 0 } ] },
+{
+  "quando": { "todos": [{ "q": "ent.sebastiao.conhecido", "eq": 0 }] },
   "texto": "c1.sebastiao.primeiro",
-  "parametros": ["ent.sebastiao"] }
+  "parametros": ["ent.sebastiao"]
+}
 ```
 
 A prosa vive em arquivos de recurso por idioma, fora do catálogo:
@@ -261,10 +263,10 @@ Implementa RN-031 do PRD: o mundo nota a ausência; a história não anda sem o 
 
 **Duas situações distintas, dois tratamentos distintos:**
 
-| Situação | Entrada | Comportamento |
-|---|---|---|
-| Ciclo de Trégua (comum ou de Recuperação) | `in.tregua == 1` | Apenas a banda `Cor` é consultada. `Espinha` e `Arco` são **suprimidas antes da filtragem** (M-01) |
-| Primeira resolução após Trégua encerrada, ou após ≥ 10 dias sem sessão | `in.reencontro == 1` | A seleção é forçada à subclasse `ausencia` de `Cor` (M-02). **Uma resolução apenas** |
+| Situação                                                               | Entrada              | Comportamento                                                                                      |
+| ---------------------------------------------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------- |
+| Ciclo de Trégua (comum ou de Recuperação)                              | `in.tregua == 1`     | Apenas a banda `Cor` é consultada. `Espinha` e `Arco` são **suprimidas antes da filtragem** (M-01) |
+| Primeira resolução após Trégua encerrada, ou após ≥ 10 dias sem sessão | `in.reencontro == 1` | A seleção é forçada à subclasse `ausencia` de `Cor` (M-02). **Uma resolução apenas**               |
 
 **Isto é regra de motor, não de autoria.** Na v2.5 a garantia dependia de todo storylet de `Arco` declarar uma guarda contra Trégua; nenhum declarava, e como `Arco` descarta `Cor`, a vinheta de Trégua nunca era sorteada. A regra existia, o comportamento não.
 
@@ -278,9 +280,9 @@ Implementa RN-031 do PRD: o mundo nota a ausência; a história não anda sem o 
 
 **Trava de solubilidade.** Ao menos um dos caminhos é **incondicionado por atributo**: elegível sempre que a complicação estiver aberta, independentemente de Força, Vigor ou Destreza. Sem isso, um jogador especialista pode ficar com complicação aberta e nenhum caminho elegível — capítulo emperrado por construção de personagem.
 
-| Caminho | Condição | Papel |
-|---|---|---|
-| Base | apenas `comp.X == 1` | garante solubilidade para qualquer ficha |
+| Caminho   | Condição                          | Papel                                                                  |
+| --------- | --------------------------------- | ---------------------------------------------------------------------- |
+| Base      | apenas `comp.X == 1`              | garante solubilidade para qualquer ficha                               |
 | Gatilhado | `comp.X == 1` + atributo ≥ limiar | desfecho diferente ou melhor; é o que dá função concreta aos atributos |
 
 **Por que isso importa além da corrigibilidade.** "Atributos abrem opções de resolução" era afirmação sem mecanismo. Os caminhos gatilhados **são** essas opções: resolver pela força, pela persistência ou pela precisão. O sistema de atributos deixa de ser decorativo e passa a ter consequência narrativa observável.
@@ -302,13 +304,15 @@ Português e espanhol exigem concordância de artigo e adjetivo com o substantiv
 **Entidade declara gênero por idioma**, ainda que só pt-BR seja preenchido no MVP:
 
 ```json
-{ "id": "sebastiao",
+{
+  "id": "sebastiao",
   "genero": { "pt-BR": "m", "es": "m", "en": "n" },
   "nome": "ent.sebastiao.nome",
-  "nome_traduzivel": false }
+  "nome_traduzivel": false
+}
 ```
 
-**Nomes próprios são invariantes entre idiomas (DEC-020).** A chave de recurso permanece — a estrutura não muda —, mas todos os idiomas carregam a mesma cadeia. `nome_traduzivel: true` é a exceção explícita, para quando o "nome" é substantivo comum ou título descritivo (*o Andarilho*, *a Lapa do Meio*).
+**Nomes próprios são invariantes entre idiomas (DEC-020).** A chave de recurso permanece — a estrutura não muda —, mas todos os idiomas carregam a mesma cadeia. `nome_traduzivel: true` é a exceção explícita, para quando o "nome" é substantivo comum ou título descritivo (_o Andarilho_, _a Lapa do Meio_).
 
 O motivo é D-020: a semente compartilhada opera por reconhecimento mútuo, duas pessoas comparando o que aconteceu no mesmo mundo. Sebastião chamar-se outra coisa em espanhol destrói a conversa que é o produto do compartilhamento.
 
@@ -362,11 +366,11 @@ Requisito RF-023 do PRD, e a defesa central contra R-001.
 
 Como os predicados são de forma restrita (§4), a classificação é decidível estaticamente:
 
-| Classe | Condição estática sobre `Requer` | Variantes exigidas |
-|---|---|---|
-| **Primeiro contato** | implica `ent.X.estado == <valor inicial>` ou `ent.X.conhecido == 0` | 1 |
-| **Retorno** | implica `ent.X.estado != <valor inicial>` ou `ent.X.conhecido >= 1` | 1 |
-| **Ambivalente** | nenhuma das duas | 2 — uma para cada classe |
+| Classe               | Condição estática sobre `Requer`                                    | Variantes exigidas       |
+| -------------------- | ------------------------------------------------------------------- | ------------------------ |
+| **Primeiro contato** | implica `ent.X.estado == <valor inicial>` ou `ent.X.conhecido == 0` | 1                        |
+| **Retorno**          | implica `ent.X.estado != <valor inicial>` ou `ent.X.conhecido >= 1` | 1                        |
+| **Ambivalente**      | nenhuma das duas                                                    | 2 — uma para cada classe |
 
 **Referência explícita.** Entidades são declaradas no campo `Entidades`, nunca inferidas do texto. Mantém a checagem trivial.
 
@@ -448,11 +452,11 @@ Mitigação parcial de R-001 após D-031, especificada em D-034 do PRD.
 
 **Restrição de desativação (DEC-012).** A elegibilidade à desativação é **derivada da banda**, não declarada por storylet:
 
-| Banda | Desativável |
-|---|---|
-| `Espinha` | **não**, sem exceção |
-| `Arco` | sim — §3.5 garante que nenhum é caminho único |
-| `Cor` | sim, exceto `st_cor_fallback` |
+| Banda     | Desativável                                   |
+| --------- | --------------------------------------------- |
+| `Espinha` | **não**, sem exceção                          |
+| `Arco`    | sim — §3.5 garante que nenhum é caminho único |
+| `Cor`     | sim, exceto `st_cor_fallback`                 |
 
 O motor **ignora** qualquer id de `Espinha` ou de `fallback` presente na lista, mesmo que o controlador o publique por engano (M-03). Campo cujo valor é sempre derivável de outro campo é campo que um dia diverge dele; e como invariante de motor, a garantia não depende de ~260 declarações corretas.
 
@@ -483,23 +487,23 @@ Esta seção substitui a validação estática do v1.0. Sem portão de publicaç
 Simular(semente, n, politica) → Resolucao[]
 ```
 
-| Política | Comportamento |
-|---|---|
-| `constante` | Juramento sempre cumprido, rolagens medianas, atributos crescendo devagar |
-| `erratico` | Juramento cumprido em ~60% dos ciclos, rolagens uniformes |
-| `especialista` | Um atributo cresce, os outros estagnam |
-| `pessimo` | Rolagens no piso, atributos parados |
-| `intermitente` *(nova)* | Trégua a cada 3 ciclos e um intervalo de 14 dias sem sessão por capítulo — exercita `in.tregua` e `in.reencontro` |
+| Política                | Comportamento                                                                                                     |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `constante`             | Juramento sempre cumprido, rolagens medianas, atributos crescendo devagar                                         |
+| `erratico`              | Juramento cumprido em ~60% dos ciclos, rolagens uniformes                                                         |
+| `especialista`          | Um atributo cresce, os outros estagnam                                                                            |
+| `pessimo`               | Rolagens no piso, atributos parados                                                                               |
+| `intermitente` _(nova)_ | Trégua a cada 3 ciclos e um intervalo de 14 dias sem sessão por capítulo — exercita `in.tregua` e `in.reencontro` |
 
 A quinta política existe porque, sem ela, M-01, M-02 e a subclasse `ausencia` nunca são exercitados por nenhuma travessia simulada — que é a razão pela qual o defeito de T-13 sobreviveu à v2.5 inteira.
 
 **Volume de sementes.** `M` é parâmetro, não constante:
 
-| Execução | M por política | Objetivo |
-|---|---|---|
-| Por commit | 50 | manter a suíte rápida o suficiente para ninguém desativar |
-| Noturna | 1000 | relevância estatística para T-09 a T-11, T-27 e T-30 |
-| Antes de release | 1000 + sementes conhecidas por regressão | portão final |
+| Execução         | M por política                           | Objetivo                                                  |
+| ---------------- | ---------------------------------------- | --------------------------------------------------------- |
+| Por commit       | 50                                       | manter a suíte rápida o suficiente para ninguém desativar |
+| Noturna          | 1000                                     | relevância estatística para T-09 a T-11, T-27 e T-30      |
+| Antes de release | 1000 + sementes conhecidas por regressão | portão final                                              |
 
 M=1000 em toda execução é otimista: 5 políticas × 1000 sementes × ~48 resoluções × filtragem de ~260 storylets é da ordem de 10⁸ avaliações de predicado. Suíte lenta acaba desligada, e aí a garantia vale zero.
 
@@ -511,59 +515,59 @@ Storylet ou variante escrito e nunca sorteado é trabalho de escrita não entreg
 
 Executada em CI sobre o catálogo real.
 
-| # | Teste | Método |
-|---|---|---|
-| T-01 | Todo `Id` é único | estático |
-| T-02 | Nenhum efeito escreve `in.`, `sys.` ou `cap.` | estático |
-| T-03 | Todo valor comparado pertence ao domínio da qualidade | estático |
-| T-04 | Profundidade de predicado ≤ 3 | estático |
-| T-05 | Todo storylet tem variante de fallback sem `Quando` | estático |
-| T-06 | Toda entidade referenciada existe e tem estado inicial | estático |
-| T-07 | **Regra de reconhecimento de §5 satisfeita** por classificação estática | estático |
-| T-08 | Toda qualidade lida é escrita por algum efeito, ou é `in.`/`sys.`/`cap.` | estático |
-| T-09 | **Todo storylet é visto ao menos uma vez** em simulação ampla | simulação |
-| T-10 | **Todo capítulo alcança seu desfecho** em ≤ 20 resoluções, em toda política | simulação |
-| T-11 | **Toda complicação aberta é fechada** em toda travessia | simulação |
-| T-12 | Razão vistos/escritos entre 0,15 e 0,3 | simulação |
-| T-14 | Nenhum nome de qualidade contém caractere fora de ASCII | estático |
-| T-16 | Estado com qualidade órfã carrega sem exceção | unitário |
-| T-17 | Em toda combinação alcançável de capítulo e `arco.tom`, o pool elegível de `Cor` é ≥ 2,5 × K | estático |
-| T-18 | Camada neutra de `Cor` ≥ **60%** do total da banda | estático |
-| T-19 | `arco.tom` tem no máximo 4 valores no domínio declarado | estático |
-| T-21 | Toda complicação tem ≥ 2 storylets de fechamento, dos quais ≥ 1 sem condição de atributo | estático |
-| T-22 | Na política `especialista`, toda complicação aberta é fechada | simulação |
-| T-23 | Toda referência de texto existe em todo idioma **ativo**. No MVP, só pt-BR — o teste cresce sozinho ao ativar um idioma | estático |
-| T-24 | Nenhum arquivo de recurso contém chave órfã | estático |
-| T-25 | Todo parâmetro consumido por um texto está declarado na variante, e toda entidade usada como parâmetro declara gênero em todo idioma ativo | estático |
-| T-26 | Nenhum storylet contém prosa embutida; todo texto é referência | estático |
-| **T-27** | **Toda variante declarada é exercida ao menos uma vez** em simulação ampla | simulação |
-| **T-28** | Toda qualidade `mem.` escrita no capítulo N é lida por algum storylet de capítulo > N | estático |
-| **T-29** | Nenhum **`Requer`** de storylet de `Espinha` de desfecho referencia `comp.*`. A restrição não alcança `Quando` de variante — é justamente ali que o desfecho reconhece a complicação deixada em aberto | estático |
-| **T-30** | A fração de resoluções da banda `Arco` por capítulo fica entre 25% e 45% em toda política | simulação |
-| **T-31** | Existe ≥ 1 storylet de `Cor` da subclasse `ausencia` elegível em todo estado alcançável com `in.tregua == 1` ou `in.reencontro == 1` | estático |
-| **T-32** | A complicação estruturante é fechada por storylet de fechamento — e não pelo desfecho — em ≥ 90% das travessias nas políticas `constante` e `erratico` | simulação |
-| **T-33** | Nenhum `Requer` de storylet com `Capitulo != null` referencia `sys.resolucoes` | estático |
-| **T-34** | Nenhum storylet de `Cor` escreve `comp.`, `ent.` ou `mem.` | estático |
+| #        | Teste                                                                                                                                                                                                  | Método    |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- |
+| T-01     | Todo `Id` é único                                                                                                                                                                                      | estático  |
+| T-02     | Nenhum efeito escreve `in.`, `sys.` ou `cap.`                                                                                                                                                          | estático  |
+| T-03     | Todo valor comparado pertence ao domínio da qualidade                                                                                                                                                  | estático  |
+| T-04     | Profundidade de predicado ≤ 3                                                                                                                                                                          | estático  |
+| T-05     | Todo storylet tem variante de fallback sem `Quando`                                                                                                                                                    | estático  |
+| T-06     | Toda entidade referenciada existe e tem estado inicial                                                                                                                                                 | estático  |
+| T-07     | **Regra de reconhecimento de §5 satisfeita** por classificação estática                                                                                                                                | estático  |
+| T-08     | Toda qualidade lida é escrita por algum efeito, ou é `in.`/`sys.`/`cap.`                                                                                                                               | estático  |
+| T-09     | **Todo storylet é visto ao menos uma vez** em simulação ampla                                                                                                                                          | simulação |
+| T-10     | **Todo capítulo alcança seu desfecho** em ≤ 20 resoluções, em toda política                                                                                                                            | simulação |
+| T-11     | **Toda complicação aberta é fechada** em toda travessia                                                                                                                                                | simulação |
+| T-12     | Razão vistos/escritos entre 0,15 e 0,3                                                                                                                                                                 | simulação |
+| T-14     | Nenhum nome de qualidade contém caractere fora de ASCII                                                                                                                                                | estático  |
+| T-16     | Estado com qualidade órfã carrega sem exceção                                                                                                                                                          | unitário  |
+| T-17     | Em toda combinação alcançável de capítulo e `arco.tom`, o pool elegível de `Cor` é ≥ 2,5 × K                                                                                                           | estático  |
+| T-18     | Camada neutra de `Cor` ≥ **60%** do total da banda                                                                                                                                                     | estático  |
+| T-19     | `arco.tom` tem no máximo 4 valores no domínio declarado                                                                                                                                                | estático  |
+| T-21     | Toda complicação tem ≥ 2 storylets de fechamento, dos quais ≥ 1 sem condição de atributo                                                                                                               | estático  |
+| T-22     | Na política `especialista`, toda complicação aberta é fechada                                                                                                                                          | simulação |
+| T-23     | Toda referência de texto existe em todo idioma **ativo**. No MVP, só pt-BR — o teste cresce sozinho ao ativar um idioma                                                                                | estático  |
+| T-24     | Nenhum arquivo de recurso contém chave órfã                                                                                                                                                            | estático  |
+| T-25     | Todo parâmetro consumido por um texto está declarado na variante, e toda entidade usada como parâmetro declara gênero em todo idioma ativo                                                             | estático  |
+| T-26     | Nenhum storylet contém prosa embutida; todo texto é referência                                                                                                                                         | estático  |
+| **T-27** | **Toda variante declarada é exercida ao menos uma vez** em simulação ampla                                                                                                                             | simulação |
+| **T-28** | Toda qualidade `mem.` escrita no capítulo N é lida por algum storylet de capítulo > N                                                                                                                  | estático  |
+| **T-29** | Nenhum **`Requer`** de storylet de `Espinha` de desfecho referencia `comp.*`. A restrição não alcança `Quando` de variante — é justamente ali que o desfecho reconhece a complicação deixada em aberto | estático  |
+| **T-30** | A fração de resoluções da banda `Arco` por capítulo fica entre 25% e 45% em toda política                                                                                                              | simulação |
+| **T-31** | Existe ≥ 1 storylet de `Cor` da subclasse `ausencia` elegível em todo estado alcançável com `in.tregua == 1` ou `in.reencontro == 1`                                                                   | estático  |
+| **T-32** | A complicação estruturante é fechada por storylet de fechamento — e não pelo desfecho — em ≥ 90% das travessias nas políticas `constante` e `erratico`                                                 | simulação |
+| **T-33** | Nenhum `Requer` de storylet com `Capitulo != null` referencia `sys.resolucoes`                                                                                                                         | estático  |
+| **T-34** | Nenhum storylet de `Cor` escreve `comp.`, `ent.` ou `mem.`                                                                                                                                             | estático  |
 
 **Aposentados nesta versão:** T-13 (vira M-01), T-15 e T-20 (viram M-03).
 
-> **Nota honesta sobre a amostragem.** No v1.0, T-09 a T-11 eram *provadas* por propagação de restrições sobre domínios finitos; na v2.5 passaram a ser *amostradas*. A regra de pressão (M-06) devolve T-10 ao território da prova, mas T-09, T-11, T-27, T-30 e T-32 continuam amostrados: simulação com M sementes não prova ausência de storylet inalcançável, só não encontra nenhum. O custo do rollback aparece aqui, e a mitigação é M alto — a simulação é barata.
+> **Nota honesta sobre a amostragem.** No v1.0, T-09 a T-11 eram _provadas_ por propagação de restrições sobre domínios finitos; na v2.5 passaram a ser _amostradas_. A regra de pressão (M-06) devolve T-10 ao território da prova, mas T-09, T-11, T-27, T-30 e T-32 continuam amostrados: simulação com M sementes não prova ausência de storylet inalcançável, só não encontra nenhum. O custo do rollback aparece aqui, e a mitigação é M alto — a simulação é barata.
 
 ### 7.3 Suíte de motor
 
 Executada sobre catálogos sintéticos, independentes do conteúdo real.
 
-| # | Invariante |
-|---|---|
-| **M-01** | Com `in.tregua == 1`, nenhuma banda além de `Cor` é consultada |
-| **M-02** | Com `in.reencontro == 1`, a resolução vem da subclasse `ausencia` de `Cor` |
-| **M-03** | O kill-switch nunca desativa storylet de `Espinha` nem `st_cor_fallback`, mesmo que a lista os contenha |
-| **M-04** | A rede de segurança devolve `st_cor_fallback`, nunca o desfecho |
-| **M-05** | Mesma semente, mesmas entradas e mesma versão → sequência idêntica em duas plataformas |
-| **M-06** | Com `cap.estagio == pressao`, o pool de `Arco` contém apenas storylets de fechamento |
+| #        | Invariante                                                                                                  |
+| -------- | ----------------------------------------------------------------------------------------------------------- |
+| **M-01** | Com `in.tregua == 1`, nenhuma banda além de `Cor` é consultada                                              |
+| **M-02** | Com `in.reencontro == 1`, a resolução vem da subclasse `ausencia` de `Cor`                                  |
+| **M-03** | O kill-switch nunca desativa storylet de `Espinha` nem `st_cor_fallback`, mesmo que a lista os contenha     |
+| **M-04** | A rede de segurança devolve `st_cor_fallback`, nunca o desfecho                                             |
+| **M-05** | Mesma semente, mesmas entradas e mesma versão → sequência idêntica em duas plataformas                      |
+| **M-06** | Com `cap.estagio == pressao`, o pool de `Arco` contém apenas storylets de fechamento                        |
 | **M-07** | O ponto de escolha devolve 2–3 opções; com menos de 2 elegíveis, degrada para automático e permanece armado |
-| **M-08** | Com `in.sessao_secundaria == 1`, nenhuma banda além de `Cor` é consultada |
-| **M-09** | A fila de exclusão `K` é calculada sobre o pool elegível efetivo, nunca sobre o total da banda |
+| **M-08** | Com `in.sessao_secundaria == 1`, nenhuma banda além de `Cor` é consultada                                   |
+| **M-09** | A fila de exclusão `K` é calculada sobre o pool elegível efetivo, nunca sobre o total da banda              |
 
 ### 7.4 Fixtures de teste negativo (DEC-037)
 
@@ -618,13 +622,13 @@ O critério 4 continua sendo o único que engenharia não resolve.
 
 Registro explícito, para decisão informada no futuro:
 
-| Perdido | Consequência |
-|---|---|
+| Perdido                        | Consequência                                                                                                                 |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
 | Pacote atualizável remotamente | **R-001 volta a não ter escape.** Storylet quebrado ou padrão de seleção exposto só se corrige com release e revisão de loja |
-| Validação estática como portão | Alcançabilidade passa de provada a amostrada — **exceto T-10**, devolvida à prova por M-06 |
-| Migração declarada de estado | Compatibilidade entre releases depende de disciplina manual sobre o dicionário de qualidades |
-| Campanha nova sem release | Cada ambientação adicional é um ciclo completo de release e revisão de loja |
-| Assinatura de pacote | Deixa de ser necessária — RN-026 passa a ser garantida pelo próprio binário |
+| Validação estática como portão | Alcançabilidade passa de provada a amostrada — **exceto T-10**, devolvida à prova por M-06                                   |
+| Migração declarada de estado   | Compatibilidade entre releases depende de disciplina manual sobre o dicionário de qualidades                                 |
+| Campanha nova sem release      | Cada ambientação adicional é um ciclo completo de release e revisão de loja                                                  |
+| Assinatura de pacote           | Deixa de ser necessária — RN-026 passa a ser garantida pelo próprio binário                                                  |
 
 ---
 
@@ -634,4 +638,4 @@ Registro explícito, para decisão informada no futuro:
 
 ---
 
-*Documento vivo. Alterações exigem entrada correspondente em `decisoes.md`.*
+_Documento vivo. Alterações exigem entrada correspondente em `decisoes.md`._

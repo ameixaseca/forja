@@ -1,0 +1,60 @@
+# Validação de conteúdo narrativo — só dispara quando o catálogo de
+# campanha ou o motor narrativo mudam (D-032, RF-100–103). Sem portão de
+# publicação além destas suítes (§14 do PRD): tratar como checagem
+# obrigatória na proteção de branch sempre que estes caminhos forem tocados.
+name: Validação de conteúdo
+
+on:
+  pull_request:
+    paths:
+      - "content/**"
+      - "packages/motor-narrativo/**"
+      - "tools/conteudo/**"
+
+concurrency:
+  group: conteudo-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar-catalogo:
+    name: Lint de conteúdo (verificar.py)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Instalar dependências do validador
+        run: pip install -r tools/conteudo/requirements.txt
+      - name: Rodar verificar.py sobre o catálogo
+        run: python tools/conteudo/verificar.py content/
+
+  motor-e-simulador:
+    name: Suítes de motor e simulador de travessia (RF-035, RF-100–103)
+    needs: verificar-catalogo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+
+      - name: Testes de propriedade do motor narrativo (RF-036)
+        run: pnpm turbo run test --filter=@forja/motor-narrativo
+
+      - name: Simulador de travessia — mínimo de execuções exigido
+        run: >
+          pnpm --filter @forja/motor-narrativo run simular --
+          --catalogo ../../content
+          --min-travessias 500
+          --saida relatorio-simulacao.json
+
+      - name: Publicar relatório do simulador
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-simulador-${{ github.event.pull_request.number }}
+          path: packages/motor-narrativo/relatorio-simulacao.json

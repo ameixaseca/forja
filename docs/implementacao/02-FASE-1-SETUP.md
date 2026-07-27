@@ -9,6 +9,7 @@
 ## AI Agent Context
 
 **Artefatos entrada:**
+
 - ADR-0001 (monorepo structure)
 - ADR-0003 (NestJS API)
 - ADR-0008 (RN Web)
@@ -17,6 +18,7 @@
 - D-036 (JSON storylet catalog)
 
 **Artefatos saída esperados:**
+
 ```
 forja/
 ├── packages/
@@ -37,6 +39,7 @@ forja/
 ```
 
 **Comandos verificação:**
+
 ```bash
 pnpm install
 pnpm build      # Turborepo build all
@@ -47,6 +50,7 @@ pnpm test       # Vitest all
 ```
 
 **Dependências externas:**
+
 - Node.js 20+
 - pnpm 8+
 - GitHub repo com actions enabled
@@ -62,38 +66,47 @@ Veja estrutura detalhada original (linhas 24-85 versão anterior) — mantida pa
 ## 2. Tarefas AI Agent
 
 ### Tarefa 1.1: Workspace Root
+
 **Agente:** `bash`
 **Comandos:**
+
 ```bash
 pnpm init
 pnpm add -D -w turbo prettier eslint
 ```
+
 **Artefatos:**
+
 - `package.json` (root) com scripts: build, lint, typecheck, test, format
 - `pnpm-workspace.yaml` com `packages: ['packages/*', 'apps/*']`
 - `turbo.json` (config §3.1.4 versão anterior)
-**Verificação:** `pnpm list turbo` retorna versão
+  **Verificação:** `pnpm list turbo` retorna versão
 
 ---
 
 ### Tarefa 1.2: Config Packages
+
 **Agente:** `bash` + `write`
 **Criar:**
+
 - `packages/config-typescript/` com base.json, react.json, node.json (§3.2.1)
 - `packages/config-eslint/` com index.js (§3.2.2)
-**Verificação:** `pnpm build --filter=@forja/config-*` sem erros
+  **Verificação:** `pnpm build --filter=@forja/config-*` sem erros
 
 ---
 
 ### Tarefa 1.3: Motor Narrativo Placeholder
+
 **Agente:** `write`
 **Criar:** `packages/motor-narrativo/`
+
 - `package.json` (§3.3.2)
 - `tsconfig.json` extends `@forja/config-typescript/base.json`
 - `src/index.ts` com types: State, Inputs, Storylet, Resolution, função `resolve()` placeholder (§3.3.4)
 - `tests/resolve.test.ts` placeholder (§3.3.5)
-**Deps:** `typescript`, `vitest`, `@forja/config-typescript`, `@forja/config-eslint`
-**Verificação:**
+  **Deps:** `typescript`, `vitest`, `@forja/config-typescript`, `@forja/config-eslint`
+  **Verificação:**
+
 ```bash
 cd packages/motor-narrativo
 pnpm build  # Compila TS
@@ -103,25 +116,30 @@ pnpm test   # Vitest roda (falha esperada "Not implemented")
 ---
 
 ### Tarefa 1.4: Domínio Placeholder
+
 **Agente:** `write`
 **Criar:** `packages/dominio/`
+
 - `src/index.ts` com Juramento, Ciclo, `calcularProgressao()` (§3.4.3)
 - `tests/progressao.test.ts` (§3.4.4)
-**Verificação:** `pnpm test --filter=@forja/dominio` passa (RN-001 cálculo 2/3 = 0.667)
+  **Verificação:** `pnpm test --filter=@forja/dominio` passa (RN-001 cálculo 2/3 = 0.667)
 
 ---
 
 ### Tarefa 1.5: Linting e Formatting
+
 **Agente:** `write`
 **Criar:**
+
 - `.prettierrc` (§3.5.1)
 - `.eslintrc.js` extends `@forja/config-eslint` (§3.5.2)
 - Scripts root package.json (§3.5.3)
-**Verificação:** `pnpm lint && pnpm format:check` passa
+  **Verificação:** `pnpm lint && pnpm format:check` passa
 
 ---
 
 ### Tarefa 1.6: CI GitHub Actions
+
 **Agente:** `write`
 **Criar:** `.github/workflows/ci.yml` (§3.5.4)
 **Jobs:** lint, typecheck, test (paralelos)
@@ -275,6 +293,7 @@ pnpm add -D -w turbo
 ```
 
 **Checklist:**
+
 - [ ] `package.json` criado com workspace scripts
 - [ ] `pnpm-workspace.yaml` criado
 - [ ] Turborepo instalado
@@ -361,10 +380,7 @@ pnpm add -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
 ```js
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   plugins: ['@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'warn',
@@ -374,6 +390,7 @@ module.exports = {
 ```
 
 **Checklist:**
+
 - [ ] `@forja/config-typescript` criado
 - [ ] `@forja/config-eslint` criado
 - [ ] Configs versionados
@@ -465,11 +482,7 @@ export interface Resolution {
 /**
  * Função pura (RF-036): estado + inputs + seed → resolução
  */
-export function resolve(
-  state: State,
-  inputs: Inputs,
-  seed: number
-): Resolution {
+export function resolve(state: State, inputs: Inputs, seed: number): Resolution {
   // Placeholder: implementar em Fase 2
   throw new Error('Not implemented');
 }
@@ -493,6 +506,7 @@ describe('resolve', () => {
 ```
 
 **Checklist:**
+
 - [ ] `@forja/motor-narrativo` criado
 - [ ] Placeholder types + função `resolve`
 - [ ] Teste placeholder (falha esperada)
@@ -570,6 +584,7 @@ describe('calcularProgressao', () => {
 ```
 
 **Checklist:**
+
 - [ ] `@forja/dominio` criado
 - [ ] Placeholder types + `calcularProgressao`
 - [ ] Teste funciona
@@ -686,6 +701,7 @@ jobs:
 ```
 
 **Checklist:**
+
 - [ ] Prettier configurado
 - [ ] ESLint na raiz funcional
 - [ ] Scripts `pnpm lint`, `pnpm format` funcionam
@@ -730,15 +746,18 @@ Criar `docs/setup/README.md`:
 # Setup Local — FORJA
 
 ## Pré-requisitos
+
 - Node.js 20+
 - pnpm 8+
 
 ## Instalação
+
 \`\`\`bash
 pnpm install
 \`\`\`
 
 ## Comandos
+
 - `pnpm build` — Build all packages
 - `pnpm lint` — Lint all packages
 - `pnpm typecheck` — Type-check all packages
@@ -746,6 +765,7 @@ pnpm install
 - `pnpm dev` — Start dev servers (mobile/web/api)
 
 ## Estrutura
+
 - `packages/motor-narrativo` — Pure TS narrative engine
 - `packages/dominio` — Domain rules
 - `apps/mobile` — React Native (Expo)
@@ -753,19 +773,20 @@ pnpm install
 - `apps/api` — NestJS
 
 ## Troubleshooting
+
 - Se `pnpm install` falhar: deletar `node_modules` e tentar novamente
 - Se cache quebrar: `turbo run build --force`
-\`\`\`
+  \`\`\`
 
 ---
 
 ## 5. Riscos e Mitigações
 
-| Risco | Probabilidade | Mitigação |
-|-------|---------------|-----------|
-| **Turborepo complexo** | Média | Usar config minimal, expandir depois |
-| **Dependências conflitantes** | Alta | Usar `pnpm` (strict hoisting) |
-| **CI lento** | Média | Cache de Turborepo + GitHub Actions cache |
+| Risco                         | Probabilidade | Mitigação                                 |
+| ----------------------------- | ------------- | ----------------------------------------- |
+| **Turborepo complexo**        | Média         | Usar config minimal, expandir depois      |
+| **Dependências conflitantes** | Alta          | Usar `pnpm` (strict hoisting)             |
+| **CI lento**                  | Média         | Cache de Turborepo + GitHub Actions cache |
 
 ---
 
@@ -784,3 +805,4 @@ Antes de marcar Fase 1 completa:
 
 **Próxima fase:** Fase 2 (Motor Narrativo)  
 **Duração estimada Fase 2:** 3 semanas
+```

@@ -1,0 +1,83 @@
+# Deploy da API (NestJS, ADR-0003) no Fly.io. Build + scan de vulnerabilidade
+# antes de qualquer deploy; staging automático; produção com estratégia
+# blue-green (rollback quase instantâneo) atrás de aprovação humana.
+name: Deploy — API
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/api/**"
+      - "packages/**"
+
+concurrency:
+  group: deploy-api-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-imagem:
+    name: Build e scan da imagem
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build da imagem (local, sem publicar)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: apps/api/Dockerfile
+          push: false
+          load: true
+          tags: forja-api:${{ github.sha }}
+      - name: Scan de vulnerabilidades (Trivy)
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: forja-api:${{ github.sha }}
+          severity: "CRITICAL,HIGH"
+          exit-code: "1"
+
+  staging:
+    name: Deploy staging (automático)
+    needs: build-imagem
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://forja-api-staging.fly.dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy no Fly.io (staging)
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl deploy --config apps/api/fly.staging.toml --remote-only
+      - name: Smoke test de saúde
+        run: |
+          for i in $(seq 1 10); do
+            if curl -fsS https://forja-api-staging.fly.dev/saude; then exit 0; fi
+            sleep 5
+          done
+          echo "API de staging não respondeu saudável a tempo" >&2
+          exit 1
+
+  producao:
+    name: Deploy produção (aprovação manual)
+    needs: staging
+    runs-on: ubuntu-latest
+    environment:
+      name: producao
+      url: https://api.forja.app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy no Fly.io (produção, blue-green)
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl deploy --config apps/api/fly.producao.toml --remote-only --strategy bluegreen
+      - name: Smoke test de saúde
+        run: |
+          for i in $(seq 1 10); do
+            if curl -fsS https://api.forja.app/saude; then exit 0; fi
+            sleep 5
+          done
+          echo "API de produção não respondeu saudável — considere: flyctl releases rollback" >&2
+          exit 1

@@ -9,6 +9,7 @@
 ## AI Agent Context
 
 **Fonte verdade:**
+
 - PRD RN-001 a RN-039 (regras negócio)
 - ADR-0002 (event sourcing ficha)
 - RF-040 a RF-049 (Marcos)
@@ -16,10 +17,12 @@
 - RF-005 a RF-008 (Vontade)
 
 **Artefatos entrada:**
+
 - `packages/dominio/` placeholder (Fase 1)
 - `docs/database/migrations/` schema `diary_events`
 
 **Artefatos saída esperados:**
+
 ```
 packages/dominio/
 ├── src/
@@ -45,6 +48,7 @@ packages/dominio/
 ```
 
 **Comandos verificação:**
+
 ```bash
 cd packages/dominio
 pnpm test              # Unit tests
@@ -58,11 +62,13 @@ pnpm test:coverage     # >=90%
 ## 1. Event Sourcing Core
 
 ### Tarefa 3.1: Types
+
 **Agente:** `write`
 **Arquivo:** `src/types.ts`
 **Types:**
+
 ```typescript
-export type DiaryEventType = 
+export type DiaryEventType =
   | 'sessao_registrada'
   | 'ciclo_encerrado'
   | 'marco_declarado'
@@ -102,22 +108,25 @@ export interface Ciclo {
   cumprido: boolean;
 }
 ```
+
 **Verificação:** Compila sem erros.
 
 ---
 
 ### Tarefa 3.2: Projector
+
 **Agente:** `write`
 **Arquivo:** `src/event-sourcing/projector.ts`
 **Função:**
+
 ```typescript
 export function calcularFicha(eventos: DiaryEvent[]): Ficha {
   let ficha: Ficha = fichaInicial();
-  
+
   for (const evento of eventos) {
     ficha = applyEvent(ficha, evento);
   }
-  
+
   return ficha;
 }
 
@@ -151,6 +160,7 @@ function applyEvent(ficha: Ficha, evento: DiaryEvent): Ficha {
   }
 }
 ```
+
 **Reducers:** Implementar em `src/event-sourcing/reducers.ts`
 **Teste:** `tests/unit/projector.test.ts` — replay 10 eventos, verificar ficha final
 **Verificação:** Passa.
@@ -160,9 +170,11 @@ function applyEvent(ficha: Ficha, evento: DiaryEvent): Ficha {
 ## 2. Regras Específicas
 
 ### Tarefa 3.3: Vontade
+
 **Agente:** `write`
 **Arquivo:** `src/vontade.ts`
 **Função:**
+
 ```typescript
 export function calcularVontade(ciclos_cumpridos: number): number {
   // RN-004: +1 @ 2 ciclos, +2 @ 6, +3 @ 14
@@ -172,15 +184,18 @@ export function calcularVontade(ciclos_cumpridos: number): number {
   return 0;
 }
 ```
+
 **Teste:** `tests/unit/vontade.test.ts` — valores 0, 2, 6, 14, 20 → 0, 1, 2, 3, 3
 **Verificação:** Passa.
 
 ---
 
 ### Tarefa 3.4: Fôlego
+
 **Agente:** `write`
 **Arquivo:** `src/folego.ts`
 **Funções:**
+
 ```typescript
 // RN-011: Teto 2 por ciclo, max 4 acumulado
 export function calcularFolegoDisponivelCiclo(
@@ -196,15 +211,18 @@ export function folegoGanhoCiclo(ciclo_cumprido: boolean): number {
   return ciclo_cumprido ? 1 : 0; // Simplificado; +2 se superação (Fase futura)
 }
 ```
+
 **Teste:** `tests/unit/folego.test.ts` — acúmulo 4 ciclos, max 4, consumo decrementa
 **Verificação:** Passa.
 
 ---
 
 ### Tarefa 3.5: Marcos
+
 **Agente:** `write`
 **Arquivo:** `src/marcos.ts`
 **Funções:**
+
 ```typescript
 // RF-043: Cooldown 2 ciclos por rótulo (DI-008: após declaração)
 export function podeDeclarerMarco(
@@ -234,15 +252,18 @@ export function aplicarCooldown(
   };
 }
 ```
+
 **Teste:** `tests/unit/marcos.test.ts` — declarar Marco ciclo 1, cooldown até ciclo 3
 **Verificação:** Passa.
 
 ---
 
 ### Tarefa 3.6: Ciclo e Juramento
+
 **Agente:** `write`
 **Arquivos:** `src/ciclo.ts`, `src/juramento.ts`
 **Funções:**
+
 ```typescript
 // RN-001: Progressão = dias_treinados / dias_jurados
 export function calcularProgressao(ciclo: Ciclo): number {
@@ -260,6 +281,7 @@ export function validarJuramento(dias_por_semana: number): boolean {
   return dias_por_semana >= 1 && dias_por_semana <= 6;
 }
 ```
+
 **Teste:** `tests/unit/ciclo.test.ts` — 3/3 cumprido, 2/3 não cumprido
 **Verificação:** Passa.
 

@@ -9,10 +9,12 @@
 ## AI Agent Context
 
 **Artefatos entrada:**
+
 - `docs/ci-cd/.github/workflows/*.yml` (templates)
 - Fase 1-8 completas (todos packages buildáveis)
 
 **Artefatos saída:**
+
 ```
 .github/
 ├── workflows/
@@ -29,6 +31,7 @@
 ```
 
 **Comandos verificação:**
+
 ```bash
 # Simular local
 act -l                   # Lista workflows
@@ -40,8 +43,10 @@ act -j lint              # Roda job lint
 ## Tarefas
 
 ### Tarefa 9.1: Workflow CI
+
 **Agente:** `write`
 **Arquivo:** `.github/workflows/ci.yml`
+
 ```yaml
 name: CI
 
@@ -61,7 +66,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
-  
+
   typecheck:
     runs-on: ubuntu-latest
     steps:
@@ -70,7 +75,7 @@ jobs:
       - uses: actions/setup-node@v4
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
-  
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -80,13 +85,16 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test
 ```
+
 **Verificação:** Push → Actions verde.
 
 ---
 
 ### Tarefa 9.2: Workflow Conteúdo
+
 **Agente:** `write`
 **Arquivo:** `.github/workflows/conteudo.yml`
+
 ```yaml
 name: Verificação Conteúdo
 
@@ -106,7 +114,7 @@ jobs:
           python-version: '3.10'
       - run: pip install -r tooling/verificador/requirements.txt
       - run: python tooling/verificador/verificar.py content/campanhas/espinha/
-  
+
   simular:
     runs-on: ubuntu-latest
     steps:
@@ -115,13 +123,16 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: cd tooling/simulador && pnpm simulate --catalog ../../content/campanhas/espinha/manifest.json --runs 50 --policy constante
 ```
+
 **Verificação:** Mudança em `content/` → workflow roda.
 
 ---
 
 ### Tarefa 9.3: Workflow Deploy Web
+
 **Agente:** `write`
 **Arquivo:** `.github/workflows/deploy-web.yml`
+
 ```yaml
 name: Deploy Web
 
@@ -144,14 +155,17 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
 ```
+
 **Secrets:** `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`
 **Verificação:** Push `main` → deploy Vercel.
 
 ---
 
 ### Tarefa 9.4: Workflow Mobile Release
+
 **Agente:** `write`
 **Arquivo:** `.github/workflows/mobile-release.yml`
+
 ```yaml
 name: Mobile Release
 
@@ -176,20 +190,23 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
       - run: eas build --platform ${{ github.event.inputs.platform }} --non-interactive
 ```
+
 **Secrets:** `EXPO_TOKEN`
 **Verificação:** Manual trigger → EAS Build inicia.
 
 ---
 
 ### Tarefa 9.5: Environments
+
 **Agente:** GitHub UI
 **Criar:**
+
 - Environment `staging` (sem proteção)
 - Environment `production` (required reviewers: 1)
-**Secrets configurados:**
+  **Secrets configurados:**
 - `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
 - `VERCEL_TOKEN`, `FLY_API_TOKEN`, `EXPO_TOKEN`
-**Verificação:** Environments listados em repo settings.
+  **Verificação:** Environments listados em repo settings.
 
 ---
 

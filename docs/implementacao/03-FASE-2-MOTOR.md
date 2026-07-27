@@ -9,6 +9,7 @@
 ## AI Agent Context
 
 **Fonte verdade:**
+
 - `docs/prd/ESPEC-Sistema-Narrativo-v2_6.md` (algoritmo §6, tipos §2-3, testes M-01 a M-09)
 - RF-036 (motor função pura: state + inputs + seed → result)
 - D-033 (zero deps React/Node/platform)
@@ -16,9 +17,11 @@
 - DI-011 (`in.reencontro` >=10 dias)
 
 **Artefatos entrada:**
+
 - `packages/motor-narrativo/` placeholder (Fase 1)
 
 **Artefatos saída esperados:**
+
 ```
 packages/motor-narrativo/
 ├── src/
@@ -63,6 +66,7 @@ packages/motor-narrativo/
 ```
 
 **Comandos verificação:**
+
 ```bash
 cd packages/motor-narrativo
 pnpm test:unit          # Unit tests
@@ -78,6 +82,7 @@ pnpm test:coverage      # >=80%
 ## 1. Tipos Principais (types.ts)
 
 Referência §3 versão anterior (linhas 108-200). Agent deve implementar:
+
 - `State` com `qualities: Record<string, number | boolean>`
 - `Inputs` com rolagem, atributo, vontade, ciclo_cumprido, tregua, reencontro, sessao_secundaria
 - `Band` = 'Espinha' | 'Arco' | 'Cor'
@@ -93,6 +98,7 @@ Referência §3 versão anterior (linhas 108-200). Agent deve implementar:
 ## 2. Implementação Core (Semana 1)
 
 ### Tarefa 2.1: RNG Seeded
+
 **Agente:** `write`
 **Arquivo:** `src/rng.ts`
 **Implementação:** Mulberry32 algorithm (§4.1.1 versão anterior)
@@ -103,6 +109,7 @@ Referência §3 versão anterior (linhas 108-200). Agent deve implementar:
 ---
 
 ### Tarefa 2.2: Predicados
+
 **Agente:** `write`
 **Arquivo:** `src/selector/predicate.ts`
 **Função:** `evaluatePredicate(pred: Predicate | undefined, state: State): boolean`
@@ -113,55 +120,63 @@ Referência §3 versão anterior (linhas 108-200). Agent deve implementar:
 ---
 
 ### Tarefa 2.3: Elegibilidade
+
 **Agente:** `write`
 **Arquivo:** `src/selector/eligibility.ts`
 **Funções:**
+
 - `isEligible(st, state, inputs, killSwitch): boolean`
 - `filterEligible(storylets[], state, inputs, killSwitch): Storylet[]`
-**Regras:**
+  **Regras:**
 - M-03: Kill-switch NÃO desativa Espinha nem st_cor_fallback
 - Capítulo match `state.qualities['cap.atual']`
 - Predicado `requer` satisfeito
 - `sys.visto.{id}` = 0 ou undefined (exceto Espinha/fallback)
-**Teste:** `tests/unit/eligibility.test.ts`
-**Verificação:** Passa
+  **Teste:** `tests/unit/eligibility.test.ts`
+  **Verificação:** Passa
 
 ---
 
 ### Tarefa 2.4: Bandas
+
 **Agente:** `write`
 **Arquivo:** `src/selector/bands.ts`
 **Função:** `selectBand(catalog, state, inputs, killSwitch): { band: Band, pool: Storylet[] }`
 **Lógica:**
+
 - M-01: `if (inputs.tregua) → banda Cor`
 - M-08: `if (inputs.sessao_secundaria) → banda Cor`
 - Senão: Espinha > Arco > Cor (primeira não-vazia)
 - M-06: Se Arco + `state.qualities['cap.estagio'] === 'pressao'` → filtrar só closures (id contém 'closure')
-**Teste:** `tests/integration/M-01.test.ts`, `M-06.test.ts`, `M-08.test.ts`
-**Verificação:** Passa
+  **Teste:** `tests/integration/M-01.test.ts`, `M-06.test.ts`, `M-08.test.ts`
+  **Verificação:** Passa
 
 ---
 
 ### Tarefa 2.5: Exclusão (Fila K)
+
 **Agente:** `write`
 **Arquivo:** `src/selector/exclusion.ts`
 **Funções:**
+
 - `calculateK(state): number` — retorna `floor(teto_modalidade * 0.6)` (DI-002). Placeholder: teto=10 → K=6
 - `applyExclusion(pool, state): Storylet[]` — M-09: K aplicado sobre pool elegível
   - Se pool.length <= K → retorna pool intacto
   - Senão: ordena por `sys.visto.{id}` decrescente, remove top K
 - `selectOne(pool, rng): Storylet` — DI-007: `rng.choice(pool)`
-**Teste:** `tests/integration/M-09.test.ts`
-**Verificação:** Passa
+  **Teste:** `tests/integration/M-09.test.ts`
+  **Verificação:** Passa
 
 ---
 
 ## 3. Função resolve() (Semana 2)
 
 ### Tarefa 2.6: resolve()
+
 **Agente:** `write`
 **Arquivo:** `src/resolve.ts`
 **Assinatura:**
+
 ```typescript
 export function resolve(
   catalog: Catalog,
@@ -169,9 +184,11 @@ export function resolve(
   inputs: Inputs,
   seed: number,
   killSwitch: string[] = []
-): ResolutionResult
+): ResolutionResult;
 ```
+
 **Passos (§5.1.1 versão anterior):**
+
 1. `const rng = new SeededRNG(seed)`
 2. `const { band, pool } = selectBand(catalog.storylets, state, inputs, killSwitch)`
 3. `let finalPool = pool; if (band === 'Cor') finalPool = applyExclusion(pool, state)`
@@ -183,6 +200,7 @@ export function resolve(
 9. `return { storylet, variant, texto, efeitos, newState }`
 
 **Funções auxiliares:**
+
 - `selectVariant(variants, state, rng): Variant` — filtra elegíveis por `quando`, fallback primeira sem `quando`, tie-break com rng
 - `applyEffects(state, effects, storyletId): State` — aplica effects, incrementa `sys.visto.{id}`, `sys.resolucoes`, `cap.resolucoes` (ESPEC §5)
 
@@ -192,6 +210,7 @@ export function resolve(
 ---
 
 ### Tarefa 2.7: Safety-net
+
 **Agente:** `write`
 **Arquivo:** `src/safety-net.ts`
 **Função:** `applySafetyNet(catalog, state, inputs, seed): ResolutionResult`
@@ -204,18 +223,21 @@ export function resolve(
 ## 4. Simulador (Semana 2)
 
 ### Tarefa 2.8: Políticas
+
 **Agente:** `write`
 **Arquivo:** `src/simulator/policies.ts`
 **Implementar 3 políticas (§5.2.1 versão anterior):**
+
 - `ConstantePolicy`: rolagem=8, atributos=1, vontade=1, cumprido=true
 - `ErraticoPolicy`: random rolagem 2-15, atributos 0-5, cumprido 60% chance
 - `IntermitentePolicy`: trégua cada 3 ciclos, reencontro cada 4 ciclos
-**Interface:** `PolicyGenerator` com `nextInputs(ciclo, resolucao): Inputs`
-**Verificação:** `tests/simulator/policies.test.ts`
+  **Interface:** `PolicyGenerator` com `nextInputs(ciclo, resolucao): Inputs`
+  **Verificação:** `tests/simulator/policies.test.ts`
 
 ---
 
 ### Tarefa 2.9: Simulador
+
 **Agente:** `write`
 **Arquivo:** `src/simulator/index.ts`
 **Função:** `simulate(catalog, seed, n, policy): SimulationReport`
@@ -229,8 +251,10 @@ export function resolve(
 ## 5. Testes M-01 a M-09 (Semana 3)
 
 ### Tarefa 2.10: Fixtures Sintéticos
+
 **Agente:** `write`
 **Arquivos:**
+
 - `tests/fixtures/minimal-catalog.json` (§6.1.1 versão anterior)
   - st_espinha_abertura_cap1 (Espinha, cap 1)
   - st_cor_fallback (Cor, cap null)
@@ -240,11 +264,12 @@ export function resolve(
   - st_arco_closure_1 (Arco, id contém 'closure')
 - `tests/fixtures/espinha-only.json`
   - 5 storylets Espinha cap 1-5
-**Verificação:** JSON válido, parse sem erros
+    **Verificação:** JSON válido, parse sem erros
 
 ---
 
 ### Tarefa 2.11: Testes Integração M-01 a M-09
+
 **Agente:** `write`
 **Arquivos:** `tests/integration/M-01.test.ts` a `M-09.test.ts`
 **M-01:** `inputs.tregua = true` → `result.storylet.banda === 'Cor'`
@@ -263,27 +288,32 @@ export function resolve(
 ## 6. Documentação e Polimento (Semana 3)
 
 ### Tarefa 2.12: README
+
 **Agente:** `write`
 **Arquivo:** `packages/motor-narrativo/README.md`
 **Conteúdo (§6.2.1 versão anterior):**
+
 - Features (determinismo, bandas, kill-switch, safety-net, simulador)
 - Usage exemplo
 - Scripts teste
 - Invariantes M-01 a M-09
-**Verificação:** README existe, menciona M-XX
+  **Verificação:** README existe, menciona M-XX
 
 ---
 
 ### Tarefa 2.13: Scripts package.json
+
 **Agente:** `edit`
 **Arquivo:** `packages/motor-narrativo/package.json`
 **Adicionar scripts (§6.2.2):**
+
 ```json
 "test:unit": "vitest run tests/unit",
 "test:integration": "vitest run tests/integration",
 "test:simulator": "vitest run tests/simulator",
 "test:coverage": "vitest run --coverage"
 ```
+
 **Verificação:** `pnpm test:unit` roda apenas unit
 
 ---
@@ -370,16 +400,7 @@ packages/motor-narrativo/
 // src/index.ts
 export { resolve, type ResolutionResult } from './resolve';
 export { simulate, type SimulationReport } from './simulator';
-export type {
-  State,
-  Inputs,
-  Storylet,
-  Variant,
-  Catalog,
-  Band,
-  Subclass,
-  Policy,
-} from './types';
+export type { State, Inputs, Storylet, Variant, Catalog, Band, Subclass, Policy } from './types';
 ```
 
 ---
@@ -613,6 +634,7 @@ export function evaluatePredicate(pred: Predicate | undefined, state: State): bo
 ```
 
 **Checklist Dia 1-2:**
+
 - [ ] `rng.ts` implementado
 - [ ] Testes de determinismo (M-05 parcial)
 - [ ] `predicate.ts` implementado
@@ -748,6 +770,7 @@ function filterByBand(
 ```
 
 **Checklist Dia 3-4:**
+
 - [ ] `eligibility.ts` implementado
 - [ ] `bands.ts` implementado
 - [ ] Testes M-01, M-08 (trégua/sessão secundária → apenas Cor)
@@ -807,6 +830,7 @@ export function selectOne(pool: Storylet[], rng: SeededRNG): Storylet {
 ```
 
 **Checklist Dia 5:**
+
 - [ ] `exclusion.ts` implementado
 - [ ] Teste M-09 (K sobre elegíveis)
 - [ ] Teste de tie-breaker determinístico
@@ -959,8 +983,10 @@ export function applySafetyNet(
   const currentVisto = (newState.qualities[vistoKey] as number) || 0;
   newState.qualities[vistoKey] = currentVisto + 1;
 
-  newState.qualities['sys.resolucoes'] = ((newState.qualities['sys.resolucoes'] as number) || 0) + 1;
-  newState.qualities['cap.resolucoes'] = ((newState.qualities['cap.resolucoes'] as number) || 0) + 1;
+  newState.qualities['sys.resolucoes'] =
+    ((newState.qualities['sys.resolucoes'] as number) || 0) + 1;
+  newState.qualities['cap.resolucoes'] =
+    ((newState.qualities['cap.resolucoes'] as number) || 0) + 1;
 
   return {
     storylet: fallback,
@@ -973,6 +999,7 @@ export function applySafetyNet(
 ```
 
 **Checklist Dia 6-7:**
+
 - [ ] `resolve.ts` completo
 - [ ] `safety-net.ts` implementado
 - [ ] Testes M-02 (reencontro → ausencia)
@@ -1015,7 +1042,11 @@ export class ErraticoPolicy implements PolicyGenerator {
     const cumprido = Math.random() > 0.4; // 60% cumprido
     return {
       rolagem: Math.floor(Math.random() * 14) + 2, // 2..15
-      atributo: { forca: Math.floor(Math.random() * 6), vigor: Math.floor(Math.random() * 6), destreza: Math.floor(Math.random() * 6) },
+      atributo: {
+        forca: Math.floor(Math.random() * 6),
+        vigor: Math.floor(Math.random() * 6),
+        destreza: Math.floor(Math.random() * 6),
+      },
       vontade: Math.floor(Math.random() * 4),
       ciclo_cumprido: cumprido,
       tregua: false,
@@ -1123,6 +1154,7 @@ function createPolicyGenerator(policy: Policy) {
 ```
 
 **Checklist Dia 8-10:**
+
 - [ ] 3 políticas implementadas (constante, errático, intermitente)
 - [ ] Simulador funcional
 - [ ] Relatório com razão vistos/escritos
@@ -1268,6 +1300,7 @@ describe('M-03: Kill-switch não desativa Espinha nem fallback', () => {
 ```
 
 **Checklist Dia 11-13:**
+
 - [ ] Testes M-01 a M-09 implementados
 - [ ] Fixtures sintéticos criados
 - [ ] 100% dos testes M-XX passando
@@ -1278,12 +1311,13 @@ describe('M-03: Kill-switch não desativa Espinha nem fallback', () => {
 
 **6.2.1 Criar `packages/motor-narrativo/README.md`**
 
-```markdown
+````markdown
 # Motor Narrativo — FORJA
 
 Pure TypeScript narrative engine implementing ESPEC v2.6.
 
 ## Features
+
 - Deterministic resolution (RF-036): same seed → same output
 - Band selection: Espinha > Arco > Cor
 - Kill-switch support (M-03): never disables Espinha or fallback
@@ -1303,11 +1337,13 @@ console.log(report.razao_vistos_escritos); // 0.15-0.3 esperado
 \`\`\`
 
 ## Tests
+
 - Unit tests: `pnpm test:unit`
 - Integration tests (M-01 to M-09): `pnpm test:integration`
 - Simulator tests: `pnpm test:simulator`
 
 ## Invariantes (M-XX)
+
 - M-01: Trégua → apenas Cor
 - M-02: Reencontro → subclasse ausencia
 - M-03: Kill-switch nunca desativa Espinha/fallback
@@ -1317,7 +1353,7 @@ console.log(report.razao_vistos_escritos); // 0.15-0.3 esperado
 - M-07: Ponto de escolha 2-3 opções
 - M-08: Sessão secundária → apenas Cor
 - M-09: Fila K sobre elegíveis, não total
-\`\`\`
+  \`\`\`
 
 **6.2.2 Atualizar `package.json` com scripts de teste**
 
@@ -1333,8 +1369,10 @@ console.log(report.razao_vistos_escritos); // 0.15-0.3 esperado
   }
 }
 ```
+````
 
 **Checklist Dia 14-15:**
+
 - [ ] README.md completo
 - [ ] Scripts de teste organizados
 - [ ] Coverage >80% (unit + integration)
@@ -1360,11 +1398,11 @@ Fase 2 aprovada quando:
 
 ## 8. Riscos e Mitigações
 
-| Risco | Mitigação |
-|-------|-----------|
-| **R-011: Motor impuro** | Lint rule: proibir `Date.now()`, `Math.random()` |
-| **R-002: Deadlock narrativo** | M-04 garante fallback sempre elegível |
-| **Testes flaky** | Seeds fixas, zero I/O, mocks de RNG |
+| Risco                         | Mitigação                                        |
+| ----------------------------- | ------------------------------------------------ |
+| **R-011: Motor impuro**       | Lint rule: proibir `Date.now()`, `Math.random()` |
+| **R-002: Deadlock narrativo** | M-04 garante fallback sempre elegível            |
+| **Testes flaky**              | Seeds fixas, zero I/O, mocks de RNG              |
 
 ---
 

@@ -33,18 +33,18 @@ Como descrito no ADR-0011 e ADR-0012, o cliente pode alcançar estas tabelas de 
 
 ## Tabelas
 
-| Tabela | Papel | Escrita por |
-|---|---|---|
-| `profiles` | Perfil 1:1 com `auth.users` | usuário (próprio) |
-| `campanhas` | Índice leve de campanhas publicadas | só admin/release |
-| `campaign_instances` | Uma partida de campanha por usuário | usuário (próprio) |
-| `diary_events` | Event store do diário — append-only | usuário (próprio, só insert) |
-| `consent_events` | Log de consentimento LGPD — append-only | usuário (próprio, só insert) |
-| `entitlement_origens` | Referência de origens de compra | só admin |
-| `entitlements` | Direito de acesso `{pacote, origem, validoAte}` | só `service_role` |
-| `purchase_receipts` | Auditoria de recibos de compra | só `service_role` |
-| `deletion_requests` | Solicitação de exclusão de conta (RF-092) | usuário abre; sistema conclui |
-| `storylet_kill_switch` | Fonte administrativa do kill-switch | só `service_role` |
+| Tabela                 | Papel                                           | Escrita por                   |
+| ---------------------- | ----------------------------------------------- | ----------------------------- |
+| `profiles`             | Perfil 1:1 com `auth.users`                     | usuário (próprio)             |
+| `campanhas`            | Índice leve de campanhas publicadas             | só admin/release              |
+| `campaign_instances`   | Uma partida de campanha por usuário             | usuário (próprio)             |
+| `diary_events`         | Event store do diário — append-only             | usuário (próprio, só insert)  |
+| `consent_events`       | Log de consentimento LGPD — append-only         | usuário (próprio, só insert)  |
+| `entitlement_origens`  | Referência de origens de compra                 | só admin                      |
+| `entitlements`         | Direito de acesso `{pacote, origem, validoAte}` | só `service_role`             |
+| `purchase_receipts`    | Auditoria de recibos de compra                  | só `service_role`             |
+| `deletion_requests`    | Solicitação de exclusão de conta (RF-092)       | usuário abre; sistema conclui |
+| `storylet_kill_switch` | Fonte administrativa do kill-switch             | só `service_role`             |
 
 ## O que este esquema deliberadamente não tem
 

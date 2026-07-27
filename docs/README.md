@@ -18,12 +18,14 @@ Esta arquitetura assume as decisões travadas do PRD-Forja v0.14 como restriçõ
 ## Índice
 
 ### C4
+
 - [01 — Contexto do sistema](c4/01-contexto.md)
 - [02 — Contêineres](c4/02-conteineres.md)
 - [03 — Componentes: API Backend](c4/03-componentes-api.md)
 - [04 — Componentes: Pacote compartilhado (motor narrativo)](c4/04-componentes-motor.md)
 
 ### ADR
+
 - [ADR-0001 — Monorepo com pacote compartilhado para o motor narrativo](adr/0001-monorepo-pacote-compartilhado.md)
 - [ADR-0002 — Event sourcing para o diário e sincronização](adr/0002-event-sourcing-diario.md)
 - [ADR-0003 — NestJS sobre Fastify para a API](adr/0003-nestjs-api.md)

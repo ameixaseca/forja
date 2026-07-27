@@ -2,28 +2,28 @@
 
 **Aplicativo de acompanhamento de treino estruturado como RPG solo de mesa**
 
-| Campo | Valor |
-|---|---|
-| Versão | **v0.14** |
-| Status | **Fechado para início da especificação técnica.** Sem questões abertas de produto, de jogo ou de domínio |
-| Autor | Luiz Paulo |
-| Data | Julho/2026 |
-| Documentos irmãos | **ESPEC — Sistema Narrativo v2.6** (vigente) · **PROTÓTIPO — A Longa Seca v0.2** · **`decisoes.md`** (registro de decisões) |
-| Arquivados | ESPEC — Motor de Narrativas v1.0 |
-| Pendente de produção | Glossário e cenários BDD (passo 7 de §14) |
+| Campo                | Valor                                                                                                                       |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Versão               | **v0.14**                                                                                                                   |
+| Status               | **Fechado para início da especificação técnica.** Sem questões abertas de produto, de jogo ou de domínio                    |
+| Autor                | Luiz Paulo                                                                                                                  |
+| Data                 | Julho/2026                                                                                                                  |
+| Documentos irmãos    | **ESPEC — Sistema Narrativo v2.6** (vigente) · **PROTÓTIPO — A Longa Seca v0.2** · **`decisoes.md`** (registro de decisões) |
+| Arquivados           | ESPEC — Motor de Narrativas v1.0                                                                                            |
+| Pendente de produção | Glossário e cenários BDD (passo 7 de §14)                                                                                   |
 
 **Mudanças desde v0.13.** Esta versão não amadurece o rascunho: ela o fecha. Todas as questões abertas foram decididas e registradas em `decisoes.md`, com racional, alternativa descartada e gatilho de reabertura. As mudanças de maior consequência:
 
-| Mudança | Origem |
-|---|---|
-| **Campanha gratuita passa de 6 para 4 capítulos.** R-026 cai de ~320 para ~260 storylets | DEC-021 |
-| **Trégua de Recuperação** para lesão e doença, sem consumo de reserva | DEC-040 |
-| **Economia do Fôlego fechada** — o desenho anterior fazia o jurador de 6 dias avançar 3× mais devagar que o de 2, invertendo D-004 | DEC-032 |
-| **Vontade ganha teto** (+3) e curva de progressão | DEC-030 |
-| Segunda sessão do dia não avança o arco | DEC-033 |
-| RE-006 ganha limiar operacional; PSE definida; deload limitado; janela de retorno sem Marco | DEC-034, DEC-042 a DEC-044 |
-| Trégua/reencontro viram regra de motor; RN-031 deixa de ser inerte | DEC-011 |
-| Referências obsoletas a pacote remoto purgadas; numeração e referências cruzadas corrigidas | DEC-001 a DEC-006 |
+| Mudança                                                                                                                            | Origem                     |
+| ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **Campanha gratuita passa de 6 para 4 capítulos.** R-026 cai de ~320 para ~260 storylets                                           | DEC-021                    |
+| **Trégua de Recuperação** para lesão e doença, sem consumo de reserva                                                              | DEC-040                    |
+| **Economia do Fôlego fechada** — o desenho anterior fazia o jurador de 6 dias avançar 3× mais devagar que o de 2, invertendo D-004 | DEC-032                    |
+| **Vontade ganha teto** (+3) e curva de progressão                                                                                  | DEC-030                    |
+| Segunda sessão do dia não avança o arco                                                                                            | DEC-033                    |
+| RE-006 ganha limiar operacional; PSE definida; deload limitado; janela de retorno sem Marco                                        | DEC-034, DEC-042 a DEC-044 |
+| Trégua/reencontro viram regra de motor; RN-031 deixa de ser inerte                                                                 | DEC-011                    |
+| Referências obsoletas a pacote remoto purgadas; numeração e referências cruzadas corrigidas                                        | DEC-001 a DEC-006          |
 
 ---
 
@@ -51,53 +51,53 @@ Se a narrativa for percebida como aleatória e sem consequência, o produto cola
 
 ## 2. Decisões travadas (D)
 
-| ID | Decisão | Justificativa | Alternativa descartada |
-|---|---|---|---|
-| D-001 | Single-player. Sem grupo, multiplayer ou estado compartilhado. | Escopo de dev solo; evita antifraude, moderação e massa crítica. | Mesa/party como motor de retenção. |
-| D-002 | **Sem LLM em tempo de execução.** | Preserva offline (D-008), custo marginal zero, determinismo e ausência de risco de moderação. | Mestre por LLM em runtime. |
-| D-003 | Registro por auto-reporte. Sem wearable no MVP. | Em solo não há economia a fraudar. | Health Connect / HealthKit (v2). |
-| D-004 | Duas moedas. **Constância** avança campanha. **Superação** alimenta atributos. Nunca performance absoluta. | Atende iniciante e avançado no mesmo sistema. Proporção-alvo 80/20. | XP por tonelagem. |
-| D-005 | O app **não prescreve** treino. | Distância deliberada da Lei 9.696/1998 e do CREF. | Programação embutida. |
-| D-006 | Descanso e deload são ações de jogo obrigatórias. | Impede incentivo a overtraining. | Streak puro. |
-| D-007 | Rolagem nunca pune sessão realizada. | Punir o comportamento desejado é erro fatal. | Falha crítica com perda. |
-| D-008 | Offline-first. | Academia tem sinal ruim. | Cloud-first. |
-| D-009 | Campanha por marcos narrativos; personagem por atributos. | Barra de XP global perde significado. | Level grinding. |
-| D-010 | Superação é **multiplicador de Constância, nunca substituto**. | Implementa o 80/20 estruturalmente. | Soma ponderada. |
-| D-011 | Superação medida contra o **próprio histórico**. | Justiça entre corpos; mantém P2 no jogo. | Comparação com norma. |
-| D-012 | Superação vale em qualquer eixo de sobrecarga, com peso igual. | Carga é uma variável entre várias. | Marco só por carga. |
-| D-013 | Modalidade-agnóstico, sessões compostas por blocos, modalidades criadas pelo usuário. | Cobre híbrido e troca de esporte. | Taxonomia fechada. |
-| D-014 | Compartilhamento externo é primeiro-classe; social interno fora. | Laço viral sem moderação. | Feed interno. |
-| D-015 | O artefato destaca narrativa, não estatística. | Narrativa é o ativo único; stat não converte. | Card de ficha. |
-| D-016 | Artefato gerado no dispositivo, sem postagem automática. | Dado de saúde é sensível. | Renderização server-side. |
-| D-017 | Campanha = **espinha autoral + conteúdo procedural**. | Sem intérprete humano, procedural puro não produz enredo. | Procedural puro. |
-| D-018 | Superação é sempre **declarada**, nunca inferida. | Inferência só funciona em eixos numéricos, criando assimetria que viola D-012 na prática. | Detecção automática de PR. |
-| D-019 | Juramento declarado em **dias de treino**. | O pacto é sobre comparecer. | Juramento em sessões ou blocos. |
-| D-020 | Convite carrega **semente de campanha**, não estado. Entrada sempre no capítulo 1. | Efeito de mesa compartilhada sem violar D-001, a custo zero. | Sincronizar progresso. |
-| D-021 | ~~Campanha inicial gratuita de 6 capítulos~~ **REVISTA por D-041.** | — | — |
-| D-022 | **A narrativa é escrita pelo autor, com IA como ferramenta de apoio.** Nenhuma IA participa da execução. | Reduz o custo de rascunho sem abrir mão do que D-002 protege; mantém autoria humana inequívoca para RC-030. | Geração automática com curadoria posterior. |
-| D-023 | **Arquitetura de storylet**, não combinatória de tabelas. | Antirrepetição percebida vem de condição e reconhecimento, não de combinatória. | Casas × entradas com janela de não-repetição. |
-| D-024 | ~~Pacote versionado e atualizável remotamente~~ **REVERTIDA por D-031.** Permanece a parte negativa: narrativa **nunca é editável, importável ou criável pelo usuário**. | Moderação, suporte e coerência de estado. | — |
-| D-025 | Em pontos definidos do arco, o usuário **escolhe entre 2–3 storylets elegíveis**. | Devolve o papel de intérprete ao usuário e barateia o seletor. | Escolha a cada resolução; ou nenhuma. |
-| D-026 | Sem assinatura **no MVP**. Monetização por compra única. Mensalidade permanece possível e não pode ser inviabilizada por nenhuma decisão de agora. | O mercado de RPG solo paga pouco e uma vez; fechar a porta hoje custaria uma migração depois. | Assinatura no MVP; ou descartá-la em definitivo. |
-| D-027 | ~~Motor independente; toda campanha é dado~~ **REVERTIDA por D-031.** | — | — |
-| D-028 | **Projeto autofinanciado.** | Remove obrigação perante terceiros. Em troca, remove a função de forçamento da validação — ver R-019 e §11.2. | Crowdfunding. |
-| D-029 | **Direito de acesso modelado como `{pacote, origem, validoAte?}`** desde o MVP. | Assinatura futura é apenas outra origem preenchendo o campo. | Desbloqueio local hard-coded. |
-| D-030 | ~~Motor e ferramental completo como escopo de MVP~~ **REVERTIDA por D-031.** | — | — |
-| D-031 | **Campanhas são codificadas. Cada campanha nova é um release.** | Reduz drasticamente o escopo de engenharia do MVP. Custo em §11 da ESPEC. | Motor independente com pacote atualizável. |
-| D-032 | **O simulador permanece no escopo do MVP.** | É a única garantia de alcançabilidade. Parte mais barata da ESPEC e a de maior retorno. | Verificação artesanal do catálogo. |
-| D-033 | **Disciplina de acoplamento interno mantida:** o subsistema narrativo não conhece treino, ficha nem tela. | Sem isso o simulador exigiria instanciar o app inteiro. | Narrativa acoplada às telas. |
-| D-034 | **Kill-switch de storylet**, com restrições estritas de privacidade. | Recupera parte da mitigação de R-001 a custo muito menor que pacote remoto. | Nenhuma correção entre releases. |
-| D-035 | ~~Preparado para tradução, não traduzido~~ **REVERTIDA por D-037.** | — | — |
-| D-036 | **Storylets como JSON embutido no binário**, não classes, não YAML. | Mantém o catálogo desacoplado e viabiliza o simulador. YAML tem ambiguidade de parsing. | Classes de código; ou YAML. |
-| D-037 | **MVP em pt-BR apenas.** Inglês e espanhol adiados. | ~800 unidades × 2 idiomas empatava com a escrita original como maior risco. Traduzir antes de validar arriscaria traduzir o que será reescrito. | Três idiomas no lançamento. |
-| D-038 | **Storylet carrega referência de texto, não prosa.** | Prosa no catálogo faria o subsistema tocar locale, quebrando determinismo e simulador. | Prosa embutida. |
-| D-039 | **Disponibilidade nas lojas é deliberada. No MVP: Brasil apenas.** | Restringir ao Brasil mantém o escopo em LGPD e reduz o parecer de cinco regimes a um. | Publicar em todos os mercados por padrão. |
-| D-040 | **A arquitetura de i18n entra no MVP; o conteúdo traduzido não.** | Retrofitar referência de texto depois exigiria uma passada por todo o catálogo. | Prosa embutida agora, refatorar depois. |
-| **D-041** | **Campanha inicial gratuita de 4 capítulos** (~12 semanas), integralmente terminada. Revisa D-021. | Quatro capítulos ≈ D84: o paywall cai **em cima** do D90 em vez de depois. Reduz R-026 em 22% — é o único risco crítico redutível por decisão em vez de por esforço. O produto compete por acoplamento ao treino, não por extensão (R-018). | 6 capítulos; ou 6 com corte posterior. |
-| **D-042** | **Trégua de Recuperação**, distinta da Trégua comum: declarável retroativamente em até 14 dias, sem consumo de reserva, sem limite de frequência, sem pergunta sobre o motivo. | O sistema tinha pausa voluntária e nada para lesão ou doença. Um usuário lesionado esgotava a reserva em duas semanas e passava a quebrar ciclos — o produto punia quem está machucado, no cenário exato em que ele não pode parecer cobrar treino. | Usar a Trégua comum; ou não tratar. |
-| **D-043** | **Vontade tem teto de +3**, com progressão de custo crescente (2, 6 e 14 ciclos cumpridos). | Modificador irrestrito eliminaria as faixas 7–9 e ≤6 justamente para o usuário mais engajado, e a rolagem deixaria de significar algo. Aos 14 ciclos, triunfo em 58% e reviravolta em 8%: constância compra vantagem substancial, não certeza. | Vontade sem teto; ou modificador fixo. |
-| **D-044** | **Fôlego tem teto de 2 por ciclo, acúmulo máximo de 4, e o Marco de capítulo custa 2.** | Sem teto, quem jura 2 dias descansa 5 e acumula 5 por ciclo, enquanto quem jura 6 acumula 1 — o jurador alto avançaria a campanha 3× mais devagar, invertendo o princípio derivado de D-004. Com teto, **todos os perfis habilitam o Marco no piso de 2 ciclos**. | Fôlego linear por dia de descanso. |
-| **D-045** | **Não existe duração mínima de sessão**, e isso é decisão explícita. | Qualquer piso é prescrição de treino (colide com D-005) e é enviesado contra P2, contra reabilitação e contra modalidades de sessão curta. O autoengano já está tratado por R-009 da única forma disponível a um jogo solo. | Piso de 10 ou 15 minutos. |
+| ID        | Decisão                                                                                                                                                                        | Justificativa                                                                                                                                                                                                                                                     | Alternativa descartada                           |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| D-001     | Single-player. Sem grupo, multiplayer ou estado compartilhado.                                                                                                                 | Escopo de dev solo; evita antifraude, moderação e massa crítica.                                                                                                                                                                                                  | Mesa/party como motor de retenção.               |
+| D-002     | **Sem LLM em tempo de execução.**                                                                                                                                              | Preserva offline (D-008), custo marginal zero, determinismo e ausência de risco de moderação.                                                                                                                                                                     | Mestre por LLM em runtime.                       |
+| D-003     | Registro por auto-reporte. Sem wearable no MVP.                                                                                                                                | Em solo não há economia a fraudar.                                                                                                                                                                                                                                | Health Connect / HealthKit (v2).                 |
+| D-004     | Duas moedas. **Constância** avança campanha. **Superação** alimenta atributos. Nunca performance absoluta.                                                                     | Atende iniciante e avançado no mesmo sistema. Proporção-alvo 80/20.                                                                                                                                                                                               | XP por tonelagem.                                |
+| D-005     | O app **não prescreve** treino.                                                                                                                                                | Distância deliberada da Lei 9.696/1998 e do CREF.                                                                                                                                                                                                                 | Programação embutida.                            |
+| D-006     | Descanso e deload são ações de jogo obrigatórias.                                                                                                                              | Impede incentivo a overtraining.                                                                                                                                                                                                                                  | Streak puro.                                     |
+| D-007     | Rolagem nunca pune sessão realizada.                                                                                                                                           | Punir o comportamento desejado é erro fatal.                                                                                                                                                                                                                      | Falha crítica com perda.                         |
+| D-008     | Offline-first.                                                                                                                                                                 | Academia tem sinal ruim.                                                                                                                                                                                                                                          | Cloud-first.                                     |
+| D-009     | Campanha por marcos narrativos; personagem por atributos.                                                                                                                      | Barra de XP global perde significado.                                                                                                                                                                                                                             | Level grinding.                                  |
+| D-010     | Superação é **multiplicador de Constância, nunca substituto**.                                                                                                                 | Implementa o 80/20 estruturalmente.                                                                                                                                                                                                                               | Soma ponderada.                                  |
+| D-011     | Superação medida contra o **próprio histórico**.                                                                                                                               | Justiça entre corpos; mantém P2 no jogo.                                                                                                                                                                                                                          | Comparação com norma.                            |
+| D-012     | Superação vale em qualquer eixo de sobrecarga, com peso igual.                                                                                                                 | Carga é uma variável entre várias.                                                                                                                                                                                                                                | Marco só por carga.                              |
+| D-013     | Modalidade-agnóstico, sessões compostas por blocos, modalidades criadas pelo usuário.                                                                                          | Cobre híbrido e troca de esporte.                                                                                                                                                                                                                                 | Taxonomia fechada.                               |
+| D-014     | Compartilhamento externo é primeiro-classe; social interno fora.                                                                                                               | Laço viral sem moderação.                                                                                                                                                                                                                                         | Feed interno.                                    |
+| D-015     | O artefato destaca narrativa, não estatística.                                                                                                                                 | Narrativa é o ativo único; stat não converte.                                                                                                                                                                                                                     | Card de ficha.                                   |
+| D-016     | Artefato gerado no dispositivo, sem postagem automática.                                                                                                                       | Dado de saúde é sensível.                                                                                                                                                                                                                                         | Renderização server-side.                        |
+| D-017     | Campanha = **espinha autoral + conteúdo procedural**.                                                                                                                          | Sem intérprete humano, procedural puro não produz enredo.                                                                                                                                                                                                         | Procedural puro.                                 |
+| D-018     | Superação é sempre **declarada**, nunca inferida.                                                                                                                              | Inferência só funciona em eixos numéricos, criando assimetria que viola D-012 na prática.                                                                                                                                                                         | Detecção automática de PR.                       |
+| D-019     | Juramento declarado em **dias de treino**.                                                                                                                                     | O pacto é sobre comparecer.                                                                                                                                                                                                                                       | Juramento em sessões ou blocos.                  |
+| D-020     | Convite carrega **semente de campanha**, não estado. Entrada sempre no capítulo 1.                                                                                             | Efeito de mesa compartilhada sem violar D-001, a custo zero.                                                                                                                                                                                                      | Sincronizar progresso.                           |
+| D-021     | ~~Campanha inicial gratuita de 6 capítulos~~ **REVISTA por D-041.**                                                                                                            | —                                                                                                                                                                                                                                                                 | —                                                |
+| D-022     | **A narrativa é escrita pelo autor, com IA como ferramenta de apoio.** Nenhuma IA participa da execução.                                                                       | Reduz o custo de rascunho sem abrir mão do que D-002 protege; mantém autoria humana inequívoca para RC-030.                                                                                                                                                       | Geração automática com curadoria posterior.      |
+| D-023     | **Arquitetura de storylet**, não combinatória de tabelas.                                                                                                                      | Antirrepetição percebida vem de condição e reconhecimento, não de combinatória.                                                                                                                                                                                   | Casas × entradas com janela de não-repetição.    |
+| D-024     | ~~Pacote versionado e atualizável remotamente~~ **REVERTIDA por D-031.** Permanece a parte negativa: narrativa **nunca é editável, importável ou criável pelo usuário**.       | Moderação, suporte e coerência de estado.                                                                                                                                                                                                                         | —                                                |
+| D-025     | Em pontos definidos do arco, o usuário **escolhe entre 2–3 storylets elegíveis**.                                                                                              | Devolve o papel de intérprete ao usuário e barateia o seletor.                                                                                                                                                                                                    | Escolha a cada resolução; ou nenhuma.            |
+| D-026     | Sem assinatura **no MVP**. Monetização por compra única. Mensalidade permanece possível e não pode ser inviabilizada por nenhuma decisão de agora.                             | O mercado de RPG solo paga pouco e uma vez; fechar a porta hoje custaria uma migração depois.                                                                                                                                                                     | Assinatura no MVP; ou descartá-la em definitivo. |
+| D-027     | ~~Motor independente; toda campanha é dado~~ **REVERTIDA por D-031.**                                                                                                          | —                                                                                                                                                                                                                                                                 | —                                                |
+| D-028     | **Projeto autofinanciado.**                                                                                                                                                    | Remove obrigação perante terceiros. Em troca, remove a função de forçamento da validação — ver R-019 e §11.2.                                                                                                                                                     | Crowdfunding.                                    |
+| D-029     | **Direito de acesso modelado como `{pacote, origem, validoAte?}`** desde o MVP.                                                                                                | Assinatura futura é apenas outra origem preenchendo o campo.                                                                                                                                                                                                      | Desbloqueio local hard-coded.                    |
+| D-030     | ~~Motor e ferramental completo como escopo de MVP~~ **REVERTIDA por D-031.**                                                                                                   | —                                                                                                                                                                                                                                                                 | —                                                |
+| D-031     | **Campanhas são codificadas. Cada campanha nova é um release.**                                                                                                                | Reduz drasticamente o escopo de engenharia do MVP. Custo em §11 da ESPEC.                                                                                                                                                                                         | Motor independente com pacote atualizável.       |
+| D-032     | **O simulador permanece no escopo do MVP.**                                                                                                                                    | É a única garantia de alcançabilidade. Parte mais barata da ESPEC e a de maior retorno.                                                                                                                                                                           | Verificação artesanal do catálogo.               |
+| D-033     | **Disciplina de acoplamento interno mantida:** o subsistema narrativo não conhece treino, ficha nem tela.                                                                      | Sem isso o simulador exigiria instanciar o app inteiro.                                                                                                                                                                                                           | Narrativa acoplada às telas.                     |
+| D-034     | **Kill-switch de storylet**, com restrições estritas de privacidade.                                                                                                           | Recupera parte da mitigação de R-001 a custo muito menor que pacote remoto.                                                                                                                                                                                       | Nenhuma correção entre releases.                 |
+| D-035     | ~~Preparado para tradução, não traduzido~~ **REVERTIDA por D-037.**                                                                                                            | —                                                                                                                                                                                                                                                                 | —                                                |
+| D-036     | **Storylets como JSON embutido no binário**, não classes, não YAML.                                                                                                            | Mantém o catálogo desacoplado e viabiliza o simulador. YAML tem ambiguidade de parsing.                                                                                                                                                                           | Classes de código; ou YAML.                      |
+| D-037     | **MVP em pt-BR apenas.** Inglês e espanhol adiados.                                                                                                                            | ~800 unidades × 2 idiomas empatava com a escrita original como maior risco. Traduzir antes de validar arriscaria traduzir o que será reescrito.                                                                                                                   | Três idiomas no lançamento.                      |
+| D-038     | **Storylet carrega referência de texto, não prosa.**                                                                                                                           | Prosa no catálogo faria o subsistema tocar locale, quebrando determinismo e simulador.                                                                                                                                                                            | Prosa embutida.                                  |
+| D-039     | **Disponibilidade nas lojas é deliberada. No MVP: Brasil apenas.**                                                                                                             | Restringir ao Brasil mantém o escopo em LGPD e reduz o parecer de cinco regimes a um.                                                                                                                                                                             | Publicar em todos os mercados por padrão.        |
+| D-040     | **A arquitetura de i18n entra no MVP; o conteúdo traduzido não.**                                                                                                              | Retrofitar referência de texto depois exigiria uma passada por todo o catálogo.                                                                                                                                                                                   | Prosa embutida agora, refatorar depois.          |
+| **D-041** | **Campanha inicial gratuita de 4 capítulos** (~12 semanas), integralmente terminada. Revisa D-021.                                                                             | Quatro capítulos ≈ D84: o paywall cai **em cima** do D90 em vez de depois. Reduz R-026 em 22% — é o único risco crítico redutível por decisão em vez de por esforço. O produto compete por acoplamento ao treino, não por extensão (R-018).                       | 6 capítulos; ou 6 com corte posterior.           |
+| **D-042** | **Trégua de Recuperação**, distinta da Trégua comum: declarável retroativamente em até 14 dias, sem consumo de reserva, sem limite de frequência, sem pergunta sobre o motivo. | O sistema tinha pausa voluntária e nada para lesão ou doença. Um usuário lesionado esgotava a reserva em duas semanas e passava a quebrar ciclos — o produto punia quem está machucado, no cenário exato em que ele não pode parecer cobrar treino.               | Usar a Trégua comum; ou não tratar.              |
+| **D-043** | **Vontade tem teto de +3**, com progressão de custo crescente (2, 6 e 14 ciclos cumpridos).                                                                                    | Modificador irrestrito eliminaria as faixas 7–9 e ≤6 justamente para o usuário mais engajado, e a rolagem deixaria de significar algo. Aos 14 ciclos, triunfo em 58% e reviravolta em 8%: constância compra vantagem substancial, não certeza.                    | Vontade sem teto; ou modificador fixo.           |
+| **D-044** | **Fôlego tem teto de 2 por ciclo, acúmulo máximo de 4, e o Marco de capítulo custa 2.**                                                                                        | Sem teto, quem jura 2 dias descansa 5 e acumula 5 por ciclo, enquanto quem jura 6 acumula 1 — o jurador alto avançaria a campanha 3× mais devagar, invertendo o princípio derivado de D-004. Com teto, **todos os perfis habilitam o Marco no piso de 2 ciclos**. | Fôlego linear por dia de descanso.               |
+| **D-045** | **Não existe duração mínima de sessão**, e isso é decisão explícita.                                                                                                           | Qualquer piso é prescrição de treino (colide com D-005) e é enviesado contra P2, contra reabilitação e contra modalidades de sessão curta. O autoengano já está tratado por R-009 da única forma disponível a um jogo solo.                                       | Piso de 10 ou 15 minutos.                        |
 
 ---
 
@@ -115,11 +115,11 @@ Ama RPG, treina de forma errática. A dor é real: começar e não parar na terc
 
 ### 3.2 Panorama competitivo
 
-| Cluster | Exemplos | Relação com FORJA |
-|---|---|---|
-| Fitness-RPG de verniz | Questing, RPGFitness, Fito, GymLevels, Level Up | Confirmam a tese negativa. Não disputam o espaço. |
-| Narrativa + atividade física | Zombies, Run!; Marvel Move | Único precedente real. Provam que ficção retém; alertam que é feita por equipe. |
-| **Companheiros de RPG solo** | **Solesworn, Solo Quest, Mythic GME, Iron Journal, Stargazer** | **Onde P1 já mora. Definem o teto de preço e ocupam o modelo de §11.** |
+| Cluster                      | Exemplos                                                       | Relação com FORJA                                                               |
+| ---------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Fitness-RPG de verniz        | Questing, RPGFitness, Fito, GymLevels, Level Up                | Confirmam a tese negativa. Não disputam o espaço.                               |
+| Narrativa + atividade física | Zombies, Run!; Marvel Move                                     | Único precedente real. Provam que ficção retém; alertam que é feita por equipe. |
+| **Companheiros de RPG solo** | **Solesworn, Solo Quest, Mythic GME, Iron Journal, Stargazer** | **Onde P1 já mora. Definem o teto de preço e ocupam o modelo de §11.**          |
 
 > **Alerta de posicionamento:** o Solesworn é gratuito, offline, com dados apenas no dispositivo e pacotes de cenário pagos previstos. Isso não é referência de preço — é o modelo de negócio de §11 já operando a custo zero. Qualquer pacote pago de FORJA precisa justificar valor contra um incumbente gratuito.
 
@@ -141,19 +141,19 @@ Condicional  → Marco de capítulo (escolha irreversível)
 
 ### 4.2 Ficha de personagem
 
-| Atributo | Cresce por | Efeito narrativo |
-|---|---|---|
-| **Força** | Marcos em blocos de carga | Abre storylets de confronto direto |
-| **Vigor** | Marcos em condicionamento | Abre storylets de persistência e travessia |
-| **Destreza** | Marcos em mobilidade e técnica | Abre storylets de evasão e precisão |
-| **Vontade** | Ciclos com Juramento cumprido | Modificador global na Rolagem |
+| Atributo     | Cresce por                     | Efeito narrativo                           |
+| ------------ | ------------------------------ | ------------------------------------------ |
+| **Força**    | Marcos em blocos de carga      | Abre storylets de confronto direto         |
+| **Vigor**    | Marcos em condicionamento      | Abre storylets de persistência e travessia |
+| **Destreza** | Marcos em mobilidade e técnica | Abre storylets de evasão e precisão        |
+| **Vontade**  | Ciclos com Juramento cumprido  | Modificador global na Rolagem              |
 
 **Escalas (D-043, DEC-031):**
 
-| Atributo | Faixa | Progressão |
-|---|---|---|
-| Força, Vigor, Destreza | 0..5 | **3 Marcos naquele atributo = +1 ponto** |
-| Vontade | 0..3 | **+1 aos 2 ciclos cumpridos, +2 aos 6, +3 aos 14** |
+| Atributo               | Faixa | Progressão                                         |
+| ---------------------- | ----- | -------------------------------------------------- |
+| Força, Vigor, Destreza | 0..5  | **3 Marcos naquele atributo = +1 ponto**           |
+| Vontade                | 0..3  | **+1 aos 2 ciclos cumpridos, +2 aos 6, +3 aos 14** |
 
 Com o teto de 2 Marcos por ciclo e o cooldown de 2 ciclos por rótulo (§4.8), o primeiro ponto de um atributo é alcançável dentro do capítulo 1 e o segundo não — que é o que faz o capítulo 2 parecer diferente. Ciclo quebrado nunca reduz atributo (RN-003); ciclo de Trégua não conta para Vontade.
 
@@ -167,25 +167,25 @@ Com o teto de 2 Marcos por ciclo e o cooldown de 2 ciclos por rótulo (§4.8), o
 
 **Ciclo de Trégua.** Declarável antes do início. Não conta como cumprido nem quebrado, não gera Fôlego, não avança capítulo, não interrompe a contagem de consecutivos.
 
-| Regra da Trégua comum (DEC-035) | Valor |
-|---|---|
-| Crédito | 1 a cada **8 ciclos encerrados de qualquer natureza** |
-| Reserva máxima | 2 |
-| Crédito inicial | **1, disponível desde o primeiro ciclo** |
+| Regra da Trégua comum (DEC-035) | Valor                                                 |
+| ------------------------------- | ----------------------------------------------------- |
+| Crédito                         | 1 a cada **8 ciclos encerrados de qualquer natureza** |
+| Reserva máxima                  | 2                                                     |
+| Crédito inicial                 | **1, disponível desde o primeiro ciclo**              |
 
 Contar apenas ciclos cumpridos negaria Trégua justamente a quem está em dificuldade, que é quem ela existe para atender. O crédito inicial existe porque a vida acontece na semana 2 tanto quanto na 10.
 
 **Trégua de Recuperação (D-042).** Para lesão, doença ou qualquer interrupção não voluntária.
 
-| Regra | Valor |
-|---|---|
-| Declaração | a qualquer momento, inclusive **retroativa em até 14 dias** |
-| Custo | **nenhum** — não consome reserva, sem limite de frequência |
-| Duração | 1 a 8 ciclos, prorrogável |
-| Efeito | não conta como cumprido nem quebrado; não gera Fôlego; não avança capítulo; não interrompe consecutivos |
-| Motivo | **o app não pergunta** e não registra natureza de lesão |
-| Saída | resolução de reencontro (§4.6); redução do Juramento oferecida como padrão pré-selecionado, dispensável |
-| Métricas | ciclos em Recuperação saem do denominador de toda métrica de constância (RN-038) |
+| Regra      | Valor                                                                                                   |
+| ---------- | ------------------------------------------------------------------------------------------------------- |
+| Declaração | a qualquer momento, inclusive **retroativa em até 14 dias**                                             |
+| Custo      | **nenhum** — não consome reserva, sem limite de frequência                                              |
+| Duração    | 1 a 8 ciclos, prorrogável                                                                               |
+| Efeito     | não conta como cumprido nem quebrado; não gera Fôlego; não avança capítulo; não interrompe consecutivos |
+| Motivo     | **o app não pergunta** e não registra natureza de lesão                                                 |
+| Saída      | resolução de reencontro (§4.6); redução do Juramento oferecida como padrão pré-selecionado, dispensável |
+| Métricas   | ciclos em Recuperação saem do denominador de toda métrica de constância (RN-038)                        |
 
 A retroatividade existe porque ninguém declara pausa no dia em que se machuca — declara quando percebe que não vai voltar essa semana. Não perguntar o motivo é decisão de privacidade e de tom: o produto não diagnostica, e RE-005 já encaminha ao profissional.
 
@@ -195,18 +195,18 @@ A retroatividade existe porque ninguém declara pausa no dia em que se machuca �
 
 `2d6 + Vontade`, com Vontade ∈ 0..3 (D-043).
 
-| Resultado | Efeito |
-|---|---|
-| 10+ | Triunfo — avanço narrativo limpo |
-| 7–9 | Avanço com custo — complicação introduzida no estado do mundo |
-| ≤6 | Reviravolta — avança mesmo assim (D-007); a história vira contra o personagem |
+| Resultado | Efeito                                                                        |
+| --------- | ----------------------------------------------------------------------------- |
+| 10+       | Triunfo — avanço narrativo limpo                                              |
+| 7–9       | Avanço com custo — complicação introduzida no estado do mundo                 |
+| ≤6        | Reviravolta — avança mesmo assim (D-007); a história vira contra o personagem |
 
 | Vontade | Triunfo | Custo | Reviravolta |
-|---|---|---|---|
-| 0 | 16,7% | 41,7% | 41,7% |
-| 1 | 27,8% | 44,4% | 27,8% |
-| 2 | 41,7% | 41,7% | 16,7% |
-| 3 | 58,3% | 33,3% | 8,3% |
+| ------- | ------- | ----- | ----------- |
+| 0       | 16,7%   | 41,7% | 41,7%       |
+| 1       | 27,8%   | 44,4% | 27,8%       |
+| 2       | 41,7%   | 41,7% | 16,7%       |
+| 3       | 58,3%   | 33,3% | 8,3%        |
 
 O resultado é **um pré-requisito de seleção de storylet**, não um multiplicador de recompensa. Nenhum resultado reverte progresso mecânico.
 
@@ -214,14 +214,14 @@ O resultado é **um pré-requisito de seleção de storylet**, não um multiplic
 
 Dia sem treino em ciclo cumprido gera **Fôlego**, consumido obrigatoriamente em Marcos de capítulo. É mecanicamente impossível avançar a campanha treinando todos os dias.
 
-| Regra (D-044) | Valor |
-|---|---|
-| Fôlego por dia de descanso em ciclo cumprido | 1 |
-| **Teto por ciclo** | **2** |
-| Deload | dobra o teto do ciclo, para 4 |
-| Acúmulo máximo | 4 |
-| **Custo do Marco de capítulo** | **2** |
-| Ciclo quebrado, Trégua ou Recuperação | 0 |
+| Regra (D-044)                                | Valor                         |
+| -------------------------------------------- | ----------------------------- |
+| Fôlego por dia de descanso em ciclo cumprido | 1                             |
+| **Teto por ciclo**                           | **2**                         |
+| Deload                                       | dobra o teto do ciclo, para 4 |
+| Acúmulo máximo                               | 4                             |
+| **Custo do Marco de capítulo**               | **2**                         |
+| Ciclo quebrado, Trégua ou Recuperação        | 0                             |
 
 Com o teto de 2, todo jurador de 1 a 5 dias recebe 2 por ciclo e o de 6 dias recebe 1. Dois ciclos cumpridos entregam 4 e 2 respectivamente — ambos ≥ 2, ou seja, **todos os perfis habilitam o Marco de capítulo no piso de 2 ciclos de §4.9**. O teto de acúmulo impede estocar Fôlego para atravessar dois capítulos sem treinar.
 
@@ -229,12 +229,12 @@ Com o teto de 2, todo jurador de 1 a 5 dias recebe 2 por ciclo e o de 6 dias rec
 
 **Unidade de conteúdo — o storylet:**
 
-| Componente | Descrição |
-|---|---|
-| Referência de texto | Chave de recurso, com variantes por estado. Nunca prosa (D-038) |
-| Pré-requisitos | Capítulo, arco, atributos, resultado da rolagem, entidades vivas, complicações abertas, storylets já vistos |
-| Efeitos | Cria/mata entidade, abre/fecha complicação, marca conhecimento, altera tom do arco |
-| Peso | Multiplicidade na bolsa de sorteio |
+| Componente          | Descrição                                                                                                   |
+| ------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Referência de texto | Chave de recurso, com variantes por estado. Nunca prosa (D-038)                                             |
+| Pré-requisitos      | Capítulo, arco, atributos, resultado da rolagem, entidades vivas, complicações abertas, storylets já vistos |
+| Efeitos             | Cria/mata entidade, abre/fecha complicação, marca conhecimento, altera tom do arco                          |
+| Peso                | Multiplicidade na bolsa de sorteio                                                                          |
 
 **Espinha autoral (D-017).** Cada capítulo tem abertura escrita, entidade central, complicação estruturante e desfecho escrito. Storylets preenchem o meio.
 
@@ -272,12 +272,12 @@ Reconhecimento de que o usuário fez algo que **ele próprio** não fazia antes.
 
 **Contenções:**
 
-| Contenção | Regra |
-|---|---|
-| Teto | 2 Marcos contabilizados por ciclo |
-| Cooldown | 2 ciclos por rótulo |
-| Teste de repetição máxima | nunca gera Marco e nunca é sugerido |
-| Ciclo não cumprido | Marco registrado, não contabilizado |
+| Contenção                       | Regra                                                                                                                                              |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Teto                            | 2 Marcos contabilizados por ciclo                                                                                                                  |
+| Cooldown                        | 2 ciclos por rótulo                                                                                                                                |
+| Teste de repetição máxima       | nunca gera Marco e nunca é sugerido                                                                                                                |
+| Ciclo não cumprido              | Marco registrado, não contabilizado                                                                                                                |
 | **Janela de retorno (DEC-044)** | após **21 dias ou mais sem sessão**, ou ao encerrar uma Trégua de Recuperação, Marcos ficam **registráveis porém não contabilizados por 2 ciclos** |
 
 **A janela de retorno** cobre o cenário clássico de lesão no retorno, e é onde um sistema que premia superação relativa ao próprio histórico é mais perigoso — o histórico é de um corpo que teve três semanas de destreino. É a única regra do sistema que retém temporariamente uma recompensa por algo realizado, e é aceita porque o vetor de dano é físico e irreversível, ao contrário do de motivação. Registrar em vez de bloquear preserva D-007: o usuário não perde nada por ter feito. O texto de interface é descritivo, sem instrução (RE-009).
@@ -300,17 +300,17 @@ A condição 3 nunca é o gargalo: por D-044, dois ciclos cumpridos entregam Fô
 
 ### 4.10 Modalidades e sessões compostas
 
-| Modalidade | Atributo | Eixos típicos |
-|---|---|---|
-| Musculação / levantamento | Força | carga, repetição, volume |
-| Calistenia | Força / Destreza | repetição, progressão, amplitude |
-| Corrida / natação / ciclismo | Vigor | distância, duração, densidade |
-| Escalada | Força / Destreza | grau, duração, amplitude |
-| Luta / artes marciais | Vigor / Destreza | duração, densidade, técnica |
-| Dança | Destreza / Vigor | duração, amplitude, técnica |
-| Mobilidade | Destreza | amplitude, duração |
-| Funcional / híbrido | composta | herdada dos blocos |
-| Definida pelo usuário | escolhido na criação | escolhidos na criação |
+| Modalidade                   | Atributo             | Eixos típicos                    |
+| ---------------------------- | -------------------- | -------------------------------- |
+| Musculação / levantamento    | Força                | carga, repetição, volume         |
+| Calistenia                   | Força / Destreza     | repetição, progressão, amplitude |
+| Corrida / natação / ciclismo | Vigor                | distância, duração, densidade    |
+| Escalada                     | Força / Destreza     | grau, duração, amplitude         |
+| Luta / artes marciais        | Vigor / Destreza     | duração, densidade, técnica      |
+| Dança                        | Destreza / Vigor     | duração, amplitude, técnica      |
+| Mobilidade                   | Destreza             | amplitude, duração               |
+| Funcional / híbrido          | composta             | herdada dos blocos               |
+| Definida pelo usuário        | escolhido na criação | escolhidos na criação            |
 
 **Campos de registro (RF-010):** tipo, duração e **PSE**. PSE é **inteiro de 0 a 10 na escala de Borg CR10**, com rótulos verbais nas âncoras, e é **campo opcional** — sessão sem PSE é válida e não gera pendência, e é excluída da média de RE-006. Opcional porque três campos obrigatórios não cabem no orçamento de 20 segundos.
 
@@ -326,13 +326,13 @@ A condição 3 nunca é o gargalo: por D-044, dois ciclos cumpridos entregam Fô
 
 ### 4.11 Artefato de Compartilhamento
 
-| Evento | Peça |
-|---|---|
-| Capítulo concluído | Página de diário com título e trecho |
-| Marco de capítulo resolvido | Cena da escolha irreversível |
-| Ciclo cumprido | Selo, sem números de treino |
-| Marco de Superação | Cartão sóbrio, auto-relativo |
-| Campanha finalizada | Retrospectiva narrativa |
+| Evento                      | Peça                                 |
+| --------------------------- | ------------------------------------ |
+| Capítulo concluído          | Página de diário com título e trecho |
+| Marco de capítulo resolvido | Cena da escolha irreversível         |
+| Ciclo cumprido              | Selo, sem números de treino          |
+| Marco de Superação          | Cartão sóbrio, auto-relativo         |
+| Campanha finalizada         | Retrospectiva narrativa              |
 
 Camada obrigatória: narrativa. Opcionais desligadas por padrão: modalidades, ciclos, atributos. Nunca disponíveis: peso, medidas, comparação, carga crua. Pré-visualização integral com controle granular. **Semente de campanha** embutida, sem identificador do convidante.
 
@@ -362,23 +362,23 @@ Camada obrigatória: narrativa. Opcionais desligadas por padrão: modalidades, c
 
 ### 5.2 Fora do MVP
 
-| Item | Motivo |
-|---|---|
-| Feed interno, perfil público, party, ranking | D-001, D-014 |
-| LLM em tempo de execução | D-002 |
-| Editor de conteúdo para usuário; importação de storylet | D-024 (parte remanescente) |
-| Pacote de conteúdo remoto, manifesto, migração de pacote, assinatura | D-031 |
-| Validação estática como portão de publicação | D-031 — substituída pelas suítes da ESPEC |
-| Conteúdo traduzido, maquinaria de concordância por idioma | D-037 |
-| Wearable / Health Connect / HealthKit | D-003 |
-| Prescrição de treino | D-005 |
-| Nutrição, calorias, peso corporal como métrica | Fora da tese |
-| Notificação de culpa / streak agressivo | D-006, D-007 |
-| Loja de itens, moeda, loot box | §8 |
-| Assinatura / cobrança recorrente | D-026 — **fora do MVP, preservada como possível** por D-029 |
-| Validação de disposição a pagar | DEC-025 — diferida com método e gatilho fixados |
-| Base de exercícios catalogada | Rótulo livre substitui |
-| Ciclo quinzenal | Ciclo é sempre semanal |
+| Item                                                                 | Motivo                                                      |
+| -------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Feed interno, perfil público, party, ranking                         | D-001, D-014                                                |
+| LLM em tempo de execução                                             | D-002                                                       |
+| Editor de conteúdo para usuário; importação de storylet              | D-024 (parte remanescente)                                  |
+| Pacote de conteúdo remoto, manifesto, migração de pacote, assinatura | D-031                                                       |
+| Validação estática como portão de publicação                         | D-031 — substituída pelas suítes da ESPEC                   |
+| Conteúdo traduzido, maquinaria de concordância por idioma            | D-037                                                       |
+| Wearable / Health Connect / HealthKit                                | D-003                                                       |
+| Prescrição de treino                                                 | D-005                                                       |
+| Nutrição, calorias, peso corporal como métrica                       | Fora da tese                                                |
+| Notificação de culpa / streak agressivo                              | D-006, D-007                                                |
+| Loja de itens, moeda, loot box                                       | §8                                                          |
+| Assinatura / cobrança recorrente                                     | D-026 — **fora do MVP, preservada como possível** por D-029 |
+| Validação de disposição a pagar                                      | DEC-025 — diferida com método e gatilho fixados             |
+| Base de exercícios catalogada                                        | Rótulo livre substitui                                      |
+| Ciclo quinzenal                                                      | Ciclo é sempre semanal                                      |
 
 ---
 
@@ -413,7 +413,7 @@ Camada obrigatória: narrativa. Opcionais desligadas por padrão: modalidades, c
 - **RF-020** — Executar a Rolagem de Resolução ao confirmar sessão.
 - **RF-021** — Selecionar storylet conforme o algoritmo de §6.1 da ESPEC vigente: supressão por entrada, filtragem, pressão, estratificação, sorteio sem reposição.
 - **RF-022** — Aplicar os efeitos do storylet selecionado ao estado do mundo antes de compor o texto.
-- **RF-023** — *(Arquitetura.)* Manter estado persistente de entidades, complicações, conhecimento e desfechos, de modo que retornos sejam **explicitamente reconhecidos** no texto.
+- **RF-023** — _(Arquitetura.)_ Manter estado persistente de entidades, complicações, conhecimento e desfechos, de modo que retornos sejam **explicitamente reconhecidos** no texto.
 - **RF-024** — Apresentar **2 a 3 storylets elegíveis para escolha** nos dois pontos por capítulo, degradando para seleção automática quando houver menos de 2 elegíveis.
 - **RF-025** — Garantir que exista sempre ao menos um storylet elegível; na ausência, recorrer ao storylet de ambientação de reserva, **nunca ao desfecho de capítulo**.
 - **RF-026** — Registrar toda resolução no Diário, com data e sessão vinculada.
@@ -429,7 +429,7 @@ Camada obrigatória: narrativa. Opcionais desligadas por padrão: modalidades, c
 - **RF-032** — Suportar múltiplas campanhas coexistindo, com estado independente por campanha.
 - **RF-033** — Registrar a versão do aplicativo em cada entrada do Diário, para rastreabilidade de correções.
 - **RF-034** — Garantir que atualização do aplicativo não corrompa campanha em andamento.
-- **RF-035** — *(Arquitetura, D-033.)* O subsistema narrativo não conhece treino, ficha, ciclo ou tela.
+- **RF-035** — _(Arquitetura, D-033.)_ O subsistema narrativo não conhece treino, ficha, ciclo ou tela.
 - **RF-036** — Manter a resolução como função pura: estado + entradas + índice → resolução, sem persistência nem E/S.
 - **RF-037** — Armazenar o catálogo como arquivos **JSON** embutidos nos assets (D-036).
 - **RF-038** — Buscar, na inicialização, arquivo estático com lista de ids desativados: timeout de 1,5 s, cache da última lista, lista vazia como padrão (D-034).
@@ -578,12 +578,12 @@ Entra no MVP com **um único idioma preenchido** (pt-BR). O conteúdo traduzido 
 - **RE-003** — Sem streak irreversível.
 - **RE-004** — Sem métrica corporal como objetivo do jogo.
 - **RE-005** — Aviso de que o app não substitui profissional de educação física ou médico, com recomendação de avaliação, exibido na primeira abertura com aceite registrado e **permanentemente acessível nos ajustes. Sem reexibição periódica** — aviso repetido é ignorado por hábito, que é o pior estado possível para um aviso de segurança.
-- **RE-006** — Relatar padrão observado sem instruir, deixando a conclusão com o usuário. **Limiar operacional:** dispara quando, por **dois ciclos consecutivos**, frequência semanal, duração total semanal ou PSE médio excederem em **40% ou mais** a média das 4 semanas anteriores. Exige histórico mínimo de 4 ciclos. **No máximo um aviso a cada 4 ciclos.** Redação estritamente descritiva e no passado: *"sua frequência nos últimos 7 dias foi 45% maior que a média das últimas 4 semanas"*.
+- **RE-006** — Relatar padrão observado sem instruir, deixando a conclusão com o usuário. **Limiar operacional:** dispara quando, por **dois ciclos consecutivos**, frequência semanal, duração total semanal ou PSE médio excederem em **40% ou mais** a média das 4 semanas anteriores. Exige histórico mínimo de 4 ciclos. **No máximo um aviso a cada 4 ciclos.** Redação estritamente descritiva e no passado: _"sua frequência nos últimos 7 dias foi 45% maior que a média das últimas 4 semanas"_.
 - **RE-007** — Uma sugestão de compartilhamento por evento, dispensável, sem badge de "não compartilhado".
 - **RE-008** — Sem lista de contatos, sem sugestão de pessoas, sem vínculo identificável entre convidante e instalador.
 - **RE-009** — **Regra transversal de redação.** Nenhuma mensagem referente a execução de exercício é redigida no modo imperativo ou em tempo futuro. Testável em revisão de copy.
 - **RE-010** — Todo storylet publicado passa por revisão quanto a conteúdo sensível, coerência com RE-001 a RE-011 e ausência de conselho de treino. Item obrigatório da lista de verificação de release.
-- **RE-011** — **Convenção de concordância.** Nenhum texto constrói frase em que o nome de entidade seja precedido de preposição que exija contração com artigo (*do*, *no*, *ao*). Evita a maquinaria de molde até existir um segundo idioma (DEC-019).
+- **RE-011** — **Convenção de concordância.** Nenhum texto constrói frase em que o nome de entidade seja precedido de preposição que exija contração com artigo (_do_, _no_, _ao_). Evita a maquinaria de molde até existir um segundo idioma (DEC-019).
 
 ---
 
@@ -606,9 +606,9 @@ Dado de saúde é **dado pessoal sensível** (art. 5º, II, Lei 13.709/2018).
 ### 9.1.1 Jurisdição
 
 - **RC-040** — **MVP disponível apenas no Brasil** (D-039). Regime aplicável: LGPD, exclusivamente.
-- **RC-041** — *(Ativa apenas com expansão.)* Incluir a União Europeia implica **GDPR art. 9**.
-- **RC-042** — *(Ativa apenas com expansão.)* Mercados hispanofalantes exigem mapear Argentina, México, Colômbia e Chile.
-- **RC-043** — *(Ativa apenas com expansão.)* Termos e política revistos juridicamente por idioma, não apenas vertidos.
+- **RC-041** — _(Ativa apenas com expansão.)_ Incluir a União Europeia implica **GDPR art. 9**.
+- **RC-042** — _(Ativa apenas com expansão.)_ Mercados hispanofalantes exigem mapear Argentina, México, Colômbia e Chile.
+- **RC-043** — _(Ativa apenas com expansão.)_ Termos e política revistos juridicamente por idioma, não apenas vertidos.
 
 ### 9.2 Regulação profissional
 
@@ -644,25 +644,25 @@ Dado de saúde é **dado pessoal sensível** (art. 5º, II, Lei 13.709/2018).
 
 ### 10.3 Métricas
 
-| Métrica | Denominador | Alvo | Referência de mercado |
-|---|---|---|---|
-| Instalação → ativação | instalações | > 40% | funil novo; instrumentar |
-| Retenção D30 | ativados | > 15% | saúde/fitness: 3–25% sobre instalações |
-| Retenção D90 | ativados | > 8% | melhores apps de fitness: 15–20% |
-| Ciclos consecutivos (mediana) | ativados | ≥ 4 | — |
-| **% que fecha o capítulo 1** | ativados | > 45% | teste de §4.9 contra a morte na semana 3 |
-| **% que conclui os 4 capítulos** | ativados | acompanhar | teto observado 25–36% em jogos pagos; tratar como teto |
-| % que reduz o Juramento em vez de abandonar | ativados | > 30% | — |
-| % que usa Trégua de Recuperação | ativados | instrumentar | uso zero indica que a função não foi encontrada |
-| % que exporta o Diário | ativados | > 5% | — |
-| % de capítulos concluídos que geram compartilhamento | eventos | > 15% | — |
-| Instalações por artefato compartilhado | artefatos | > 0,15 | — |
-| Fator k | ativados | > 0,2 | — |
-| % com mais de uma modalidade | ativados | > 30% | — |
-| Distribuição de Marcos por ciclo | ativados | instrumentar | — |
-| % de Marcos bloqueados por teto vs. cooldown vs. janela de retorno | Marcos | instrumentar | cooldown < 10% = regra inerte, remover |
-| **Storylets vistos / storylets escritos** | campanha | ≈ 0,2 | régua de orçamento (§4.6) |
-| **Fração de resoluções por banda** | campanha | `Arco` entre 25% e 45% | espelha T-30 em produção |
+| Métrica                                                            | Denominador | Alvo                   | Referência de mercado                                  |
+| ------------------------------------------------------------------ | ----------- | ---------------------- | ------------------------------------------------------ |
+| Instalação → ativação                                              | instalações | > 40%                  | funil novo; instrumentar                               |
+| Retenção D30                                                       | ativados    | > 15%                  | saúde/fitness: 3–25% sobre instalações                 |
+| Retenção D90                                                       | ativados    | > 8%                   | melhores apps de fitness: 15–20%                       |
+| Ciclos consecutivos (mediana)                                      | ativados    | ≥ 4                    | —                                                      |
+| **% que fecha o capítulo 1**                                       | ativados    | > 45%                  | teste de §4.9 contra a morte na semana 3               |
+| **% que conclui os 4 capítulos**                                   | ativados    | acompanhar             | teto observado 25–36% em jogos pagos; tratar como teto |
+| % que reduz o Juramento em vez de abandonar                        | ativados    | > 30%                  | —                                                      |
+| % que usa Trégua de Recuperação                                    | ativados    | instrumentar           | uso zero indica que a função não foi encontrada        |
+| % que exporta o Diário                                             | ativados    | > 5%                   | —                                                      |
+| % de capítulos concluídos que geram compartilhamento               | eventos     | > 15%                  | —                                                      |
+| Instalações por artefato compartilhado                             | artefatos   | > 0,15                 | —                                                      |
+| Fator k                                                            | ativados    | > 0,2                  | —                                                      |
+| % com mais de uma modalidade                                       | ativados    | > 30%                  | —                                                      |
+| Distribuição de Marcos por ciclo                                   | ativados    | instrumentar           | —                                                      |
+| % de Marcos bloqueados por teto vs. cooldown vs. janela de retorno | Marcos      | instrumentar           | cooldown < 10% = regra inerte, remover                 |
+| **Storylets vistos / storylets escritos**                          | campanha    | ≈ 0,2                  | régua de orçamento (§4.6)                              |
+| **Fração de resoluções por banda**                                 | campanha    | `Arco` entre 25% e 45% | espelha T-30 em produção                               |
 
 > Queda acentuada entre semana 4 e 8 é o padrão de morte de app gamificado. Se acontecer, o problema é narrativo (§1.2), não onboarding.
 
@@ -670,11 +670,11 @@ Dado de saúde é **dado pessoal sensível** (art. 5º, II, Lei 13.709/2018).
 
 ## 11. Monetização
 
-| Modelo | Nota |
-|---|---|
-| Gratuito | Campanha inicial de **4 capítulos** (~12 semanas), completa e com desfecho real |
-| Pacotes de campanha | **Compra única** por ambientação adicional |
-| Assinatura | **Fora do MVP**, preservada como possível por D-029 |
+| Modelo              | Nota                                                                            |
+| ------------------- | ------------------------------------------------------------------------------- |
+| Gratuito            | Campanha inicial de **4 capítulos** (~12 semanas), completa e com desfecho real |
+| Pacotes de campanha | **Compra única** por ambientação adicional                                      |
+| Assinatura          | **Fora do MVP**, preservada como possível por D-029                             |
 
 **Financiamento:** autofinanciado no início, sustentado depois pelas vendas de pacote (D-028).
 
@@ -690,14 +690,14 @@ Dado de saúde é **dado pessoal sensível** (art. 5º, II, Lei 13.709/2018).
 
 **Custo autoral estimado (DEC-026), a partir da medição do protótipo:**
 
-| Item | Estimativa |
-|---|---|
-| Storylet de `Arco` | 25–40 min |
-| Storylet de `Cor` neutro | 8–12 min |
-| Espinha de capítulo | 60–90 min |
-| **Capítulo completo (26 itens)** | **14–20 h** |
-| **Banda `Cor` global (150 itens)** | **25–35 h** |
-| **Campanha de 4 capítulos** | **~80–110 h** |
+| Item                               | Estimativa    |
+| ---------------------------------- | ------------- |
+| Storylet de `Arco`                 | 25–40 min     |
+| Storylet de `Cor` neutro           | 8–12 min      |
+| Espinha de capítulo                | 60–90 min     |
+| **Capítulo completo (26 itens)**   | **14–20 h**   |
+| **Banda `Cor` global (150 itens)** | **25–35 h**   |
+| **Campanha de 4 capítulos**        | **~80–110 h** |
 
 A estimativa **exclui deliberadamente** revisão, retrabalho após o teste de leitura e a passada de RE-010 — historicamente 30 a 50% adicionais. Com 6 capítulos seria 110–150 h, que é o número que motivou D-041.
 
@@ -709,12 +709,12 @@ R-019 exigia definir, por escrito e de antemão, qual desfecho é aceitável —
 
 **O projeto é interrompido se qualquer um destes ocorrer:**
 
-| Marco | Critério de parada |
-|---|---|
-| Teste de leitura (§14.1) | Duas pessoas em três não conseguem resumir a história em três frases, **após uma rodada de correção** |
-| Teste do card (§14.2) | Menos de 1 em 5 do público anglófono pergunta "que app é esse?" |
-| Esforço do capítulo 1 completo | Acima de 30 h |
-| Retenção pós-lançamento | % que fecha o capítulo 1 abaixo de 25% sobre ativados, em 8 semanas |
+| Marco                          | Critério de parada                                                                                    |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| Teste de leitura (§14.1)       | Duas pessoas em três não conseguem resumir a história em três frases, **após uma rodada de correção** |
+| Teste do card (§14.2)          | Menos de 1 em 5 do público anglófono pergunta "que app é esse?"                                       |
+| Esforço do capítulo 1 completo | Acima de 30 h                                                                                         |
+| Retenção pós-lançamento        | % que fecha o capítulo 1 abaixo de 25% sobre ativados, em 8 semanas                                   |
 
 **Desfecho aceitável, declarado:** um produto de nicho com algumas centenas de usuários ativos, que cobre o próprio custo de operação e que o autor continua querendo escrever, **é sucesso** — e não deve ser reavaliado contra a Pergunta 2.
 
@@ -722,39 +722,39 @@ R-019 exigia definir, por escrito e de antemão, qual desfecho é aceitável —
 
 ## 12. Riscos
 
-| ID | Risco | Severidade | Mitigação |
-|---|---|---|---|
-| R-001 | Padrão de seleção aparece e a fachada narrativa cai | **Crítica** | Storylets com pré-requisito e reconhecimento (D-023); orçamento 0,2; simulador (D-032); teste de leitura antes de codar. Com narrativa no binário, a correção exige release |
-| R-002 | Terceiro produto em especificação simultânea, com custo próprio | **Crítica** | D-041 reduz o esforço autoral em 22%; §11.2 fixa critério de parada |
-| R-003 | Auto-reporte tedioso → usuário para de registrar | Alta | Registro < 20 s; PSE opcional; escolha restrita a 2 pontos por capítulo |
-| R-004 | P1 não retém e P2 não paga | Alta | Teste de cobrança real em comunidade de RPG solo |
-| R-005 | Conteúdo é trabalho autoral, não engenharia | **Crítica** | D-022 reduz o custo de prosa; parceria com designer de RPG solo continua recomendada |
-| R-006 | Dado sensível sem parecer jurídico | Média | Parecer antes do lançamento; RC-009 e RC-034 já adotam o caminho conservador |
-| R-007 | Classificação como app de saúde nas lojas | Média | Revisar diretrizes antes do submit |
-| R-008 | Marcos incentivam caça a recorde → lesão | **Crítica** | Teto, cooldown, exclusão de 1RM, paridade entre eixos, **janela de retorno (RF-048)** e **RN-036**; revisar com profissional de educação física |
-| R-009 | Autoengano no auto-reporte esvazia a moeda | Média | Punição adequada é a própria descrença na história |
-| R-010 | Artefato não desperta curiosidade → sem canal de aquisição | **Crítica** | Testar 5 variações com público frio antes de codar, em público anglófono (§14.2) |
-| R-011 | Comparação entra pela rede social | Média | Stat fora do card por padrão |
-| R-012 | Divulgação de dado de saúde gera consequência real | Média | RC-006; camadas sensíveis desligadas |
-| R-013 | Multimodalidade explode complexidade | Alta | Blocos com campos adaptativos; superação auto-relativa |
-| R-015 | Custo autoral inviabiliza o catálogo de §11 | Média | Sem exigência de margem, deixa de ser risco financeiro; permanece como risco de tempo, coberto por R-002 |
-| R-016 | Conteúdo rascunhado por IA sem rastro de curadoria enfraquece RC-030 | Média | RC-034: registro versionado de prompts e revisões desde o primeiro storylet |
-| R-017 | Grafo de pré-requisitos cresce além do gerenciável e a continuidade quebra | Alta | **Mitigação atualizada:** profundidade ≤ 3, condicionamento estreito de `Arco`, T-27 (cobertura por variante), T-28 (`mem.` com leitor futuro) e T-30. O grafo passa a ser observável por instrumento, não por disciplina |
-| R-018 | Concorrente gratuito no mesmo modelo de pacotes | Alta | O diferencial é o acoplamento ao treino, não o oráculo em si |
-| R-019 | Autofinanciamento remove a função de forçamento da validação | **Crítica** | **Mitigado:** §11.2 fixa critério de parada e desfecho aceitável, por escrito e antes dos testes |
-| R-023 | Alcançabilidade amostrada em vez de provada | Alta | M alto; política `pessimo` e `intermitente` obrigatórias; **T-10 devolvido à prova** pela regra de pressão |
-| R-024 | Cada campanha adicional é ciclo completo de release e revisão de loja | Média | Aceito por D-031 |
-| R-025 | Correção de narrativa quebrada leva dias | Média | Mitigado por D-034 |
-| **R-026** | **Volume de conteúdo: ~260 storylets, 40–65 mil palavras** para a campanha gratuita de 4 capítulos | **Crítica — reduzido** | D-041 cortou 22%. ~58% são vinhetas curtas de `Cor`, reutilizadas e sem trabalho de continuidade. Estimativa detalhada em §11.1; remedir ao fim do capítulo 1 |
-| R-027 | Kill-switch corrói o posicionamento de privacidade | Média — **reduzido** | RF-039 e RF-039A: arquivo estático, sem identificador, sem retenção de log ou IP, com jitter, declarado em seção própria |
-| R-029 | O kill-switch não alcança a `Espinha` | Média — **reduzido** | Com 4 capítulos, o buraco fica restrito a **8 itens na campanha inteira**. Revisão manual integral da espinha antes de cada release |
-| R-030 | Camada tonal reduz o pool e pode esfomear a bolsa | Média | K sobre o pool efetivo com teto de 40%; camada neutra ≥ 60% garante T-17 sozinha |
-| R-031 | Volume de tradução | **Adiado** | Fora do MVP por D-037. A arquitetura de D-040 garante que reabrir não exige refatoração |
-| R-032 | Espanhol revisado por falante de português produz portunhol | **Adiado** | Quando reabrir: revisor nativo obrigatório para `es`, sem exceção |
-| R-033 | Publicar em inglês implica GDPR | **Eliminado no MVP** | D-039 restringe ao Brasil |
-| R-034 | O público-alvo real fica fora de alcance no MVP | Alta | Consequência aceita de D-037. **Mitigado metodologicamente:** o teste do card roda em público anglófono (§14.2), separando qualidade do artefato de tamanho do público |
-| **R-035** | **A banda `Arco` sufoca a banda `Cor`** por condicionamento largo, e 150 vinhetas escritas nunca aparecem — sem erro e sem teste vermelho | Alta | Regra de autoria de condicionamento estreito e T-30, medidos já no capítulo 1 |
-| **R-036** | **Trégua de Recuperação usada como pausa indefinida** sem lesão, esvaziando a métrica-norte | Baixa | Aceito. Um app solo não tem como nem por que auditar isso, e o custo de suspeitar do usuário é maior que o de ser ocasionalmente usado como pausa livre |
+| ID        | Risco                                                                                                                                     | Severidade             | Mitigação                                                                                                                                                                                                                 |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| R-001     | Padrão de seleção aparece e a fachada narrativa cai                                                                                       | **Crítica**            | Storylets com pré-requisito e reconhecimento (D-023); orçamento 0,2; simulador (D-032); teste de leitura antes de codar. Com narrativa no binário, a correção exige release                                               |
+| R-002     | Terceiro produto em especificação simultânea, com custo próprio                                                                           | **Crítica**            | D-041 reduz o esforço autoral em 22%; §11.2 fixa critério de parada                                                                                                                                                       |
+| R-003     | Auto-reporte tedioso → usuário para de registrar                                                                                          | Alta                   | Registro < 20 s; PSE opcional; escolha restrita a 2 pontos por capítulo                                                                                                                                                   |
+| R-004     | P1 não retém e P2 não paga                                                                                                                | Alta                   | Teste de cobrança real em comunidade de RPG solo                                                                                                                                                                          |
+| R-005     | Conteúdo é trabalho autoral, não engenharia                                                                                               | **Crítica**            | D-022 reduz o custo de prosa; parceria com designer de RPG solo continua recomendada                                                                                                                                      |
+| R-006     | Dado sensível sem parecer jurídico                                                                                                        | Média                  | Parecer antes do lançamento; RC-009 e RC-034 já adotam o caminho conservador                                                                                                                                              |
+| R-007     | Classificação como app de saúde nas lojas                                                                                                 | Média                  | Revisar diretrizes antes do submit                                                                                                                                                                                        |
+| R-008     | Marcos incentivam caça a recorde → lesão                                                                                                  | **Crítica**            | Teto, cooldown, exclusão de 1RM, paridade entre eixos, **janela de retorno (RF-048)** e **RN-036**; revisar com profissional de educação física                                                                           |
+| R-009     | Autoengano no auto-reporte esvazia a moeda                                                                                                | Média                  | Punição adequada é a própria descrença na história                                                                                                                                                                        |
+| R-010     | Artefato não desperta curiosidade → sem canal de aquisição                                                                                | **Crítica**            | Testar 5 variações com público frio antes de codar, em público anglófono (§14.2)                                                                                                                                          |
+| R-011     | Comparação entra pela rede social                                                                                                         | Média                  | Stat fora do card por padrão                                                                                                                                                                                              |
+| R-012     | Divulgação de dado de saúde gera consequência real                                                                                        | Média                  | RC-006; camadas sensíveis desligadas                                                                                                                                                                                      |
+| R-013     | Multimodalidade explode complexidade                                                                                                      | Alta                   | Blocos com campos adaptativos; superação auto-relativa                                                                                                                                                                    |
+| R-015     | Custo autoral inviabiliza o catálogo de §11                                                                                               | Média                  | Sem exigência de margem, deixa de ser risco financeiro; permanece como risco de tempo, coberto por R-002                                                                                                                  |
+| R-016     | Conteúdo rascunhado por IA sem rastro de curadoria enfraquece RC-030                                                                      | Média                  | RC-034: registro versionado de prompts e revisões desde o primeiro storylet                                                                                                                                               |
+| R-017     | Grafo de pré-requisitos cresce além do gerenciável e a continuidade quebra                                                                | Alta                   | **Mitigação atualizada:** profundidade ≤ 3, condicionamento estreito de `Arco`, T-27 (cobertura por variante), T-28 (`mem.` com leitor futuro) e T-30. O grafo passa a ser observável por instrumento, não por disciplina |
+| R-018     | Concorrente gratuito no mesmo modelo de pacotes                                                                                           | Alta                   | O diferencial é o acoplamento ao treino, não o oráculo em si                                                                                                                                                              |
+| R-019     | Autofinanciamento remove a função de forçamento da validação                                                                              | **Crítica**            | **Mitigado:** §11.2 fixa critério de parada e desfecho aceitável, por escrito e antes dos testes                                                                                                                          |
+| R-023     | Alcançabilidade amostrada em vez de provada                                                                                               | Alta                   | M alto; política `pessimo` e `intermitente` obrigatórias; **T-10 devolvido à prova** pela regra de pressão                                                                                                                |
+| R-024     | Cada campanha adicional é ciclo completo de release e revisão de loja                                                                     | Média                  | Aceito por D-031                                                                                                                                                                                                          |
+| R-025     | Correção de narrativa quebrada leva dias                                                                                                  | Média                  | Mitigado por D-034                                                                                                                                                                                                        |
+| **R-026** | **Volume de conteúdo: ~260 storylets, 40–65 mil palavras** para a campanha gratuita de 4 capítulos                                        | **Crítica — reduzido** | D-041 cortou 22%. ~58% são vinhetas curtas de `Cor`, reutilizadas e sem trabalho de continuidade. Estimativa detalhada em §11.1; remedir ao fim do capítulo 1                                                             |
+| R-027     | Kill-switch corrói o posicionamento de privacidade                                                                                        | Média — **reduzido**   | RF-039 e RF-039A: arquivo estático, sem identificador, sem retenção de log ou IP, com jitter, declarado em seção própria                                                                                                  |
+| R-029     | O kill-switch não alcança a `Espinha`                                                                                                     | Média — **reduzido**   | Com 4 capítulos, o buraco fica restrito a **8 itens na campanha inteira**. Revisão manual integral da espinha antes de cada release                                                                                       |
+| R-030     | Camada tonal reduz o pool e pode esfomear a bolsa                                                                                         | Média                  | K sobre o pool efetivo com teto de 40%; camada neutra ≥ 60% garante T-17 sozinha                                                                                                                                          |
+| R-031     | Volume de tradução                                                                                                                        | **Adiado**             | Fora do MVP por D-037. A arquitetura de D-040 garante que reabrir não exige refatoração                                                                                                                                   |
+| R-032     | Espanhol revisado por falante de português produz portunhol                                                                               | **Adiado**             | Quando reabrir: revisor nativo obrigatório para `es`, sem exceção                                                                                                                                                         |
+| R-033     | Publicar em inglês implica GDPR                                                                                                           | **Eliminado no MVP**   | D-039 restringe ao Brasil                                                                                                                                                                                                 |
+| R-034     | O público-alvo real fica fora de alcance no MVP                                                                                           | Alta                   | Consequência aceita de D-037. **Mitigado metodologicamente:** o teste do card roda em público anglófono (§14.2), separando qualidade do artefato de tamanho do público                                                    |
+| **R-035** | **A banda `Arco` sufoca a banda `Cor`** por condicionamento largo, e 150 vinhetas escritas nunca aparecem — sem erro e sem teste vermelho | Alta                   | Regra de autoria de condicionamento estreito e T-30, medidos já no capítulo 1                                                                                                                                             |
+| **R-036** | **Trégua de Recuperação usada como pausa indefinida** sem lesão, esvaziando a métrica-norte                                               | Baixa                  | Aceito. Um app solo não tem como nem por que auditar isso, e o custo de suspeitar do usuário é maior que o de ser ocasionalmente usado como pausa livre                                                                   |
 
 **Eliminados por perda de objeto:** R-014 (obrigação perante apoiadores, resolvida por D-028), R-020 a R-022 (sem objeto após D-031), R-028 (realizado e absorvido por R-031).
 
@@ -764,15 +764,15 @@ R-019 exigia definir, por escrito e de antemão, qual desfecho é aceitável —
 
 **Não há questões abertas.** Todas as que constavam do v0.13 foram fechadas e registradas em `decisoes.md`:
 
-| Questão | Fechamento | Decisão |
-|---|---|---|
-| QA-010 — disposição a pagar | Diferida com método e gatilho fixados (§11.1) | DEC-025 |
-| QA-019 — custo autoral | Respondida com a medição do protótipo (§11.1) | DEC-026 |
-| QA-022 — termos do provedor de IA | Convertida em política operacional (RC-034) | DEC-023 |
-| QA-028 — MEs remanescentes da ESPEC | Dissolvida: ME-011, 012, 014 e 015 fechadas | DEC-017 a DEC-020 |
-| QA-031 — kill-switch e LGPD | Caminho conservador adotado (RF-039A, RC-009) | DEC-024 |
-| QA-032 — número de capítulos gratuitos | **4 capítulos** (D-041) | DEC-021 |
-| QA-035 — onde testar o card | Público anglófono (§14.2) | DEC-022 |
+| Questão                                | Fechamento                                    | Decisão           |
+| -------------------------------------- | --------------------------------------------- | ----------------- |
+| QA-010 — disposição a pagar            | Diferida com método e gatilho fixados (§11.1) | DEC-025           |
+| QA-019 — custo autoral                 | Respondida com a medição do protótipo (§11.1) | DEC-026           |
+| QA-022 — termos do provedor de IA      | Convertida em política operacional (RC-034)   | DEC-023           |
+| QA-028 — MEs remanescentes da ESPEC    | Dissolvida: ME-011, 012, 014 e 015 fechadas   | DEC-017 a DEC-020 |
+| QA-031 — kill-switch e LGPD            | Caminho conservador adotado (RF-039A, RC-009) | DEC-024           |
+| QA-032 — número de capítulos gratuitos | **4 capítulos** (D-041)                       | DEC-021           |
+| QA-035 — onde testar o card            | Público anglófono (§14.2)                     | DEC-022           |
 
 Itens que dependem de terceiros — parecer jurídico e revisão por profissional de educação física — deixam de ser questões de especificação e passam a ser **itens da lista de verificação de release**. A especificação assume a posição conservadora em cada um deles, de modo que um parecer mais permissivo não obriga a desfazer nada.
 
@@ -780,7 +780,7 @@ Itens que dependem de terceiros — parecer jurídico e revisão por profissiona
 
 ## 14. Próximos passos
 
-1. **Escrever a espinha do capítulo 1 completo e prototipar em papel.** Gerar 20 resoluções em sequência, entregar a **outra pessoa** para ler como texto corrido e pedir que **resuma a história**. Bloqueante. Critério de parada em §11.2. *(O PROTÓTIPO v0.2 já entrega o instrumento; falta rodar o teste.)*
+1. **Escrever a espinha do capítulo 1 completo e prototipar em papel.** Gerar 20 resoluções em sequência, entregar a **outra pessoa** para ler como texto corrido e pedir que **resuma a história**. Bloqueante. Critério de parada em §11.2. _(O PROTÓTIPO v0.2 já entrega o instrumento; falta rodar o teste.)_
 2. **Prototipar 5 variações do artefato de compartilhamento** e mostrar a público frio **anglófono** de RPG solo. Se menos de 1 em 5 perguntar "que app é esse?", o canal de aquisição não existe. Bloqueante. Registrado antes do teste, conforme R-034: a taxa brasileira é observada, mas não é critério de decisão sobre o artefato.
 3. **Medir o esforço real do capítulo 1 completo** e confrontar com §11.1. Acima de 30 h, §11.2 se aplica; abaixo de 15 h, D-041 pode ser reaberta para 5 capítulos.
 4. **Implementar o subsistema conforme a ESPEC vigente**, com o simulador e **as duas suítes desde o primeiro dia**, incluindo as fixtures de teste negativo. Sem portão de publicação, as suítes são a única defesa antes da produção — e a produção é cara de corrigir.
@@ -789,4 +789,4 @@ Itens que dependem de terceiros — parecer jurídico e revisão por profissiona
 
 ---
 
-*Documento vivo. Alterações exigem entrada correspondente em `decisoes.md`.*
+_Documento vivo. Alterações exigem entrada correspondente em `decisoes.md`._
