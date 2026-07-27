@@ -1,12 +1,12 @@
-// Thresholds: break=0 because resolve() is unimplemented (Phase 2). Raise to break=60 when implemented.
+// resolve() implemented (Phase 2). break=60 matches @forja/dominio convention (AGENTS.md).
 export default {
   testRunner: 'vitest',
   plugins: ['@stryker-mutator/vitest-runner'],
   mutate: ['src/**/*.ts'],
   reporters: ['html', 'clear-text', 'progress'],
   thresholds: {
-    break: 0,
-    low: 50,
+    break: 60,
+    low: 60,
     high: 80,
   },
 };

@@ -1,0 +1,28 @@
+{
+  "storylets": [
+    {
+      "id": "st_cor_ausencia_1",
+      "banda": "Cor",
+      "subclasse": "ausencia",
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.ausencia.1",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_reencontro_1",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.reencontro.1",
+          "efeitos": {}
+        }
+      ]
+    }
+  ]
+}

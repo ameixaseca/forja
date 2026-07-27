@@ -1,0 +1,28 @@
+{
+  "storylets": [
+    {
+      "id": "st_arco_complicacao_1",
+      "banda": "Arco",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.arco.complicacao.1",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_arco_closure_1",
+      "banda": "Arco",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.arco.closure.1",
+          "efeitos": {}
+        }
+      ]
+    }
+  ]
+}

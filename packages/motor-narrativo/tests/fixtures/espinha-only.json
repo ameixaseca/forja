@@ -1,0 +1,64 @@
+{
+  "storylets": [
+    {
+      "id": "st_espinha_cap1",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 1,
+      "variantes": [
+        {
+          "texto": "texto.espinha.cap1",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_espinha_cap2",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 2,
+      "variantes": [
+        {
+          "texto": "texto.espinha.cap2",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_espinha_cap3",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 3,
+      "variantes": [
+        {
+          "texto": "texto.espinha.cap3",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_espinha_cap4",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 4,
+      "variantes": [
+        {
+          "texto": "texto.espinha.cap4",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_espinha_cap5",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 5,
+      "variantes": [
+        {
+          "texto": "texto.espinha.cap5",
+          "efeitos": {}
+        }
+      ]
+    }
+  ]
+}
