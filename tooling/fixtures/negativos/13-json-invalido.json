@@ -1,0 +1,11 @@
+{
+  "storylets": [
+    {
+      "id": "st_espinha_1",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 1,
+      "variantes": [{ "texto": "texto.espinha.1", "efeitos": { "flag.a": true } }],
+    }
+  ],
+}

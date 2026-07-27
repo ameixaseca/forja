@@ -35,9 +35,11 @@ describe('simulate', () => {
     expect(report.vistos.length + report.nunca_vistos.length).toBe(catalog.storylets.length);
   });
 
-  it('lança erro para política não implementada', () => {
+  it.each(['especialista', 'pessimo'] as const)('roda a política %s sem lançar erro', (policy) => {
     const catalog = buildCatalog(5);
 
-    expect(() => simulate(catalog, 1, 10, 'pessimo')).toThrow('Policy pessimo not implemented');
+    const report = simulate(catalog, 1, 10, policy);
+
+    expect(report.resolutions).toHaveLength(10);
   });
 });

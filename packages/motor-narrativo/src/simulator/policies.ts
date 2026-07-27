@@ -36,6 +36,34 @@ export class ErraticoPolicy implements PolicyGenerator {
   }
 }
 
+export class EspecialistaPolicy implements PolicyGenerator {
+  nextInputs(ciclo: number): Inputs {
+    return {
+      rolagem: 8,
+      atributo: { forca: Math.min(ciclo, 5), vigor: 0, destreza: 0 },
+      vontade: 1,
+      ciclo_cumprido: true,
+      tregua: false,
+      reencontro: false,
+      sessao_secundaria: false,
+    };
+  }
+}
+
+export class PessimoPolicy implements PolicyGenerator {
+  nextInputs(): Inputs {
+    return {
+      rolagem: 2,
+      atributo: { forca: 0, vigor: 0, destreza: 0 },
+      vontade: 0,
+      ciclo_cumprido: false,
+      tregua: false,
+      reencontro: false,
+      sessao_secundaria: false,
+    };
+  }
+}
+
 export class IntermitentePolicy implements PolicyGenerator {
   nextInputs(ciclo: number, resolucao: number): Inputs {
     const tregua = ciclo > 0 && ciclo % 3 === 0;

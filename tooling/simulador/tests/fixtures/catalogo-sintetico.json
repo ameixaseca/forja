@@ -1,0 +1,2404 @@
+{
+  "storylets": [
+    {
+      "id": "st_cor_fallback",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.fallback",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_0",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.0",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_1",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.1",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_2",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.2",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_3",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.3",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_4",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.4",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_5",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.5",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_6",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.6",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_7",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.7",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_8",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.8",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_9",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.9",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_10",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.10",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_11",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.11",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_12",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.12",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_13",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.13",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_14",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.14",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_15",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.15",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_16",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.16",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_17",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.17",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_18",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.18",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_19",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.19",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_20",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.20",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_21",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.21",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_22",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.22",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_23",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.23",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_24",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.24",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_25",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.25",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_26",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.26",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_27",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.27",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_28",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.28",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_29",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.29",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_30",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.30",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_31",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.31",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_32",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.32",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_33",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.33",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_34",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.34",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_35",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.35",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_36",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.36",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_37",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.37",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_38",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.38",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_39",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.39",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_40",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.40",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_41",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.41",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_42",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.42",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_43",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.43",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_44",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.44",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_45",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.45",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_46",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.46",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_47",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.47",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_48",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.48",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_49",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.49",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_50",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.50",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_51",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.51",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_52",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.52",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_53",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.53",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_54",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.54",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_55",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.55",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_56",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.56",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_57",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.57",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_58",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.58",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_59",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.59",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_60",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.60",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_61",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.61",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_62",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.62",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_63",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.63",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_64",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.64",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_65",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.65",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_66",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.66",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_67",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.67",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_68",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.68",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_69",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.69",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_70",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.70",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_71",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.71",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_72",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.72",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_73",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.73",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_74",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.74",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_75",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.75",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_76",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.76",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_77",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.77",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_78",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.78",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_79",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.79",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_80",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.80",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_81",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.81",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_82",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.82",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_83",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.83",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_84",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.84",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_85",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.85",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_86",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.86",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_87",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.87",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_88",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.88",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_89",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.89",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_90",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.90",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_91",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.91",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_92",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.92",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_93",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.93",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_94",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.94",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_95",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.95",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_96",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.96",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_97",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.97",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_98",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.98",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_99",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.99",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_100",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.100",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_101",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.101",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_102",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.102",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_103",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.103",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_104",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.104",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_105",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.105",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_106",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.106",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_107",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.107",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_108",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.108",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_109",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.109",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_110",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.110",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_111",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.111",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_112",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.112",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_113",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.113",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_114",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.114",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_115",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.115",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_116",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.116",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_117",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.117",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_118",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.118",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_119",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.119",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_120",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.120",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_121",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.121",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_122",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.122",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_123",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.123",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_124",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.124",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_125",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.125",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_126",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.126",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_127",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.127",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_128",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.128",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_129",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.129",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_130",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.130",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_131",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.131",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_132",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.132",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_133",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.133",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_134",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.134",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_135",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.135",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_136",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.136",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_137",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.137",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_138",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.138",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_139",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.139",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_140",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.140",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_141",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.141",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_142",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.142",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_143",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.143",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_144",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.144",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_145",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.145",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_146",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.146",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_147",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.147",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_148",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.148",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_149",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.149",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_150",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.150",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_151",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.151",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_152",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.152",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_153",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.153",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_154",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.154",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_155",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.155",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_156",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.156",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_157",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.157",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_158",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.158",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_159",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.159",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_160",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.160",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_161",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.161",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_162",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.162",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_163",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.163",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_164",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.164",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_165",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.165",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_166",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.166",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_167",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.167",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_168",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.168",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_169",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.169",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_170",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.170",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_171",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.171",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_172",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.172",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_173",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.173",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_174",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.174",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_175",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.175",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_176",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.176",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_177",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.177",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_178",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.178",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_179",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.179",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_180",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.180",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_181",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.181",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_182",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.182",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_183",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.183",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_184",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.184",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_185",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.185",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_186",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.186",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_187",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.187",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_188",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.188",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_189",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.189",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_190",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.190",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_191",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.191",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_192",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.192",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_193",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.193",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_194",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.194",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_195",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.195",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_196",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.196",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_197",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.197",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_198",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.198",
+          "efeitos": {}
+        }
+      ]
+    }
+  ]
+}

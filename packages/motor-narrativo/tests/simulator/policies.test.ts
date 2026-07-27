@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { ConstantePolicy, ErraticoPolicy, IntermitentePolicy } from '../../src/simulator/policies';
+import {
+  ConstantePolicy,
+  EspecialistaPolicy,
+  ErraticoPolicy,
+  IntermitentePolicy,
+  PessimoPolicy,
+} from '../../src/simulator/policies';
 
 describe('ConstantePolicy', () => {
   it('sempre retorna rolagem=8, atributos=1, vontade=1, ciclo_cumprido=true', () => {
@@ -40,6 +46,39 @@ describe('ErraticoPolicy', () => {
       expect(value).toBeGreaterThanOrEqual(0);
       expect(value).toBeLessThanOrEqual(5);
     }
+  });
+});
+
+describe('EspecialistaPolicy', () => {
+  it('cresce força com o ciclo e mantém vigor/destreza estagnados', () => {
+    const policy = new EspecialistaPolicy();
+
+    expect(policy.nextInputs(0, 0).atributo).toMatchObject({ forca: 0, vigor: 0, destreza: 0 });
+    expect(policy.nextInputs(3, 0).atributo).toMatchObject({ forca: 3, vigor: 0, destreza: 0 });
+  });
+
+  it('satura o crescimento de força em 5', () => {
+    const policy = new EspecialistaPolicy();
+
+    expect(policy.nextInputs(10, 0).atributo.forca).toBe(5);
+  });
+});
+
+describe('PessimoPolicy', () => {
+  it('mantém rolagem no piso e atributos parados em todo ciclo', () => {
+    const policy = new PessimoPolicy();
+
+    const inputs = policy.nextInputs(5, 2);
+
+    expect(inputs).toMatchObject({
+      rolagem: 2,
+      atributo: { forca: 0, vigor: 0, destreza: 0 },
+      vontade: 0,
+      ciclo_cumprido: false,
+      tregua: false,
+      reencontro: false,
+      sessao_secundaria: false,
+    });
   });
 });
 

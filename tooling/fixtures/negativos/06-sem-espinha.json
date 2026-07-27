@@ -1,0 +1,11 @@
+{
+  "storylets": [
+    {
+      "id": "st_cor_fallback",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [{ "texto": "texto.cor.fallback", "efeitos": {} }]
+    }
+  ]
+}

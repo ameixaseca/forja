@@ -1,0 +1,26 @@
+{
+  "storylets": [
+    {
+      "id": "st_espinha_1",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 1,
+      "variantes": [{ "texto": "texto.espinha.1", "efeitos": { "flag.a": true } }]
+    },
+    {
+      "id": "st_cor_fallback",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [{ "texto": "texto.cor.fallback", "efeitos": {} }]
+    },
+    {
+      "id": "st_arco_extra",
+      "banda": "Arco",
+      "subclasse": null,
+      "capitulo": null,
+      "requer": { "qual": "flag.fantasma", "op": "==", "valor": 1 },
+      "variantes": [{ "texto": "texto.arco.extra", "efeitos": { "flag.b": true } }]
+    }
+  ]
+}

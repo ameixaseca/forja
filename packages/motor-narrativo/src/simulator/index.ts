@@ -1,6 +1,13 @@
 import { resolve } from '../resolve';
 import type { Catalog, Policy, ResolutionResult, State } from '../types';
-import { ConstantePolicy, ErraticoPolicy, IntermitentePolicy, type PolicyGenerator } from './policies';
+import {
+  ConstantePolicy,
+  EspecialistaPolicy,
+  ErraticoPolicy,
+  IntermitentePolicy,
+  PessimoPolicy,
+  type PolicyGenerator,
+} from './policies';
 
 export interface SimulationReport {
   resolutions: ResolutionResult[];
@@ -57,6 +64,10 @@ function createPolicyGenerator(policy: Policy): PolicyGenerator {
       return new ErraticoPolicy();
     case 'intermitente':
       return new IntermitentePolicy();
+    case 'especialista':
+      return new EspecialistaPolicy();
+    case 'pessimo':
+      return new PessimoPolicy();
     default:
       throw new Error(`Policy ${policy} not implemented`);
   }

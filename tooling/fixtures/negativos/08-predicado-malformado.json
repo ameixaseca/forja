@@ -1,0 +1,41 @@
+{
+  "storylets": [
+    {
+      "id": "st_espinha_1",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 1,
+      "variantes": [{ "texto": "texto.espinha.1", "efeitos": { "flag.a": true } }]
+    },
+    {
+      "id": "st_cor_fallback",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [{ "texto": "texto.cor.fallback", "efeitos": {} }]
+    },
+    {
+      "id": "st_arco_abre",
+      "banda": "Arco",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [{ "texto": "texto.arco.abre", "efeitos": { "comp.x": 1 } }]
+    },
+    {
+      "id": "st_arco_fecha_1",
+      "banda": "Arco",
+      "subclasse": null,
+      "capitulo": null,
+      "requer": { "qual": "comp.x", "op": ">>", "valor": 1 },
+      "variantes": [{ "texto": "texto.arco.fecha1", "efeitos": { "comp.x": 0 } }]
+    },
+    {
+      "id": "st_arco_fecha_2",
+      "banda": "Arco",
+      "subclasse": null,
+      "capitulo": null,
+      "requer": { "qual": "comp.x", "op": "==", "valor": 1 },
+      "variantes": [{ "texto": "texto.arco.fecha2", "efeitos": { "comp.x": 0 } }]
+    }
+  ]
+}

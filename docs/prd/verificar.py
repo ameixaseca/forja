@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Verifica o protótipo contra as regras da ESPEC v2.6 e confere referências cruzadas."""
+"""Verifica o protótipo (PROTOTIPO-Campanha-A-Longa-Seca) contra as regras da
+ESPEC v2.6 e confere referências cruzadas entre PRD/ESPEC/decisões.
+
+Escopo: valida o documento-protótipo em si (JSON embutido em markdown +
+prosa), não o catálogo real de produção. Para verificação de catálogo
+(SCH-xx, T-01 a T-21) rodada em CI sobre `content/`, ver
+`tooling/verificador/verificar.py` (Fase 4) — este script permanece só
+para checar o protótipo, não é mais referenciado pelo workflow de CI.
+"""
 import json, re, sys, pathlib
 
 BASE = pathlib.Path("/home/claude")

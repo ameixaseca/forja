@@ -9,7 +9,8 @@ on:
     paths:
       - "content/**"
       - "packages/motor-narrativo/**"
-      - "docs/prd/verificar.py"
+      - "tooling/verificador/**"
+      - "tooling/simulador/**"
       - "docs/testes/cobertura.py"
 
 concurrency:
@@ -25,8 +26,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Rodar verificar.py sobre o catálogo (valida ESPEC e referências cruzadas)
-        run: python docs/prd/verificar.py
+      - name: Instalar dependências do verificador
+        run: pip install -r tooling/verificador/requirements.txt
+      - name: Rodar verificar.py sobre o catálogo (SCH-xx e T-01 a T-21, ESPEC §7.2)
+        run: python tooling/verificador/verificar.py content/campanhas/espinha/
+      - name: Rodar testes do verificador (fixtures negativas, DEC-037)
+        run: pytest tooling/verificador
       - name: Rodar cobertura.py (cobertura BDD dos requisitos)
         run: python docs/testes/cobertura.py
 
@@ -46,16 +51,17 @@ jobs:
       - name: Testes de propriedade do motor narrativo (RF-036)
         run: pnpm turbo run test --filter=@forja/motor-narrativo
 
-      - name: Simulador de travessia — mínimo de execuções exigido
+      - name: Simulador de travessia — mínimo de execuções exigido (M=50 por commit, ESPEC §7.1)
         run: >
-          pnpm --filter @forja/motor-narrativo run simular --
-          --catalogo ../../content
-          --min-travessias 500
-          --saida relatorio-simulacao.json
+          pnpm --filter tooling-simulador run simulate --
+          --catalog ../../content/campanhas/espinha/manifest.json
+          --runs 50
+          --policy constante
+          --output relatorio-simulacao.html
 
       - name: Publicar relatório do simulador
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: relatorio-simulador-${{ github.event.pull_request.number }}
-          path: packages/motor-narrativo/relatorio-simulacao.json
+          path: tooling/simulador/relatorio-simulacao.html

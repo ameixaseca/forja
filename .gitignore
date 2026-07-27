@@ -7,3 +7,6 @@ coverage/
 .omo
 .stryker-tmp/
 reports/mutation/
+__pycache__/
+.pytest_cache/
+*.pyc
