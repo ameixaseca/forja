@@ -115,7 +115,7 @@ packages:
 | `motor-narrativo` | ES2020 | ESNext   | Pure TS, sem deps Node |
 | `dominio`         | ES2020 | ESNext   | Pure TS, sem deps Node |
 | `schema`          | ES2020 | CommonJS | Compatibilidade NestJS |
-| `api`             | ES2022 | CommonJS | Node 20                |
+| `api`             | ES2022 | CommonJS | Node 22                |
 | `mobile`          | ES2020 | ESNext   | Hermes engine          |
 | `web`             | ES2022 | ESNext   | Next.js                |
 
@@ -254,7 +254,7 @@ supabase gen types typescript --local > packages/db-types/src/index.ts
 
 ### 4.1 Runtime
 
-**Ferramenta:** Node.js 20 LTS  
+**Ferramenta:** Node.js 22 LTS  
 **Justificativa:**
 
 - LTS até abril 2026 (alinhado com timeline)
@@ -869,7 +869,7 @@ CLOUDFLARE_API_TOKEN  # para kill-switch
 
 **Obrigatório:**
 
-- Node.js 20
+- Node.js 22
 - pnpm 8
 - Git
 - VSCode (ou editor com TypeScript LSP)

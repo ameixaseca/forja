@@ -131,4 +131,26 @@ describe('POST /entitlements/validate (e2e)', () => {
 
     expect(response.statusCode).toBe(401);
   });
+
+  it('excede o limite de requisições e retorna 429 sem chamar o validator', async () => {
+    app = await buildApp({ authenticated: true, receiptValid: true });
+    const payload = { platform: 'ios', receipt: 'recibo-base64' };
+
+    for (let i = 0; i < 5; i += 1) {
+      const resposta = await app.inject({
+        method: 'POST',
+        url: '/entitlements/validate',
+        payload,
+      });
+      expect(resposta.statusCode).toBe(201);
+    }
+
+    const excedente = await app.inject({
+      method: 'POST',
+      url: '/entitlements/validate',
+      payload,
+    });
+
+    expect(excedente.statusCode).toBe(429);
+  });
 });

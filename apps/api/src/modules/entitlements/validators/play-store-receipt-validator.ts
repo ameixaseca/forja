@@ -39,6 +39,11 @@ function getAccessToken(): string {
 export class PlayStoreReceiptValidator implements ReceiptValidator {
   async validate(receipt: string): Promise<ReceiptValidationResult> {
     const { packageName, productId, purchaseToken } = parseReceipt(receipt);
+    // Sem essa checagem, um recibo válido de QUALQUER app Play Store (mesmo
+    // de outro desenvolvedor) passaria adiante e viraria entitlement FORJA.
+    if (packageName !== process.env.PLAY_STORE_PACKAGE_NAME) {
+      return { valid: false };
+    }
     const accessToken = getAccessToken();
 
     const url = `https://androidpublisher.googleapis.com/androidpublisher/v3/applications/${packageName}/purchases/products/${productId}/tokens/${purchaseToken}`;

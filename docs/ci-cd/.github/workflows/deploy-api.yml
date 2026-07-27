@@ -53,7 +53,7 @@ jobs:
       - name: Smoke test de saúde
         run: |
           for i in $(seq 1 10); do
-            if curl -fsS https://forja-api-staging.fly.dev/saude; then exit 0; fi
+            if curl -fsS https://forja-api-staging.fly.dev/health; then exit 0; fi
             sleep 5
           done
           echo "API de staging não respondeu saudável a tempo" >&2
@@ -76,7 +76,7 @@ jobs:
       - name: Smoke test de saúde
         run: |
           for i in $(seq 1 10); do
-            if curl -fsS https://api.forja.app/saude; then exit 0; fi
+            if curl -fsS https://api.forja.app/health; then exit 0; fi
             sleep 5
           done
           echo "API de produção não respondeu saudável — considere: flyctl releases rollback" >&2

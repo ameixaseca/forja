@@ -10,6 +10,7 @@ const SANDBOX_RECEIPT_STATUS = 21007;
 
 interface AppStoreVerifyReceiptResponse {
   status: number;
+  receipt?: { bundle_id?: string };
   latest_receipt_info?: Array<{ product_id: string; expires_date_ms?: string }>;
 }
 
@@ -39,6 +40,11 @@ export class AppStoreReceiptValidator implements ReceiptValidator {
 
     const latest = result.latest_receipt_info?.[0];
     if (result.status !== 0 || !latest) {
+      return { valid: false };
+    }
+    // Sem essa checagem, um recibo válido de QUALQUER app da App Store
+    // (mesmo de outro desenvolvedor) passaria adiante e viraria entitlement FORJA.
+    if (result.receipt?.bundle_id !== process.env.APP_STORE_BUNDLE_ID) {
       return { valid: false };
     }
 

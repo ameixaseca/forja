@@ -1,0 +1,20 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      PORT: '3000'
+      # Dummy values for local container smoke-testing only (no real Supabase project
+      # wired up yet — Fase 5 deploy staging, tasks.md 7.x, is pending real credentials).
+      # SupabaseServiceRoleClient just needs non-empty strings to construct; /health will
+      # report 503 against these since they don't resolve to a real project.
+      SUPABASE_URL: 'http://localhost:54321'
+      SUPABASE_SERVICE_ROLE_KEY: 'dummy-service-role-key'
+      APP_STORE_SHARED_SECRET: 'dummy-app-store-secret'
+      APP_STORE_BUNDLE_ID: 'com.forja.app'
+      GOOGLE_PLAY_ACCESS_TOKEN: 'dummy-play-token'
+      PLAY_STORE_PACKAGE_NAME: 'com.forja.app'
+      STRIPE_SECRET_KEY: 'dummy-stripe-key'

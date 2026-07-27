@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { SupabaseServiceRoleClient } from '../../supabase/supabase-service-role.provider';
 import { EntitlementsController } from './entitlements.controller';
 import { EntitlementsService } from './entitlements.service';
@@ -8,6 +9,14 @@ import { PlayStoreReceiptValidator } from './validators/play-store-receipt-valid
 import { StripeReceiptValidator } from './validators/stripe-receipt-validator';
 
 @Module({
+  imports: [
+    // /entitlements/validate chama APIs pagas de terceiros (Apple/Google/Stripe)
+    // por request; limite conservador para conter abuso e proteger cota externa.
+    // ThrottlerGuard é aplicado só no EntitlementsController (@UseGuards), não via
+    // APP_GUARD — esse token é sempre global no Nest independente do módulo que o
+    // registra, o que afetaria /health e /data-export indevidamente.
+    ThrottlerModule.forRoot([{ ttl: 60_000, limit: 5 }]),
+  ],
   controllers: [EntitlementsController],
   providers: [
     SupabaseServiceRoleClient,
