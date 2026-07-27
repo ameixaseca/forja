@@ -9,7 +9,8 @@ on:
     paths:
       - "content/**"
       - "packages/motor-narrativo/**"
-      - "tools/conteudo/**"
+      - "docs/prd/verificar.py"
+      - "docs/testes/cobertura.py"
 
 concurrency:
   group: conteudo-${{ github.ref }}
@@ -17,17 +18,17 @@ concurrency:
 
 jobs:
   verificar-catalogo:
-    name: Lint de conteúdo (verificar.py)
+    name: Lint de conteúdo (verificar.py + cobertura.py)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Instalar dependências do validador
-        run: pip install -r tools/conteudo/requirements.txt
-      - name: Rodar verificar.py sobre o catálogo
-        run: python tools/conteudo/verificar.py content/
+      - name: Rodar verificar.py sobre o catálogo (valida ESPEC e referências cruzadas)
+        run: python docs/prd/verificar.py
+      - name: Rodar cobertura.py (cobertura BDD dos requisitos)
+        run: python docs/testes/cobertura.py
 
   motor-e-simulador:
     name: Suítes de motor e simulador de travessia (RF-035, RF-100–103)

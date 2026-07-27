@@ -9,11 +9,14 @@
     "lint": "eslint src/ --ext .ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:mutation": "stryker run"
   },
   "devDependencies": {
     "@forja/config-eslint": "workspace:*",
     "@forja/config-typescript": "workspace:*",
+    "@stryker-mutator/core": "^8.7.1",
+    "@stryker-mutator/vitest-runner": "^8.7.1",
     "typescript": "^5.9.3",
     "vitest": "^1.6.1"
   }

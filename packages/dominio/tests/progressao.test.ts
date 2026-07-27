@@ -1,185 +1,89 @@
 import { describe, it, expect } from 'vitest';
-import { calcularProgressao, isCicloCumprido, calcularFolego } from '../src/index';
+import { calcularFolego, calcularProgressao, isCicloCumprido, type Ciclo } from '../src/index';
+
+function makeCiclo(overrides: Partial<Ciclo> = {}): Ciclo {
+  return {
+    numero: 1,
+    juramento: {
+      diasPorSemana: 3,
+      dataInicio: new Date('2026-01-06'),
+      dataFim: new Date('2026-01-12'),
+    },
+    diasTreinados: 3,
+    diasJurados: 3,
+    cumprido: true,
+    tregua: false,
+    treguaRecuperacao: false,
+    deload: false,
+    ...overrides,
+  };
+}
 
 describe('calcularProgressao', () => {
-  it('should calculate RN-001 correctly', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 3, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 2,
-      diasJurados: 3,
-      cumprido: false,
-      tregua: false,
-      treguaRecuperacao: false,
-      deload: false,
-    };
-
-    expect(calcularProgressao(ciclo)).toBeCloseTo(0.667, 2);
+  it('RN-001: calcula a razão entre dias treinados e jurados', () => {
+    expect(calcularProgressao(makeCiclo({ diasTreinados: 2, diasJurados: 3 }))).toBeCloseTo(0.667, 2);
   });
 
-  it('should return 0 when diasJurados is 0', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 0, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 0,
-      diasJurados: 0,
-      cumprido: false,
-      tregua: false,
-      treguaRecuperacao: false,
-      deload: false,
-    };
-
-    expect(calcularProgressao(ciclo)).toBe(0);
+  it('RN-001: retorna zero quando não há dias jurados', () => {
+    expect(calcularProgressao(makeCiclo({ diasTreinados: 0, diasJurados: 0 }))).toBe(0);
   });
 });
 
 describe('isCicloCumprido', () => {
-  it('should return true when dias_treinados >= dias_jurados (RN-002)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 3, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 3,
-      diasJurados: 3,
-      cumprido: true,
-      tregua: false,
-      treguaRecuperacao: false,
-      deload: false,
-    };
-
-    expect(isCicloCumprido(ciclo)).toBe(true);
+  it('RN-002: considera cumprido o ciclo no limite do juramento', () => {
+    expect(isCicloCumprido(makeCiclo({ diasTreinados: 3, diasJurados: 3 }))).toBe(true);
   });
 
-  it('should return false for Trégua (RN-038)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 3, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 0,
-      diasJurados: 3,
-      cumprido: false,
-      tregua: true,
-      treguaRecuperacao: false,
-      deload: false,
-    };
-
-    expect(isCicloCumprido(ciclo)).toBe(false);
+  it('RN-002: considera cumprido o ciclo acima do juramento', () => {
+    expect(isCicloCumprido(makeCiclo({ diasTreinados: 6, diasJurados: 3 }))).toBe(true);
   });
 
-  it('should return false for Trégua Recuperação (RF-007A)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 3, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 0,
-      diasJurados: 3,
-      cumprido: false,
-      tregua: false,
-      treguaRecuperacao: true,
-      deload: false,
-    };
+  it('RN-002: considera quebrado ciclo abaixo do juramento sem Trégua', () => {
+    expect(isCicloCumprido(makeCiclo({ diasTreinados: 2, diasJurados: 3 }))).toBe(false);
+  });
 
-    expect(isCicloCumprido(ciclo)).toBe(false);
+  it('RN-038: Trégua não classifica ciclo como cumprido', () => {
+    expect(isCicloCumprido(makeCiclo({ diasTreinados: 3, tregua: true }))).toBe(false);
+  });
+
+  it('RF-007A: Trégua de Recuperação não classifica ciclo como cumprido', () => {
+    expect(isCicloCumprido(makeCiclo({ diasTreinados: 3, treguaRecuperacao: true }))).toBe(false);
   });
 });
 
 describe('calcularFolego', () => {
-  it('should generate Fôlego from dias sem treino (PRD §4.5)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 3, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 3,
-      diasJurados: 3,
-      cumprido: true,
-      tregua: false,
-      treguaRecuperacao: false,
-      deload: false,
-    };
+  it.each([
+    [1, 1, 2],
+    [2, 2, 2],
+    [3, 3, 2],
+    [5, 5, 2],
+    [6, 6, 1],
+    [3, 6, 1],
+    [3, 7, 0],
+  ])(
+    'RF-080/RF-084: juramento %i, treino %i gera %i Fôlego',
+    (diasJurados, diasTreinados, folego) => {
+      expect(calcularFolego(makeCiclo({ diasJurados, diasTreinados }))).toBe(folego);
+    },
+  );
 
-    // Jurou 3, treinou 3 → cumprido
-    // Dias sem treino = 7 - 3 = 4 dias
-    // Teto 2 → Fôlego = 2
-    expect(calcularFolego(ciclo)).toBe(2);
+  it.each([
+    ['quebrado', { diasJurados: 5, diasTreinados: 2 }],
+    ['Trégua', { diasJurados: 3, diasTreinados: 0, tregua: true }],
+    ['Trégua de Recuperação', { diasJurados: 3, diasTreinados: 0, treguaRecuperacao: true }],
+  ])('RF-080: ciclo %s não gera Fôlego', (_tipo, overrides) => {
+    expect(calcularFolego(makeCiclo(overrides))).toBe(0);
   });
 
-  it('should cap Fôlego at 2 for normal cycle (D-044)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 1, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 1,
-      diasJurados: 1,
-      cumprido: true,
-      tregua: false,
-      treguaRecuperacao: false,
-      deload: false,
-    };
-
-    // Jurou 1, treinou 1 → cumprido
-    // Dias sem treino = 7 - 1 = 6 dias
-    // Teto 2 → Fôlego = 2 (capped)
-    expect(calcularFolego(ciclo)).toBe(2);
+  it('RF-082: deload dobra o teto de Fôlego para quatro', () => {
+    expect(calcularFolego(makeCiclo({ diasJurados: 2, diasTreinados: 2, deload: true }))).toBe(4);
   });
 
-  it('should give 1 Fôlego for 6-day oath (PRD §4.5)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 6, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 6,
-      diasJurados: 6,
-      cumprido: true,
-      tregua: false,
-      treguaRecuperacao: false,
-      deload: false,
-    };
-
-    // Jurou 6, treinou 6 → cumprido
-    // Dias sem treino = 7 - 6 = 1 dia
-    // Fôlego = 1 (PRD: "todo jurador de 1 a 5 dias recebe 2 por ciclo e o de 6 dias recebe 1")
-    expect(calcularFolego(ciclo)).toBe(1);
+  it('RN-006/RF-080: treino acima do juramento não gera Fôlego adicional', () => {
+    expect(calcularFolego(makeCiclo({ diasJurados: 2, diasTreinados: 5 }))).toBe(2);
   });
 
-  it('should double cap for deload cycle (RF-082)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 1, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 1,
-      diasJurados: 1,
-      cumprido: true,
-      tregua: false,
-      treguaRecuperacao: false,
-      deload: true,
-    };
-
-    // Jurou 1, treinou 1, deload → cumprido
-    // Dias sem treino = 7 - 1 = 6 dias
-    // Teto deload = 4 → Fôlego = 4
-    expect(calcularFolego(ciclo)).toBe(4);
-  });
-
-  it('should return 0 for non-cumprido cycle (RF-080)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 5, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 2,
-      diasJurados: 5,
-      cumprido: false,
-      tregua: false,
-      treguaRecuperacao: false,
-      deload: false,
-    };
-
-    expect(calcularFolego(ciclo)).toBe(0);
-  });
-
-  it('should return 0 for Trégua Recuperação (D-042)', () => {
-    const ciclo = {
-      numero: 1,
-      juramento: { diasPorSemana: 5, dataInicio: new Date(), dataFim: new Date() },
-      diasTreinados: 0,
-      diasJurados: 5,
-      cumprido: false,
-      tregua: false,
-      treguaRecuperacao: true,
-      deload: false,
-    };
-
-    expect(calcularFolego(ciclo)).toBe(0);
+  it('RF-080: sete dias treinados deixam Fôlego em zero', () => {
+    expect(calcularFolego(makeCiclo({ diasJurados: 3, diasTreinados: 7 }))).toBe(0);
   });
 });

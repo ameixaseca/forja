@@ -52,4 +52,13 @@ jobs:
           restore-keys: turbo-${{ matrix.tarefa }}-
 
       - name: Rodar ${{ matrix.tarefa }} nos pacotes afetados
-        run: pnpm turbo run ${{ matrix.tarefa }} --filter=...[origin/main]
+        # Em PR, compara contra origin/main para escopar aos pacotes afetados.
+        # Em push a main, HEAD já É origin/main (diff vazio) — roda tudo,
+        # já que este job é a checagem de sanidade pós-merge (não deve
+        # depender de filtro que sempre resulta em zero pacotes).
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            pnpm turbo run ${{ matrix.tarefa }} --filter=...[origin/main]
+          else
+            pnpm turbo run ${{ matrix.tarefa }}
+          fi

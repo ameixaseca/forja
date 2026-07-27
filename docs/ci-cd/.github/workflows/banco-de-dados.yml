@@ -7,11 +7,11 @@ name: Banco de dados
 on:
   pull_request:
     paths:
-      - "database/migrations/**"
+      - "docs/database/migrations/**"
   push:
     branches: [main]
     paths:
-      - "database/migrations/**"
+      - "docs/database/migrations/**"
 
 concurrency:
   group: banco-de-dados-${{ github.ref }}

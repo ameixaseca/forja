@@ -94,6 +94,13 @@ Every added functionality must include:
 
 No feature considered complete without these three test layers.
 
+**Mutation testing setup:**
+- Tool: Stryker v8 (`pnpm --filter <pkg> run test:mutation`)
+- Threshold: score ≥ 80% required for `@forja/dominio` (break at 60%)
+- Report: `packages/<pkg>/reports/mutation/index.html`
+- CI: `.github/workflows/mutation-tests.yml` runs on `packages/**` changes
+- Docs: `docs/testes/MUTATION-TESTING.md`
+
 ## OpenSpec workflow
 
 Skills available: `openspec-propose`, `openspec-apply-change`, `openspec-explore`, `openspec-archive-change`, `openspec-sync-specs`.
