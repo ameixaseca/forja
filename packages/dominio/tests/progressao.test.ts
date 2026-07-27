@@ -42,6 +42,10 @@ describe('isCicloCumprido', () => {
     expect(isCicloCumprido(makeCiclo({ diasTreinados: 2, diasJurados: 3 }))).toBe(false);
   });
 
+  it('RN-001: sem Juramento declarado (0 dias jurados) nunca é cumprido, mesmo com 0 treinados', () => {
+    expect(isCicloCumprido(makeCiclo({ diasTreinados: 0, diasJurados: 0 }))).toBe(false);
+  });
+
   it('RN-038: Trégua não classifica ciclo como cumprido', () => {
     expect(isCicloCumprido(makeCiclo({ diasTreinados: 3, tregua: true }))).toBe(false);
   });

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calcularFolego, calcularProgressao, isCicloCumprido, type Ciclo } from '../src/index';
+import { calcularFolego, calcularProgressao, isCicloCumprido, validarJuramento, type Ciclo } from '../src/index';
 
 function makeCiclo(overrides: Partial<Ciclo> = {}): Ciclo {
   return {
@@ -49,5 +49,24 @@ describe('Juramento', () => {
 
   it('RF-082: deload dobra teto de Fôlego do Juramento', () => {
     expect(calcularFolego(makeCiclo({ diasJurados: 2, diasTreinados: 2, deload: true }))).toBe(4);
+  });
+});
+
+describe('validarJuramento', () => {
+  it.each([
+    [0, false],
+    [1, true],
+    [2, true],
+    [3, true],
+    [4, true],
+    [5, true],
+    [6, true],
+    [7, false],
+  ])('RF-004: %i dias por semana é aceito=%s', (dias, aceito) => {
+    expect(validarJuramento(dias)).toBe(aceito);
+  });
+
+  it('RF-004: rejeita valores não inteiros', () => {
+    expect(validarJuramento(3.5)).toBe(false);
   });
 });
