@@ -53,4 +53,4 @@
 - [x] 7.1 Escrever `tooling/verificador/README.md` e `tooling/simulador/README.md`
 - [x] 7.2 Rodar `python tooling/verificador/verificar.py` contra catálogo de teste sem erros
 - [x] 7.3 Critérios do gate Fase 4 confirmados — ver resumo na entrega desta mudança; regras T-01–T-21 implementadas como subconjunto estático real (T06/T17 documentados como limitação, não fabricados)
-- [ ] 7.4 Criar tag `fase-4-completa` — ação de repositório compartilhado; não executada automaticamente, aguardando confirmação explícita do usuário
+- [x] 7.4 Criar tag `fase-4-completa` (local, não enviada ao remoto)
