@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['@forja/config-eslint'],
+  extends: [require.resolve('@forja/config-eslint')],
 };

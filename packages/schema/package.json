@@ -1,0 +1,25 @@
+{
+  "name": "@forja/schema",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src/ --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:mutation": "stryker run"
+  },
+  "dependencies": {
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@forja/config-eslint": "workspace:*",
+    "@forja/config-typescript": "workspace:*",
+    "@stryker-mutator/core": "^8.7.1",
+    "@stryker-mutator/vitest-runner": "^8.7.1",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  }
+}
