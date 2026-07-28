@@ -1,0 +1,47 @@
+{
+  "name": "@forja/mobile",
+  "version": "0.0.1",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "ios": "expo start --ios",
+    "android": "expo start --android",
+    "lint": "eslint src/ app/ --ext .ts,.tsx --no-error-on-unmatched-pattern",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:watch": "vitest",
+    "test:mutation": "stryker run"
+  },
+  "dependencies": {
+    "@forja/dominio": "workspace:*",
+    "@forja/motor-narrativo": "workspace:*",
+    "@forja/schema": "workspace:*",
+    "@react-native-async-storage/async-storage": "^3.1.1",
+    "@supabase/supabase-js": "^2.45.4",
+    "expo": "~51.0.0",
+    "expo-constants": "~16.0.2",
+    "expo-crypto": "~13.0.2",
+    "expo-router": "~3.5.0",
+    "expo-sqlite": "~14.0.0",
+    "react": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-gesture-handler": "~2.16.0",
+    "react-native-reanimated": "~3.10.0",
+    "react-native-safe-area-context": "4.10.5",
+    "react-native-screens": "3.31.1",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@forja/config-eslint": "workspace:*",
+    "@forja/config-typescript": "workspace:*",
+    "@stryker-mutator/core": "^8.7.1",
+    "@stryker-mutator/vitest-runner": "^8.7.1",
+    "@types/react": "~18.2.79",
+    "@types/react-test-renderer": "~18.0.7",
+    "react-test-renderer": "18.2.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  }
+}

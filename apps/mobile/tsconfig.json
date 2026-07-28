@@ -1,0 +1,15 @@
+{
+  "extends": "@forja/config-typescript/react.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-native",
+    "types": ["react"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*", "app/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

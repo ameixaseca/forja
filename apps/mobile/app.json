@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "FORJA",
+    "slug": "forja",
+    "scheme": "forja",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "plugins": ["expo-router"],
+    "ios": {
+      "bundleIdentifier": "app.forja.mobile",
+      "supportsTablet": false
+    },
+    "android": {
+      "package": "app.forja.mobile"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "storylets": [
+    {
+      "id": "st_espinha_abertura_cap1",
+      "banda": "Espinha",
+      "subclasse": null,
+      "capitulo": 1,
+      "variantes": [
+        {
+          "texto": "texto.espinha.abertura.cap1",
+          "efeitos": { "cap.aberto": true }
+        }
+      ]
+    },
+    {
+      "id": "st_cor_fallback",
+      "banda": "Cor",
+      "subclasse": null,
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.fallback",
+          "efeitos": {}
+        }
+      ]
+    },
+    {
+      "id": "st_cor_ausencia_1",
+      "banda": "Cor",
+      "subclasse": "ausencia",
+      "capitulo": null,
+      "variantes": [
+        {
+          "texto": "texto.cor.ausencia.1",
+          "efeitos": {}
+        }
+      ]
+    }
+  ]
+}
